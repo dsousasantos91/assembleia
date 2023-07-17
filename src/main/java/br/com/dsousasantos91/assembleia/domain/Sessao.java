@@ -47,10 +47,10 @@ public class Sessao {
     private LocalDateTime dataHoraFim;
 
     @JsonIgnore
-    private Boolean notificacaoEncerramentoEnviada;
+    private Boolean resultadoEnviado;
 
     @PrePersist
-    public void setNotificacaoEncerramentoEnviada() {
-        this.notificacaoEncerramentoEnviada = Boolean.FALSE;
+    public void setResultadoEnviado() {
+        this.resultadoEnviado = Boolean.FALSE;
     }
 }

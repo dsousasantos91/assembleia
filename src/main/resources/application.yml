@@ -11,9 +11,6 @@ spring:
     password: postgres
   flyway:
     enabled: false
-  h2:
-    console:
-      enabled: true
   jackson:
     date-format: yyyy-MM-dd
     deserialization:

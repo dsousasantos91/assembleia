@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface SessaoRepository extends JpaRepository<Sessao, Long> {
 
-    Optional<List<Sessao>> findByDataHoraFimLessThanAndNotificacaoEncerramentoEnviadaIsFalse(LocalDateTime now);
+    Optional<List<Sessao>> findByDataHoraFimBeforeAndResultadoEnviadoIsFalse(LocalDateTime now);
 }
