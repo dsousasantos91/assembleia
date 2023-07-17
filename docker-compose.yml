@@ -1,0 +1,46 @@
+version: '2.4'
+
+services:
+  postgresql_client:
+    image: postgres:12-alpine
+    container_name: assembleiaDB
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=pg_client
+    ports:
+      - 5432:5432
+    networks:
+      - assembleia-network
+
+  pgadmin:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - assembleia-network
+
+  rabbitmq:
+    image: rabbitmq:3.8.3-management
+    container_name: assembleia_rabbitmq
+    restart: always
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=secret_pass
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    networks:
+      - assembleia-network
+
+networks:
+  assembleia-network:
+    name: assembleia-network
+    driver: bridge
