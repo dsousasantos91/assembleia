@@ -6,6 +6,8 @@ import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
 import br.com.dsousasantos91.assembleia.mapper.SessaoMapper;
 import br.com.dsousasantos91.assembleia.repository.PautaRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
+import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
+import br.com.dsousasantos91.assembleia.scheduler.dto.Notificador;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class SessaoService {
     private final SessaoRepository sessaoRepository;
     private final PautaRepository pautaRepository;
     private final SessaoMapper sessaoMapper;
+    private final NotificadorScheduler notificadorScheduler;
 
     public SessaoResponse abrir(SessaoRequest request) {
         LocalDateTime dataHoraInicio = LocalDateTime.now();
@@ -34,6 +37,7 @@ public class SessaoService {
                 .dataHoraFim(dataHoraFim)
                 .build();
         Sessao sessaoAberta = sessaoRepository.save(sessao);
+        notificadorScheduler.agendarNotificacao(Notificador.builder().sessao(sessao).build());
         return sessaoMapper.toResponse(sessaoAberta);
     }
 
@@ -50,6 +54,7 @@ public class SessaoService {
         return this.sessaoRepository.findById(id)
                 .map(sessaoEncontrada -> {
                     sessaoEncontrada.setDataHoraFim(calcularDataHoraFim(request));
+                    notificadorScheduler.agendarNotificacao(Notificador.builder().sessao(sessaoEncontrada).build());
                     return this.sessaoMapper.toResponse(sessaoEncontrada);
                 })
                 .orElseGet(() -> this.abrir(request));
@@ -60,6 +65,7 @@ public class SessaoService {
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Sessao com ID: %d não encontrada.", sessaoId)));
         sessao.setDataHoraFim(LocalDateTime.now());
         Sessao sessaoEncerrada = sessaoRepository.save(sessao);
+        notificadorScheduler.agendarNotificacao(Notificador.builder().sessao(sessaoEncerrada).build());
         return sessaoMapper.toResponse(sessaoEncerrada);
     }
 

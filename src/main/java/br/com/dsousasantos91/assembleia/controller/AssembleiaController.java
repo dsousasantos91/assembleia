@@ -71,7 +71,7 @@ public class AssembleiaController {
 	@ApiOperation(value = "Encerramento de assembleia.")
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long id) {
+	public void encerrar(@PathVariable Long id) {
 		this.assembleiaService.encerrar(id);
 	}
 
