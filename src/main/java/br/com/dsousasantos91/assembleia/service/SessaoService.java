@@ -1,6 +1,7 @@
 package br.com.dsousasantos91.assembleia.service;
 
 import br.com.dsousasantos91.assembleia.domain.Assembleia;
+import br.com.dsousasantos91.assembleia.domain.Associado;
 import br.com.dsousasantos91.assembleia.domain.Pauta;
 import br.com.dsousasantos91.assembleia.domain.Sessao;
 import br.com.dsousasantos91.assembleia.exception.GenericBadRequestException;
@@ -8,6 +9,7 @@ import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
 import br.com.dsousasantos91.assembleia.mapper.AssociadoMapper;
 import br.com.dsousasantos91.assembleia.mapper.SessaoMapper;
 import br.com.dsousasantos91.assembleia.repository.AssembleiaRepository;
+import br.com.dsousasantos91.assembleia.repository.AssociadoRepository;
 import br.com.dsousasantos91.assembleia.repository.PautaRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
 import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
@@ -33,6 +35,7 @@ public class SessaoService {
     private final SessaoRepository sessaoRepository;
     private final PautaRepository pautaRepository;
     private final AssembleiaRepository assembleiaRepository;
+    private final AssociadoRepository associadoRepository;
     private final SessaoMapper sessaoMapper;
     private final AssociadoMapper associadoMapper;
     private final NotificadorScheduler notificadorScheduler;
@@ -60,6 +63,8 @@ public class SessaoService {
         if (assembleia.isEmpty() && pautasNullOuVazio(request.getIdsPautas()))
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
         sessoes = montarSessoes(request);
+        List<Associado> associados = setAssociados(request);
+        sessoes.forEach(sessao -> sessao.setAssociados(associados));
         List<Sessao> sessoesEmLote = sessaoRepository.saveAll(sessoes);
         sessoesEmLote.forEach(notificadorScheduler::agendarNotificacao);
         return sessaoMapper.toResponses(sessoesEmLote);
@@ -74,11 +79,17 @@ public class SessaoService {
                     .dataHoraFim(calcularDataHoraFim(request.getTempoSessao()))
                     .build();
             pauta.ifPresent(sessao::setPauta);
-            if (Boolean.FALSE.equals(sessao.getVotacaoLivre()) && request.getAssociados().isEmpty())
-                throw new GenericBadRequestException("Votação fechada. Deve-se enviar os associados participantes da Sessão.");
-            Optional.ofNullable(request.getAssociados()).ifPresent(associado -> sessao.setAssociados(associadoMapper.toEntities(associado)));
             return sessao;
         }).toList();
+    }
+
+    private List<Associado> setAssociados(SessaoEmLoteRequest request) {
+        if (Boolean.FALSE.equals(request.getVotacaoLivre()) && request.getAssociados().isEmpty())
+            throw new GenericBadRequestException("Votação fechada. Deve-se enviar os associados participantes da Sessão.");
+        return request.getAssociados().stream()
+                .map(associado -> associadoRepository.findByCpf(associado.getCpf())
+                        .orElseGet(() -> associadoMapper.toEntity(associado)))
+                .toList();
     }
 
     public Page<SessaoResponse> pesquisar(Pageable pageable) {
