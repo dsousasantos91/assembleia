@@ -60,9 +60,9 @@ public class VotacaoController {
 	}
 
 	@ApiOperation(value = "Altera voto associado.")
-	@PutMapping(path = "/alterarVoto/associado/{cpf}", produces = "application/json")
-	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable String cpf) {
-		VotacaoResponse response = this.votacaoService.alterarVoto(cpf);
+	@PutMapping(path = "/alterarVoto/sessao/{sessaoId}/associado/{cpf}", produces = "application/json")
+	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable Long sessaoId, @PathVariable String cpf) {
+		VotacaoResponse response = this.votacaoService.alterarVoto(sessaoId, cpf);
 		return ResponseEntity.ok(response);
 	}
 }

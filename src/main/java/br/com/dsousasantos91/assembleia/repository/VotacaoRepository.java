@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface VotacaoRepository extends JpaRepository<Votacao, Long> {
     Optional<List<Votacao>> findBySessaoId(Long sessaoId);
-    Optional<Votacao> findByAssociadoCpf(String cpf);
+    Optional<Votacao> findBySessaoIdAndAssociadoCpf(Long sessaoId, String cpf);
 }

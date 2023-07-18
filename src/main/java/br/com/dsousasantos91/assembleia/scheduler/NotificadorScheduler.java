@@ -30,7 +30,7 @@ public class NotificadorScheduler {
 
     public void agendarNotificacao(Sessao sessao) {
         Notificador notificador = Notificador.builder().sessao(sessao).build();
-        log.info("Agendamento de Notificacao:"+ notificador.toString());
+        log.info("Agendamento de Notificacao [{}]", notificador.toString());
         cancelarNotificacao(notificador);
         ScheduledFuture<?> scheduleTask = taskScheduler.schedule(
                 () -> {
@@ -41,10 +41,12 @@ public class NotificadorScheduler {
                 },
                 new CronTrigger(notificador.getCron(), TimeZone.getTimeZone(TimeZone.getDefault().toZoneId()))
         );
+        log.info("Agendamento de Notificacao: [{}] realizado com sucesso", notificador);
         schedulerMap.put(notificador.getNome(), scheduleTask);
     }
 
     private void cancelarNotificacao(Notificador notificador) {
+        log.info("Cancelamento de Notificacao:"+ notificador.toString());
         if (schedulerMap.containsKey(notificador.getNome()))
             schedulerMap.get(notificador.getNome()).cancel(true);
     }
