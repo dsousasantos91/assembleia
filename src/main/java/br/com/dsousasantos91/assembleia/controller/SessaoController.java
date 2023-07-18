@@ -2,6 +2,7 @@ package br.com.dsousasantos91.assembleia.controller;
 
 import br.com.dsousasantos91.assembleia.event.RecursoCriadoEvent;
 import br.com.dsousasantos91.assembleia.service.SessaoService;
+import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 import io.swagger.annotations.Api;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(value = "API REST - Entidade Sessao")
 @RequiredArgsConstructor
@@ -43,6 +45,14 @@ public class SessaoController {
 		SessaoResponse response = this.sessaoService.abrir(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+
+	@ApiOperation(value = "Abertura de sessão em lote.")
+	@PostMapping(path = "/abrirEmLote", produces = "application/json")
+	public ResponseEntity<List<SessaoResponse>> abrirEmLote(@Valid @RequestBody SessaoEmLoteRequest request, HttpServletResponse servletResponse) {
+		List<SessaoResponse> responseList = this.sessaoService.abrirEmLote(request);
+		responseList.forEach(response -> publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId())));
+		return ResponseEntity.status(HttpStatus.CREATED).body(responseList);
 	}
 
 	@ApiOperation(value = "Listagem de sessões.")

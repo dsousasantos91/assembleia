@@ -15,14 +15,13 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SessaoRequest {
-    @NotNull(message = "{0} é obrigatório")
-    private Long pautaId;
+public class SessaoEmLoteRequest {
+    private Long assembleiaId;
+    private List<Long> idsPautas;
+    private List<AssociadoRequest> associados;
 
     @NotNull(message = "{0} é obrigatório")
     private Boolean votacaoLivre;
-
-    private List<AssociadoRequest> associados;
 
     @Valid
     private TempoSessaoRequest tempoSessao = new TempoSessaoRequest();

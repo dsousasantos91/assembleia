@@ -48,8 +48,13 @@ public class Sessao {
     @NotNull(message = "{0} é obrigatório")
     private LocalDateTime dataHoraFim;
 
-    @OneToMany(mappedBy = "sessao", orphanRemoval = true)
+    @OneToMany
     private List<Votacao> votacoes;
+
+    @OneToMany
+    private List<Associado> associados;
+
+    private Boolean votacaoLivre = Boolean.TRUE;
 
     @JsonIgnore
     private Boolean resultadoEnviado;

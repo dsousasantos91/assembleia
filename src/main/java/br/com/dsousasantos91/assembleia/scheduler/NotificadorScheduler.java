@@ -1,5 +1,6 @@
 package br.com.dsousasantos91.assembleia.scheduler;
 
+import br.com.dsousasantos91.assembleia.domain.Sessao;
 import br.com.dsousasantos91.assembleia.producer.NotificarVotacao;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
 import br.com.dsousasantos91.assembleia.scheduler.dto.Notificador;
@@ -27,7 +28,8 @@ public class NotificadorScheduler {
     private final SessaoRepository sessaoRepository;
     private final Map<String, ScheduledFuture<?>> schedulerMap = new HashMap<>();
 
-    public void agendarNotificacao(Notificador notificador) {
+    public void agendarNotificacao(Sessao sessao) {
+        Notificador notificador = Notificador.builder().sessao(sessao).build();
         log.info("Agendamento de Notificacao:"+ notificador.toString());
         cancelarNotificacao(notificador);
         ScheduledFuture<?> scheduleTask = taskScheduler.schedule(
