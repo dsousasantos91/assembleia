@@ -69,10 +69,17 @@ public class AssembleiaController {
 	}
 
 	@ApiOperation(value = "Encerramento de assembleia.")
+	@PutMapping(path = "/encerrar/{id}")
+	public ResponseEntity<AssembleiaResponse> encerrar(@PathVariable Long id) {
+		AssembleiaResponse response = this.assembleiaService.encerrar(id);
+		return ResponseEntity.ok(response);
+	}
+
+	@ApiOperation(value = "Apaga assembleia.")
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void encerrar(@PathVariable Long id) {
-		this.assembleiaService.encerrar(id);
+	public void apagar(@PathVariable Long id) {
+		this.assembleiaService.apagar(id);
 	}
 
 }

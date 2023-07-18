@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -72,5 +73,12 @@ public class SessaoController {
 		SessaoResponse response = this.sessaoService.encerrar(sessaoId);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+	}
+
+	@ApiOperation(value = "Apaga sessão.")
+	@DeleteMapping(path = "/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void apagar(@PathVariable Long id) {
+		this.sessaoService.apagar(id);
 	}
 }

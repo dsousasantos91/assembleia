@@ -14,11 +14,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -45,6 +47,9 @@ public class Sessao {
 
     @NotNull(message = "{0} é obrigatório")
     private LocalDateTime dataHoraFim;
+
+    @OneToMany(mappedBy = "sessao", orphanRemoval = true)
+    private List<Votacao> votacoes;
 
     @JsonIgnore
     private Boolean resultadoEnviado;

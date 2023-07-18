@@ -41,4 +41,8 @@ public class PautaService {
                     return this.pautaMapper.toResponse(pautaSalvo);
                 });
     }
+
+    public void apagar(Long id) {
+        pautaRepository.deleteById(id);
+    }
 }

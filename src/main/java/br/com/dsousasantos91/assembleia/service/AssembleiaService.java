@@ -54,9 +54,14 @@ public class AssembleiaService {
                 });
     }
 
-    public void encerrar(Long id) {
+    public AssembleiaResponse encerrar(Long id) {
         Assembleia assembleia = this.assembleiaRepository.findById(id).orElseThrow(GenericNotFoundException::new);
         assembleia.setDataHoraFimApuracao(LocalDateTime.now());
-        assembleiaRepository.save(assembleia);
+        Assembleia assembleiaEncerrada = assembleiaRepository.save(assembleia);
+        return assembleiaMapper.toResponse(assembleiaEncerrada);
+    }
+
+    public void apagar(Long id) {
+        assembleiaRepository.deleteById(id);
     }
 }

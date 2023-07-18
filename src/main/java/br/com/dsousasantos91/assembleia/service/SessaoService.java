@@ -75,4 +75,8 @@ public class SessaoService {
                 .plusHours(request.getTempoSessao().getHoras())
                 .plusMinutes(request.getTempoSessao().getMinutos());
     }
+
+    public void apagar(Long id) {
+        this.sessaoRepository.deleteById(id);
+    }
 }

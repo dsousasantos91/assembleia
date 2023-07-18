@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,10 +52,17 @@ public class VotacaoController {
 		return ResponseEntity.ok(response);
 	}
 
-	@ApiOperation(value = "Contabilizar Votos.")
+	@ApiOperation(value = "Contabiliza Votos.")
 	@GetMapping(path = "/contabilizar/sessao/{sessaoId}")
 	public ResponseEntity<ContagemVotosResponse> contabilizar(@PathVariable Long sessaoId) {
 		ContagemVotosResponse response = votacaoService.contabilizar(sessaoId);
+		return ResponseEntity.ok(response);
+	}
+
+	@ApiOperation(value = "Altera voto associado.")
+	@PutMapping(path = "/alterarVoto/associado/{cpf}", produces = "application/json")
+	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable String cpf) {
+		VotacaoResponse response = this.votacaoService.alterarVoto(cpf);
 		return ResponseEntity.ok(response);
 	}
 }

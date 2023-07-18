@@ -69,4 +69,13 @@ public class VotacaoService {
                 .votos(Map.of(Voto.NAO, votosParaNao, Voto.SIM, votosParaSim))
                 .build();
     }
+
+    public VotacaoResponse alterarVoto(String cpf) {
+        Votacao votacao = votacaoRepository.findByAssociadoCpf(cpf)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Associado com CPF %s não encontrado.", cpf)));
+        Voto novoVoto = Voto.SIM.equals(votacao.getVoto()) ? Voto.SIM : Voto.NAO;
+        votacao.setVoto(novoVoto);
+        Votacao votacaoAlterada = votacaoRepository.save(votacao);
+        return votacaoMapper.toResponse(votacaoAlterada);
+    }
 }
