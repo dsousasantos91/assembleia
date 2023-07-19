@@ -9,6 +9,7 @@ import br.com.dsousasantos91.assembleia.repository.AssembleiaRepository;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaUpdateRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.AssembleiaResponse;
+import br.com.dsousasantos91.assembleia.util.MaskUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,7 @@ class AssembleiaServiceTest {
         assertEquals(response.getSecretario(), request.getSecretario());
         assertEquals(response.getPautas().size(), request.getPautas().size());
         assertNotNull(response.getLocal().getId());
-        assertEquals(response.getLocal().getCep(), request.getLocal().getCep());
+        assertEquals(response.getLocal().getCep(), MaskUtil.cep(request.getLocal().getCep()));
         assertEquals(response.getLocal().getLogradouro(), request.getLocal().getLogradouro());
         assertEquals(response.getLocal().getBairro(), request.getLocal().getBairro());
         assertEquals(response.getLocal().getCidade(), request.getLocal().getCidade());
@@ -107,7 +108,7 @@ class AssembleiaServiceTest {
         assertEquals(response.getSecretario(), entity1.getSecretario());
         assertEquals(response.getPautas().size(), entity1.getPautas().size());
         assertEquals(response.getLocal().getId(), entity1.getLocal().getId());
-        assertEquals(response.getLocal().getCep(), entity1.getLocal().getCep());
+        assertEquals(response.getLocal().getCep(), MaskUtil.cep(entity1.getLocal().getCep()));
         assertEquals(response.getLocal().getLogradouro(), entity1.getLocal().getLogradouro());
         assertEquals(response.getLocal().getBairro(), entity1.getLocal().getBairro());
         assertEquals(response.getLocal().getCidade(), entity1.getLocal().getCidade());
@@ -132,7 +133,7 @@ class AssembleiaServiceTest {
         assertEquals(response.getPresidente(), updateRequest.getPresidente());
         assertEquals(response.getSecretario(), updateRequest.getSecretario());
         assertEquals(response.getLocal().getId(), entity1.getLocal().getId());
-        assertEquals(response.getLocal().getCep(), updateRequest.getLocal().getCep());
+        assertEquals(response.getLocal().getCep(), MaskUtil.cep(updateRequest.getLocal().getCep()));
         assertEquals(response.getLocal().getLogradouro(), updateRequest.getLocal().getLogradouro());
         assertEquals(response.getLocal().getBairro(), updateRequest.getLocal().getBairro());
         assertEquals(response.getLocal().getCidade(), updateRequest.getLocal().getCidade());
