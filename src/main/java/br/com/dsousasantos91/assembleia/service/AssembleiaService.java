@@ -15,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -40,27 +39,28 @@ public class AssembleiaService {
 
     public AssembleiaResponse buscarPorId(Long id) {
         log.info("Buscar assembleia ID [{}]", id);
-        Assembleia assembleia = this.assembleiaRepository.findById(id).orElseThrow(GenericNotFoundException::new);
+        Assembleia assembleia = this.assembleiaRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id)));
         log.info("Assembleia ID [{}] encontrada.", assembleia.getId());
         return this.assembleiaMapper.toResponse(assembleia);
     }
 
     public AssembleiaResponse atualizar(Long id, AssembleiaUpdateRequest request) {
         log.info("Atualizando assembleia ID [{}]", id);
-        Optional<Assembleia> assembleiaEncontrada = this.assembleiaRepository.findById(id);
-        if (assembleiaEncontrada.isEmpty())
-            throw new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id));
+        Assembleia assembleiaEncontrada = this.assembleiaRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id)));
         Assembleia assembleia = this.assembleiaMapper.toEntity(request);
         assembleia.getLocal().setAssembleia(assembleia);
-        PropertyUtils.copyNonNullProperties(assembleia, assembleiaEncontrada.get());
-        this.assembleiaRepository.save(assembleiaEncontrada.get());
-        log.info("Assembleia ID [{}] atualizada com sucesso.", assembleiaEncontrada.get().getId());
-        return this.assembleiaMapper.toResponse(assembleiaEncontrada.get());
+        PropertyUtils.copyNonNullProperties(assembleia, assembleiaEncontrada);
+        Assembleia assembleiaAtualizada = this.assembleiaRepository.save(assembleiaEncontrada);
+        log.info("Assembleia ID [{}] atualizada com sucesso.", assembleiaEncontrada.getId());
+        return this.assembleiaMapper.toResponse(assembleiaAtualizada);
     }
 
     public AssembleiaResponse encerrar(Long id) {
         log.info("Encerrando assembleia ID [{}]", id);
-        Assembleia assembleia = this.assembleiaRepository.findById(id).orElseThrow(GenericNotFoundException::new);
+        Assembleia assembleia = this.assembleiaRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id)));
         assembleia.setDataHoraFimApuracao(LocalDateTime.now());
         Assembleia assembleiaEncerrada = assembleiaRepository.save(assembleia);
         log.info("Assembleia ID [{}] encerrada com sucesso.",assembleiaEncerrada.getId());

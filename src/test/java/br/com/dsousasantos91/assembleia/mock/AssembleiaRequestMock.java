@@ -20,7 +20,7 @@ public class AssembleiaRequestMock {
 
     public static void initializeDefaultData(AssembleiaRequestMock mock) {
         mock.element = AssembleiaRequest.builder()
-                .tipoAssembleia(TipoAssembleia.ORDINARIA)
+                .tipoAssembleia(TipoAssembleia.EXTRAORDINARIA)
                 .dataHoraInicioApuracao(LocalDateTime.now())
                 .dataHoraFimApuracao(LocalDateTime.now().plusMinutes(10))
                 .cooperativa("Cooperativa União")

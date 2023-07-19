@@ -18,13 +18,13 @@ public class AssembleiaUpdateRequestMock {
 
     public static void initializeDefaultData(AssembleiaUpdateRequestMock mock) {
         mock.element = AssembleiaUpdateRequest.builder()
-                .tipoAssembleia(TipoAssembleia.EXTRAORDINARIA)
+                .tipoAssembleia(TipoAssembleia.ORDINARIA)
                 .dataHoraInicioApuracao(LocalDateTime.now())
                 .dataHoraFimApuracao(LocalDateTime.now().plusMinutes(10))
                 .cooperativa("Cooperativa União")
                 .local(EnderecoRequestMock.mocked().mock())
-                .presidente("Louise Prohaska")
-                .secretario("Lindsey Wyman")
+                .presidente("Betsy West")
+                .secretario("Forrest Bednar")
                 .build();
     }
 
