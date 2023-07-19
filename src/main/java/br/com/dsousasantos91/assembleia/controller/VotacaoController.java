@@ -38,7 +38,7 @@ public class VotacaoController {
 
 	@ApiOperation(value = "Votação de Pauta.")
 	@PostMapping(path = "/votar", produces = "application/json")
-	public ResponseEntity<VotacaoResponse> abrir(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
+	public ResponseEntity<VotacaoResponse> votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
 		VotacaoResponse response = this.votacaoService.votar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);

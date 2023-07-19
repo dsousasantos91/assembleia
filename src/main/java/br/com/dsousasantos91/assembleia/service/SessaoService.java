@@ -16,6 +16,7 @@ import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.TempoSessaoRequest;
+import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -112,6 +113,16 @@ public class SessaoService {
         notificadorScheduler.agendarNotificacao(sessaoEncerrada);
         log.info("Sessão ID [{}] encerrada com sucesso.", id);
         return sessaoMapper.toResponse(sessaoEncerrada);
+    }
+
+    public void confirmarEnvioDeNotificacao(ContagemVotosResponse contagem) {
+        log.info("Buscando sessão da pauta [{}].", contagem.getPauta().getTitulo());
+        Optional<Sessao> sessao = sessaoRepository.findById(contagem.getSessaoId());
+        if (sessao.isEmpty()) throw new RuntimeException("Sessão ID " + contagem.getSessaoId() + " não encontrada.");
+        log.info("Sessão [{}] encontrada.", sessao.get().getId());
+        sessao.get().setResultadoEnviado(Boolean.TRUE);
+        sessaoRepository.save(sessao.get());
+        log.info("Confirmação de envio do resultado da sessão [{}] recebida com sucesso.", sessao.get().getId());
     }
 
     public void apagar(Long id) {

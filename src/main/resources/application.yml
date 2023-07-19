@@ -24,14 +24,11 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
   rabbitmq:
+    virtual-host: /
     host: localhost
     port: 5672
     username: admin
     password: admin
-    template:
-      exchange: direct-exchange
-
-votacao:
-  rabbitmq:
-    routingkey: votacao.routingkey
-    queue: votacao.queue
+    listener:
+      simple:
+        default-requeue-rejected: false

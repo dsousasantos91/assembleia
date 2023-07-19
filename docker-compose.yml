@@ -39,6 +39,8 @@ services:
       - RABBITMQ_DEFAULT_PASS=admin
     networks:
       - assembleia-network
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
 
 networks:
   assembleia-network:

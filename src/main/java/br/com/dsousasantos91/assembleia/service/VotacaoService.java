@@ -48,7 +48,7 @@ public class VotacaoService {
         Associado associado = associadoRepository.findByCpf(request.getAssociado().getCpf())
                 .orElse(associadoMapper.toEntity(request.getAssociado()));
         log.info("Associado CPF [{}] encontrado com sucesso.", request.getAssociado().getCpf());
-        if (!sessao.getAssociados().contains(associado))
+        if (!sessao.getAssociados().isEmpty() && !sessao.getAssociados().contains(associado))
             throw new GenericBadRequestException(String.format("Associado %s não tem permissão para votar na sessão de id %d.",
                     associado.getCpf(), request.getSessaoId()));
         Votacao votacao = Votacao.builder()
@@ -77,6 +77,7 @@ public class VotacaoService {
         long votosParaSim = votacoes.stream().filter(votacao -> Voto.SIM.equals(votacao.getVoto())).count();
         log.info("Contagem do votos da sessão [{}] realizada com sucesso.", sessao.getId());
         return ContagemVotosResponse.builder()
+                .sessaoId(sessao.getId())
                 .pauta(pautaMapper.toResponse(sessao.getPauta()))
                 .votos(Map.of(Voto.NAO, votosParaNao, Voto.SIM, votosParaSim))
                 .build();

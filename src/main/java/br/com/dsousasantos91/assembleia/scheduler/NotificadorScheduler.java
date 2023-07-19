@@ -1,8 +1,7 @@
 package br.com.dsousasantos91.assembleia.scheduler;
 
 import br.com.dsousasantos91.assembleia.domain.Sessao;
-import br.com.dsousasantos91.assembleia.producer.NotificarVotacao;
-import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
+import br.com.dsousasantos91.assembleia.producer.NotificarVotacaoProducer;
 import br.com.dsousasantos91.assembleia.scheduler.dto.Notificador;
 import br.com.dsousasantos91.assembleia.service.VotacaoService;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
@@ -23,9 +22,8 @@ import java.util.concurrent.ScheduledFuture;
 public class NotificadorScheduler {
 
     private final TaskScheduler taskScheduler;
-    private final NotificarVotacao notificarVotacao;
+    private final NotificarVotacaoProducer notificarVotacaoProducer;
     private final VotacaoService votacaoService;
-    private final SessaoRepository sessaoRepository;
     private final Map<String, ScheduledFuture<?>> schedulerMap = new HashMap<>();
 
     public void agendarNotificacao(Sessao sessao) {
@@ -35,9 +33,7 @@ public class NotificadorScheduler {
         ScheduledFuture<?> scheduleTask = taskScheduler.schedule(
                 () -> {
                     ContagemVotosResponse contagemVotos = votacaoService.contabilizar(notificador.getSessao().getId());
-                    notificarVotacao.enviarResultadoVotacao(contagemVotos);
-                    notificador.getSessao().setResultadoEnviado(Boolean.TRUE);
-                    sessaoRepository.save(notificador.getSessao());
+                    notificarVotacaoProducer.enviarResultadoVotacao(contagemVotos);
                 },
                 new CronTrigger(notificador.getCron(), TimeZone.getTimeZone(TimeZone.getDefault().toZoneId()))
         );
