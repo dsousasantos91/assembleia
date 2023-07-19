@@ -43,7 +43,7 @@ public class VotacaoService {
         log.info("Encontrando sessão para votação");
         Sessao sessao = sessaoRepository.findById(request.getSessaoId())
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com id %d não existe.", request.getSessaoId())));
-        log.info("sSssão ID [{}] encontrata.", sessao.getId());
+        log.info("Sessão ID [{}] encontrata.", sessao.getId());
         if (LocalDateTime.now().isAfter(sessao.getDataHoraFim()))
             throw new GenericBadRequestException(String.format("Sessão com id %d está encerrada.", request.getSessaoId()));
         log.info("Buscando associado CPF [{}]", request.getAssociado().getCpf());

@@ -128,7 +128,7 @@ public class SessaoService {
     public void apagar(Long id) {
         log.info("Apagando sessão ID [{}]", id);
         this.sessaoRepository.deleteById(id);
-        log.info("sSssão ID [{}] apagada com sucesso", id);
+        log.info("Sessão ID [{}] apagada com sucesso", id);
     }
 
     private List<Sessao> montarSessoes(SessaoEmLoteRequest request) {
