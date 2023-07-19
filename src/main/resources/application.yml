@@ -10,7 +10,7 @@ spring:
     username: postgres
     password: postgres
   flyway:
-    enabled: false
+    enabled: true
   jackson:
     date-format: yyyy-MM-dd
     deserialization:
@@ -18,7 +18,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
     show-sql: true
   mvc:
     pathmatch:
