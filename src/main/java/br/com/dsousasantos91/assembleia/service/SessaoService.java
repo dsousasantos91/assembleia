@@ -116,7 +116,7 @@ public class SessaoService {
         return sessaoMapper.toResponse(sessaoEncerrada);
     }
 
-    public void confirmarEnvioDeNotificacao(ContagemVotosResponse contagem) {
+    public void confirmarEnvioDeResultado(ContagemVotosResponse contagem) {
         log.info("Buscando sessão da pauta [{}].", contagem.getPauta().getTitulo());
         Optional<Sessao> sessao = sessaoRepository.findById(contagem.getSessaoId());
         if (sessao.isEmpty()) throw new RuntimeException("Sessão ID " + contagem.getSessaoId() + " não encontrada.");

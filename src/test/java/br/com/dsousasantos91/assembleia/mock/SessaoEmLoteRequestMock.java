@@ -22,7 +22,7 @@ public class SessaoEmLoteRequestMock {
                 .assembleiaId(0L)
                 .idsPautas(List.of(1L, 2L, 3L))
                 .associados(AssociadoRequestMock.mocked().mockList())
-                .votacaoLivre(true)
+                .votacaoLivre(Boolean.TRUE)
                 .tempoSessao(TempoSessaoRequestMock.mocked().mock())
                 .build();
     }
@@ -37,8 +37,18 @@ public class SessaoEmLoteRequestMock {
         return this;
     }
 
+    public SessaoEmLoteRequestMock withListIdsPautasList(List<Long> listIds) {
+        element.setIdsPautas(listIds);
+        return this;
+    }
+
     public SessaoEmLoteRequestMock withListAssociados(AssociadoRequest... params) {
         element.setAssociados(Arrays.asList(params));
+        return this;
+    }
+
+    public SessaoEmLoteRequestMock withListAssociadosList(List<AssociadoRequest> associados) {
+        element.setAssociados(associados);
         return this;
     }
 

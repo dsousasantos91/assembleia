@@ -21,7 +21,7 @@ public class NotificarVotacaoConsumer {
     public void receber(@Payload ContagemVotosResponse contagem) {
         log.info("Enviando notificação de contagem da sessão [{}] pauta [{}].",
                 contagem.getSessaoId(), contagem.getPauta().getTitulo());
-        sessaoService.confirmarEnvioDeNotificacao(contagem);
+        sessaoService.confirmarEnvioDeResultado(contagem);
         log.info("Notificação de contagem da sessão [{}] pauta [{}] enviada com sucesso.",
                 contagem.getSessaoId(), contagem.getPauta().getTitulo());
     }
