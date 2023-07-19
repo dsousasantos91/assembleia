@@ -50,7 +50,7 @@ public class VotacaoService {
         Associado associado = associadoRepository.findByCpf(request.getAssociado().getCpf())
                 .orElse(associadoMapper.toEntity(request.getAssociado()));
         log.info("Associado CPF [{}] encontrado com sucesso.", request.getAssociado().getCpf());
-        if (!sessao.getAssociados().isEmpty() && !sessao.getAssociados().contains(associado))
+        if (sessaoContemAssociado(sessao, associado))
             throw new GenericBadRequestException(String.format("Associado %s não tem permissão para votar na sessão de id %d.",
                     associado.getCpf(), request.getSessaoId()));
         Votacao votacao = Votacao.builder()
@@ -69,11 +69,11 @@ public class VotacaoService {
         return this.votacaoRepository.findAll(pageable).map(votacaoMapper::toResponse);
     }
 
-    public ContagemVotosResponse contabilizar(Long id) {
-        log.info("Realizada contagem dos votos para sessão [{}].", id);
-        Sessao sessao = sessaoRepository.findById(id)
-                .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com id %d não existe.", id)));
-        List<Votacao> votacoes = votacaoRepository.findBySessaoId(id)
+    public ContagemVotosResponse contabilizar(Long sessaoId) {
+        log.info("Realizada contagem dos votos para sessão [{}].", sessaoId);
+        Sessao sessao = sessaoRepository.findById(sessaoId)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com sessaoId %d não existe.", sessaoId)));
+        List<Votacao> votacoes = votacaoRepository.findBySessaoId(sessaoId)
                 .orElseThrow(() -> new GenericNotFoundException("Sessão não encontrada."));
         long votosParaNao = votacoes.stream().filter(votacao -> Voto.NAO.equals(votacao.getVoto())).count();
         long votosParaSim = votacoes.stream().filter(votacao -> Voto.SIM.equals(votacao.getVoto())).count();
@@ -86,13 +86,18 @@ public class VotacaoService {
     }
 
     public VotacaoResponse alterarVoto(Long sessaoId, String cpf) {
+        validarCPFService.validar(cpf);
         log.info("Alterando voto do associado CPF [{}].", cpf);
         Votacao votacao = votacaoRepository.findBySessaoIdAndAssociadoCpf(sessaoId, cpf)
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Associado com CPF %s não encontrado.", cpf)));
-        Voto novoVoto = Voto.SIM.equals(votacao.getVoto()) ? Voto.SIM : Voto.NAO;
+        Voto novoVoto = Voto.SIM.equals(votacao.getVoto()) ? Voto.NAO : Voto.SIM;
         votacao.setVoto(novoVoto);
         Votacao votacaoAlterada = votacaoRepository.save(votacao);
         log.info("Alteração de voto do associado CPF [{}] realizada com sucesso.", cpf);
         return votacaoMapper.toResponse(votacaoAlterada);
+    }
+
+    private static boolean sessaoContemAssociado(Sessao sessao, Associado associado) {
+        return !sessao.getAssociados().isEmpty() && !sessao.getAssociados().stream().map(Associado::getCpf).toList().contains(associado.getCpf());
     }
 }

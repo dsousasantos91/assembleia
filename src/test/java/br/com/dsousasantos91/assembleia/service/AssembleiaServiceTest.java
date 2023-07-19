@@ -60,7 +60,7 @@ class AssembleiaServiceTest {
         when(assembleiaRepository.save(any(Assembleia.class))).thenReturn(entity1);
         AssembleiaResponse response = assembleiaService.criar(request);
         assertNotNull(response.getId());
-        assertEquals(response.getTipoAssembleia(), request.getTipoAssembleia().getNome());
+        assertEquals(response.getTipoAssembleia(), request.getTipoAssembleia().getValue());
         assertEquals(response.getDataHoraInicioApuracao(), request.getDataHoraInicioApuracao());
         assertEquals(response.getDataHoraFimApuracao(), request.getDataHoraFimApuracao());
         assertEquals(response.getCooperativa(), request.getCooperativa());
@@ -99,7 +99,7 @@ class AssembleiaServiceTest {
         when(assembleiaRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
         AssembleiaResponse response = assembleiaService.buscarPorId(1L);
         assertEquals(response.getId(), entity1.getId());
-        assertEquals(response.getTipoAssembleia(), entity1.getTipoAssembleia().getNome());
+        assertEquals(response.getTipoAssembleia(), entity1.getTipoAssembleia().getValue());
         assertEquals(response.getDataHoraInicioApuracao(), entity1.getDataHoraInicioApuracao());
         assertEquals(response.getDataHoraFimApuracao(), entity1.getDataHoraFimApuracao());
         assertEquals(response.getCooperativa(), entity1.getCooperativa());
@@ -125,7 +125,7 @@ class AssembleiaServiceTest {
         when(assembleiaRepository.save(any(Assembleia.class))).thenReturn(entity1);
         AssembleiaResponse response = assembleiaService.atualizar(1L, updateRequest);
         assertEquals(response.getId(), entity1.getId());
-        assertEquals(response.getTipoAssembleia(), updateRequest.getTipoAssembleia().getNome());
+        assertEquals(response.getTipoAssembleia(), updateRequest.getTipoAssembleia().getValue());
         assertEquals(response.getDataHoraInicioApuracao(), updateRequest.getDataHoraInicioApuracao());
         assertEquals(response.getDataHoraFimApuracao(), updateRequest.getDataHoraFimApuracao());
         assertEquals(response.getCooperativa(), updateRequest.getCooperativa());

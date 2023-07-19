@@ -15,6 +15,7 @@ import br.com.dsousasantos91.assembleia.mock.SessaoRequestMock;
 import br.com.dsousasantos91.assembleia.repository.AssembleiaRepository;
 import br.com.dsousasantos91.assembleia.repository.PautaRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
+import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
@@ -44,6 +45,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,6 +74,9 @@ class SessaoServiceTest {
     @MockBean
     private AssembleiaRepository assembleiaRepository;
 
+    @MockBean
+    private NotificadorScheduler notificadorScheduler;
+
     private SessaoRequest request;
     private Sessao entity1;
 
@@ -83,7 +88,6 @@ class SessaoServiceTest {
         entity1.setId(1L);
         entity1.setPauta(pauta);
         entity1.setDataHoraInicio(LocalDateTime.now());
-        entity1.setDataHoraFim(calcularDataHoraFim(entity1.getDataHoraInicio()));
         entity1.setResultadoEnviado(Boolean.FALSE);
         for (int i = 0; i < entity1.getAssociados().size(); i++) {
             entity1.getAssociados().get(i).setId(i + 1L);
@@ -97,10 +101,8 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.abrir(request);
         assertNotNull(response.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraInicio(response.getDataHoraFim()).truncatedTo(ChronoUnit.SECONDS));
-        assertEquals(response.getDataHoraFim().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraFim(response.getDataHoraInicio()).truncatedTo(ChronoUnit.SECONDS));
+        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
     @Test
@@ -148,10 +150,8 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.buscarPorId(1L);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraInicio(response.getDataHoraFim()).truncatedTo(ChronoUnit.SECONDS));
-        assertEquals(response.getDataHoraFim().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraFim(response.getDataHoraInicio()).truncatedTo(ChronoUnit.SECONDS));
+        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
     @Test
@@ -162,18 +162,18 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.prorrogar(1L, request);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraInicio(response.getDataHoraFim()).truncatedTo(ChronoUnit.SECONDS));
-        assertEquals(response.getDataHoraFim().truncatedTo(ChronoUnit.SECONDS),
-                calcularDataHoraFim(response.getDataHoraInicio()).truncatedTo(ChronoUnit.SECONDS));
+        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
     @Test
     void deveEncerrarSessaoComSucesso() {
+        LocalDateTime dataHoraFimPre = entity1.getDataHoraFim();
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
         when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
+        doNothing().when(notificadorScheduler).agendarNotificacao(any(Sessao.class));
         SessaoResponse response = sessaoService.encerrar(1L);
-        assertTrue(response.getDataHoraFim().isBefore(calcularDataHoraFim(response.getDataHoraInicio())));
+        assertTrue(response.getDataHoraFim().isBefore(dataHoraFimPre));
     }
 
     @Test
@@ -243,19 +243,5 @@ class SessaoServiceTest {
     void deveApagarComSucesso() {
         sessaoService.apagar(1L);
         verify(sessaoRepository, times(1)).deleteById(1L);
-    }
-
-    private LocalDateTime calcularDataHoraFim(LocalDateTime dataHoraInicio) {
-        return dataHoraInicio
-                .plusDays(request.getTempoSessao().getDias())
-                .plusHours(request.getTempoSessao().getHoras())
-                .plusMinutes(request.getTempoSessao().getMinutos());
-    }
-
-    private LocalDateTime calcularDataHoraInicio(LocalDateTime dataHoraFim) {
-        return dataHoraFim
-                .minusDays(request.getTempoSessao().getDias())
-                .minusHours(request.getTempoSessao().getHoras())
-                .minusMinutes(request.getTempoSessao().getMinutos());
     }
 }

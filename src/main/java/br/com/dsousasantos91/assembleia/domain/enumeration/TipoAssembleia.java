@@ -7,9 +7,9 @@ public enum TipoAssembleia {
     ORDINARIA("Ordinária"),
     EXTRAORDINARIA("Extraordinária");
 
-    private String nome;
+    private final String value;
 
-    TipoAssembleia(String nome) {
-        this.nome = nome;
+    TipoAssembleia(String value) {
+        this.value = value;
     }
 }

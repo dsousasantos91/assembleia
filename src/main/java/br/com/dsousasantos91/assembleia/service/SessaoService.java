@@ -15,7 +15,6 @@ import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
 import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
-import br.com.dsousasantos91.assembleia.service.dto.request.TempoSessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 import lombok.RequiredArgsConstructor;
@@ -51,7 +50,7 @@ public class SessaoService {
         Sessao sessao = Sessao.builder()
                 .pauta(pauta)
                 .dataHoraInicio(LocalDateTime.now())
-                .dataHoraFim(calcularDataHoraFim(request.getTempoSessao()))
+                .dataHoraFim(request.getDataHoraFim())
                 .build();
         Sessao sessaoAberta = sessaoRepository.save(sessao);
         notificadorScheduler.agendarNotificacao(sessaoAberta);
@@ -97,7 +96,7 @@ public class SessaoService {
         log.info("Prorrogando sessão ID [{}]", id);
         return this.sessaoRepository.findById(id)
                 .map(sessaoEncontrada -> {
-                    sessaoEncontrada.setDataHoraFim(calcularDataHoraFim(request.getTempoSessao()));
+                    sessaoEncontrada.setDataHoraFim(request.getDataHoraFim());
                     notificadorScheduler.agendarNotificacao(sessaoEncontrada);
                     log.info("Sessão ID [{}] prorrogada até [{}]", sessaoEncontrada.getId(), sessaoEncontrada.getDataHoraFim());
                     return this.sessaoMapper.toResponse(sessaoEncontrada);
@@ -139,7 +138,7 @@ public class SessaoService {
             Sessao sessao = Sessao.builder()
                     .votacaoLivre(request.getVotacaoLivre())
                     .dataHoraInicio(LocalDateTime.now())
-                    .dataHoraFim(calcularDataHoraFim(request.getTempoSessao()))
+                    .dataHoraFim(request.getDataHoraFim())
                     .build();
             pauta.ifPresent(sessao::setPauta);
             log.info("Sessão ID [{}] instanciada com sucesso para a pauta [{}]", sessao.getId(), sessao.getPauta().getTitulo());
@@ -159,13 +158,6 @@ public class SessaoService {
                             .orElseGet(() -> associadoMapper.toEntity(associado));
                 })
                 .toList();
-    }
-
-    private static LocalDateTime calcularDataHoraFim(TempoSessaoRequest tempoSessao) {
-        return LocalDateTime.now()
-                .plusDays(tempoSessao.getDias())
-                .plusHours(tempoSessao.getHoras())
-                .plusMinutes(tempoSessao.getMinutos());
     }
 
     private <T> Boolean nuloOuVazio(List<T> list) {
