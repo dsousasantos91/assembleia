@@ -19,7 +19,7 @@ public class SessaoEmLoteRequestMock {
 
     public static void initializeDefaultData(SessaoEmLoteRequestMock mock) {
         mock.element = SessaoEmLoteRequest.builder()
-                .assembleiaId(0L)
+                .assembleiaId(1L)
                 .idsPautas(List.of(1L, 2L, 3L))
                 .associados(AssociadoRequestMock.mocked().mockList())
                 .votacaoLivre(Boolean.TRUE)

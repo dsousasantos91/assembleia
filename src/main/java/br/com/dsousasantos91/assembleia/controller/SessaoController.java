@@ -78,11 +78,11 @@ public class SessaoController {
 	}
 
 	@ApiOperation(value = "Encerramento de sessão.")
-	@DeleteMapping(path = "/encerrar/{sessaoId}")
+	@PutMapping(path = "/encerrar/{sessaoId}")
 	public ResponseEntity<SessaoResponse> encerrar(@Valid @PathVariable Long sessaoId, HttpServletResponse servletResponse) {
 		SessaoResponse response = this.sessaoService.encerrar(sessaoId);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
-		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Apaga sessão.")
