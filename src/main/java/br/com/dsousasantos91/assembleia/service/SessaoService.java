@@ -42,6 +42,7 @@ public class SessaoService {
     private final SessaoMapper sessaoMapper;
     private final AssociadoMapper associadoMapper;
     private final NotificadorScheduler notificadorScheduler;
+    private final ValidarCPFService validarCPFService;
 
     public SessaoResponse abrir(SessaoRequest request) {
         log.info("Abrindo sessão para pauta ID [{}].", request.getPautaId());
@@ -152,8 +153,11 @@ public class SessaoService {
             throw new GenericBadRequestException("votacaoLivre é " + request.getVotacaoLivre()
                     + ". Deve-se enviar os associados participantes da Sessão.");
         return request.getAssociados().stream()
-                .map(associado -> associadoRepository.findByCpf(associado.getCpf())
-                        .orElseGet(() -> associadoMapper.toEntity(associado)))
+                .map(associado -> {
+                    validarCPFService.validar(associado.getCpf());
+                    return associadoRepository.findByCpf(associado.getCpf())
+                            .orElseGet(() -> associadoMapper.toEntity(associado));
+                })
                 .toList();
     }
 

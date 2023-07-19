@@ -36,8 +36,10 @@ public class VotacaoService {
     private final VotacaoMapper votacaoMapper;
     private final AssociadoMapper associadoMapper;
     private final PautaMapper pautaMapper;
+    private final ValidarCPFService validarCPFService;
 
     public VotacaoResponse votar(VotacaoRequest request) {
+        validarCPFService.validar(request.getAssociado().getCpf());
         log.info("Encontrando sessão para votação");
         Sessao sessao = sessaoRepository.findById(request.getSessaoId())
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com id %d não existe.", request.getSessaoId())));

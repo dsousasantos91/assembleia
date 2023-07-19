@@ -32,3 +32,7 @@ spring:
     listener:
       simple:
         default-requeue-rejected: false
+
+cliente:
+  validador:
+    url: https://www.4devs.com.br/ferramentas_online.php
