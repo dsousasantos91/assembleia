@@ -17,7 +17,7 @@ public class EnderecoRequestMock {
 
     public static void initializeDefaultData(EnderecoRequestMock mock) {
         mock.element = EnderecoRequest.builder()
-                .cep("72876-036")
+                .cep("72876036")
                 .logradouro("Quadra 10")
                 .bairro("Valparaíso I - Etapa A")
                 .cidade("Valparaíso de Goiás")

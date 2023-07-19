@@ -33,14 +33,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/v1/sessao")
+@RequestMapping(value = "/v1/sessao", produces = { "application/json;charset=UTF-8" })
 public class SessaoController {
 
 	private final SessaoService sessaoService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Abertura de sessão.")
-	@PostMapping(path = "/abrir", produces = "application/json")
+	@PostMapping(path = "/abrir")
 	public ResponseEntity<SessaoResponse> abrir(@Valid @RequestBody SessaoRequest request, HttpServletResponse servletResponse) {
 		SessaoResponse response = this.sessaoService.abrir(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
@@ -48,7 +48,7 @@ public class SessaoController {
 	}
 
 	@ApiOperation(value = "Abertura de sessão em lote.")
-	@PostMapping(path = "/abrirEmLote", produces = "application/json")
+	@PostMapping(path = "/abrirEmLote")
 	public ResponseEntity<List<SessaoResponse>> abrirEmLote(@Valid @RequestBody SessaoEmLoteRequest request, HttpServletResponse servletResponse) {
 		List<SessaoResponse> responseList = this.sessaoService.abrirEmLote(request);
 		responseList.forEach(response -> publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId())));
@@ -64,21 +64,21 @@ public class SessaoController {
 	}
 
 	@ApiOperation(value = "Informações sobre uma sessão específica.")
-	@GetMapping(path = "/{id}", produces = "application/json")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<SessaoResponse> buscaoPorId(@PathVariable Long id) {
 		SessaoResponse response = sessaoService.buscarPorId(id);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Prorrogar prazo da sessão.")
-	@PutMapping(path = "/prorrogar/{id}", produces = "application/json")
+	@PutMapping(path = "/prorrogar/{id}")
 	public ResponseEntity<SessaoResponse> prorrogar(@PathVariable Long id, @Valid @RequestBody SessaoRequest request) {
 		SessaoResponse response = this.sessaoService.prorrogar(id, request);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Encerramento de sessão.")
-	@DeleteMapping(path = "/encerrar/{sessaoId}", produces = "application/json")
+	@DeleteMapping(path = "/encerrar/{sessaoId}")
 	public ResponseEntity<SessaoResponse> encerrar(@Valid @PathVariable Long sessaoId, HttpServletResponse servletResponse) {
 		SessaoResponse response = this.sessaoService.encerrar(sessaoId);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));

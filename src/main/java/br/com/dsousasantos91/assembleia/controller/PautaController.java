@@ -27,7 +27,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/v1/pauta")
+@RequestMapping(value = "/v1/pauta", produces = { "application/json;charset=UTF-8" })
 public class PautaController {
 
 	private final PautaService pautaService;
@@ -41,14 +41,14 @@ public class PautaController {
 	}
 
 	@ApiOperation(value = "Informações sobre uma pauta.")
-	@GetMapping(path = "/{id}", produces = "application/json")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<PautaResponse> buscaoPorId(@PathVariable Long id) {
 		PautaResponse response = pautaService.buscarPorId(id);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Atualização de pauta.")
-	@PutMapping(path = "/{id}", produces = "application/json")
+	@PutMapping(path = "/{id}")
 	public ResponseEntity<PautaResponse> atualizar(@PathVariable Long id, @Valid @RequestBody PautaRequest request) {
 		PautaResponse response = this.pautaService.atualizar(id, request);
 		return ResponseEntity.ok(response);

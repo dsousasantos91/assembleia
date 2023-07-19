@@ -30,14 +30,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/v1/votacao")
+@RequestMapping(value = "/v1/votacao", produces = { "application/json;charset=UTF-8" })
 public class VotacaoController {
 
 	private final VotacaoService votacaoService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Votação de Pauta.")
-	@PostMapping(path = "/votar", produces = "application/json")
+	@PostMapping(path = "/votar")
 	public ResponseEntity<VotacaoResponse> votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
 		VotacaoResponse response = this.votacaoService.votar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
@@ -60,7 +60,7 @@ public class VotacaoController {
 	}
 
 	@ApiOperation(value = "Altera voto associado.")
-	@PutMapping(path = "/alterarVoto/sessao/{sessaoId}/associado/{cpf}", produces = "application/json")
+	@PutMapping(path = "/alterarVoto/sessao/{sessaoId}/associado/{cpf}")
 	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable Long sessaoId, @PathVariable String cpf) {
 		VotacaoResponse response = this.votacaoService.alterarVoto(sessaoId, cpf);
 		return ResponseEntity.ok(response);
