@@ -3,7 +3,6 @@ package br.com.dsousasantos91.assembleia.controller;
 import br.com.dsousasantos91.assembleia.domain.Assembleia;
 import br.com.dsousasantos91.assembleia.mapper.AssembleiaMapper;
 import br.com.dsousasantos91.assembleia.mock.AssembleiaRequestMock;
-import br.com.dsousasantos91.assembleia.mock.AssembleiaUpdateRequestMock;
 import br.com.dsousasantos91.assembleia.service.AssembleiaService;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaUpdateRequest;
@@ -32,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,10 +70,11 @@ class AssembleiaControllerTest {
                 post("/v1/assembleia")
                         .contentType(APPLICATION_JSON_UTF_8)
                         .content(objectMapper.writeValueAsString(request))
-        )
-        .andExpect(status().isCreated())
-        .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
-        .andExpect(content().string(objectMapper.writeValueAsString(response)));
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
+                .andExpect(content().string(objectMapper.writeValueAsString(response)));
     }
 
     @Test
@@ -85,6 +86,7 @@ class AssembleiaControllerTest {
         mockMvc.perform(get("/v1/assembleia")
                         .contentType(APPLICATION_JSON_UTF_8)
                 )
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
                 .andExpect(content().string(objectMapper.writeValueAsString(pageResponse)));
@@ -94,6 +96,7 @@ class AssembleiaControllerTest {
     void deveBuscaoPorIdERetornarStatusCode200() throws Exception {
         when(assembleiaService.buscarPorId(anyLong())).thenReturn(response);
         mockMvc.perform(get("/v1/assembleia/" + 1))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
                 .andExpect(content().string(objectMapper.writeValueAsString(response)));
@@ -101,16 +104,13 @@ class AssembleiaControllerTest {
 
     @Test
     void deveAtualizarERetornarStatusCode200() throws Exception {
-        AssembleiaUpdateRequest requestAtualizada = AssembleiaUpdateRequestMock.mocked()
-                .withPresidente("Mr. Brenda Ullrich")
-                .withPresidente("Kristina Miller")
-                .mock();
         when(assembleiaService.atualizar(anyLong(), any(AssembleiaUpdateRequest.class))).thenReturn(response);
         mockMvc.perform(
                         put("/v1/assembleia/" + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(requestAtualizada))
+                                .content(objectMapper.writeValueAsString(request))
                 )
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
                 .andExpect(content().string(objectMapper.writeValueAsString(response)));
@@ -120,6 +120,7 @@ class AssembleiaControllerTest {
     void deveEncerrarERetornarStatusCode200() throws Exception {
         when(assembleiaService.encerrar(anyLong())).thenReturn(response);
         mockMvc.perform(put("/v1/assembleia/encerrar/" + 1))
+                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
                 .andExpect(content().string(objectMapper.writeValueAsString(response)));
@@ -129,6 +130,7 @@ class AssembleiaControllerTest {
     void deveApagarERetornarStatusCode204() throws Exception {
         doNothing().when(assembleiaService).apagar(anyLong());
         mockMvc.perform(delete("/v1/assembleia/" + 1))
+                .andDo(print())
                 .andExpect(status().isNoContent());
     }
 }

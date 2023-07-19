@@ -19,6 +19,7 @@ import br.com.dsousasantos91.assembleia.repository.VotacaoRepository;
 import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
+import br.com.dsousasantos91.assembleia.util.MaskUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,7 +98,7 @@ class VotacaoServiceTest {
         VotacaoResponse response = votacaoService.votar(request);
         assertNotNull(response.getId());
         assertEquals(response.getSessao().getId(), request.getSessaoId());
-        assertEquals(response.getAssociado().getCpf(), request.getAssociado().getCpf());
+        assertEquals(response.getAssociado().getCpf(), MaskUtil.cpf(request.getAssociado().getCpf()));
         assertEquals(response.getVoto(), request.getVoto().getValue());
     }
 
