@@ -13,8 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,21 +27,21 @@ public class PautaService {
 
     public PautaResponse buscarPorId(Long id) {
         log.info("Buscar pauta ID [{}]", id);
-        Pauta pauta = this.pautaRepository.findById(id).orElseThrow(GenericNotFoundException::new);
+        Pauta pauta = this.pautaRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Pauta ID: [%d] não encontrada.", id)));
         log.info("Pauta ID [{}] encontrada.", pauta.getId());
         return this.pautaMapper.toResponse(pauta);
     }
 
     public PautaResponse atualizar(Long id, PautaRequest request) {
         log.info("Atualizando pauta ID [{}]", id);
-        Optional<Pauta> pautaEncontrada = this.pautaRepository.findById(id);
-        if (pautaEncontrada.isEmpty())
-            throw new GenericNotFoundException(String.format("Pauta ID: [%d] não encontrada.", id));
+        Pauta pautaEncontrada = this.pautaRepository.findById(id)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Pauta ID: [%d] não encontrada.", id)));
         Pauta pauta = this.pautaMapper.toEntity(request);
-        PropertyUtils.copyNonNullProperties(pauta, pautaEncontrada.get());
-        this.pautaRepository.save(pautaEncontrada.get());
-        log.info("Pauta ID [{}] atualizada com sucesso.", pautaEncontrada.get().getId());
-        return this.pautaMapper.toResponse(pautaEncontrada.get());
+        PropertyUtils.copyNonNullProperties(pauta, pautaEncontrada);
+        this.pautaRepository.save(pautaEncontrada);
+        log.info("Pauta ID [{}] atualizada com sucesso.", pautaEncontrada.getId());
+        return this.pautaMapper.toResponse(pautaEncontrada);
     }
 
     public void apagar(Long id) {
