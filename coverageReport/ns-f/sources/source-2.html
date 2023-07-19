@@ -1,0 +1,183 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PautaService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.dsousasantos91.assembleia.service</a>
+</div>
+
+<h1>Coverage Summary for Class: PautaService (br.com.dsousasantos91.assembleia.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PautaService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$32ifbdR6</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$DGRDcG7X</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$I1JCzLdU</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$liS1tr7e</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$loBNQiwG</td>
+  </tr>
+  <tr>
+    <td class="name">PautaService$MockitoMock$GZcznZ6Y$auxiliary$RJ7jRbdF</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.service;
+&nbsp;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Pauta;
+&nbsp;import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
+&nbsp;import br.com.dsousasantos91.assembleia.mapper.PautaMapper;
+&nbsp;import br.com.dsousasantos91.assembleia.repository.PautaRepository;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.PautaRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.PautaResponse;
+&nbsp;import br.com.dsousasantos91.assembleia.util.PropertyUtils;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.Pageable;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;public class PautaService {
+&nbsp;    private final PautaRepository pautaRepository;
+&nbsp;    private final PautaMapper pautaMapper;
+&nbsp;
+&nbsp;    public Page&lt;PautaResponse&gt; pesquisar(Pageable pageable) {
+<b class="fc">&nbsp;        log.info(&quot;Pesquisar pautas&quot;);</b>
+<b class="fc">&nbsp;        return this.pautaRepository.findAll(pageable).map(pautaMapper::toResponse);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PautaResponse buscarPorId(Long id) {
+<b class="fc">&nbsp;        log.info(&quot;Buscar pauta ID [{}]&quot;, id);</b>
+<b class="fc">&nbsp;        Pauta pauta = this.pautaRepository.findById(id)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Pauta ID: [%d] não encontrada.&quot;, id)));</b>
+<b class="fc">&nbsp;        log.info(&quot;Pauta ID [{}] encontrada.&quot;, pauta.getId());</b>
+<b class="fc">&nbsp;        return this.pautaMapper.toResponse(pauta);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public PautaResponse atualizar(Long id, PautaRequest request) {
+<b class="fc">&nbsp;        log.info(&quot;Atualizando pauta ID [{}]&quot;, id);</b>
+<b class="fc">&nbsp;        Pauta pautaEncontrada = this.pautaRepository.findById(id)</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Pauta ID: [%d] não encontrada.&quot;, id)));</b>
+<b class="fc">&nbsp;        Pauta pauta = this.pautaMapper.toEntity(request);</b>
+<b class="fc">&nbsp;        PropertyUtils.copyNonNullProperties(pauta, pautaEncontrada);</b>
+<b class="fc">&nbsp;        this.pautaRepository.save(pautaEncontrada);</b>
+<b class="fc">&nbsp;        log.info(&quot;Pauta ID [{}] atualizada com sucesso.&quot;, pautaEncontrada.getId());</b>
+<b class="fc">&nbsp;        return this.pautaMapper.toResponse(pautaEncontrada);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void apagar(Long id) {
+<b class="fc">&nbsp;        log.info(&quot;Apagando pauta ID [{}]&quot;, id);</b>
+<b class="fc">&nbsp;        pautaRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        log.info(&quot;Pauta ID [{}] apagada com sucesso.&quot;,id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-19 20:07</div>
+</div>
+</body>
+</html>

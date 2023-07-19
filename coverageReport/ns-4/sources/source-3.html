@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SessaoController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.dsousasantos91.assembleia.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: SessaoController (br.com.dsousasantos91.assembleia.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SessaoController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_2</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_3</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_3$$FastClassBySpringCGLIB$$5a990c46</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_4</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_5</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_6</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_7</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_8</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$EnhancerBySpringCGLIB$$1d3b8a08_9</td>
+  </tr>
+  <tr>
+    <td class="name">SessaoController$$FastClassBySpringCGLIB$$a8f0547a</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.controller;
+&nbsp;
+&nbsp;import br.com.dsousasantos91.assembleia.event.RecursoCriadoEvent;
+&nbsp;import br.com.dsousasantos91.assembleia.service.SessaoService;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
+&nbsp;import io.swagger.annotations.Api;
+&nbsp;import io.swagger.annotations.ApiOperation;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import org.springframework.context.ApplicationEventPublisher;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.Pageable;
+&nbsp;import org.springframework.data.web.SortDefault;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.validation.annotation.Validated;
+&nbsp;import org.springframework.web.bind.annotation.DeleteMapping;
+&nbsp;import org.springframework.web.bind.annotation.GetMapping;
+&nbsp;import org.springframework.web.bind.annotation.PathVariable;
+&nbsp;import org.springframework.web.bind.annotation.PostMapping;
+&nbsp;import org.springframework.web.bind.annotation.PutMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.ResponseStatus;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import javax.validation.Valid;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Api(value = &quot;API REST - Entidade Sessao&quot;)
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;@Validated
+&nbsp;@RestController
+&nbsp;@RequestMapping(value = &quot;/v1/sessao&quot;, produces = { &quot;application/json;charset=UTF-8&quot; })
+&nbsp;public class SessaoController {
+&nbsp;
+&nbsp;	private final SessaoService sessaoService;
+&nbsp;	private final ApplicationEventPublisher publish;
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Abertura de sessão.&quot;)
+&nbsp;	@PostMapping(path = &quot;/abrir&quot;)
+&nbsp;	public ResponseEntity&lt;SessaoResponse&gt; abrir(@Valid @RequestBody SessaoRequest request, HttpServletResponse servletResponse) {
+<b class="fc">&nbsp;		SessaoResponse response = this.sessaoService.abrir(request);</b>
+<b class="fc">&nbsp;		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));</b>
+<b class="fc">&nbsp;		return ResponseEntity.status(HttpStatus.CREATED).body(response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Abertura de sessão em lote.&quot;)
+&nbsp;	@PostMapping(path = &quot;/abrirEmLote&quot;)
+&nbsp;	public ResponseEntity&lt;List&lt;SessaoResponse&gt;&gt; abrirEmLote(@Valid @RequestBody SessaoEmLoteRequest request, HttpServletResponse servletResponse) {
+<b class="fc">&nbsp;		List&lt;SessaoResponse&gt; responseList = this.sessaoService.abrirEmLote(request);</b>
+<b class="fc">&nbsp;		responseList.forEach(response -&gt; publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId())));</b>
+<b class="fc">&nbsp;		return ResponseEntity.status(HttpStatus.CREATED).body(responseList);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Listagem de sessões.&quot;)
+&nbsp;	@GetMapping
+&nbsp;	public ResponseEntity&lt;Page&lt;SessaoResponse&gt;&gt; pesquisar(
+&nbsp;			@SortDefault.SortDefaults({ @SortDefault(sort = &quot;dataHoraInicio&quot;) }) Pageable pageable) {
+<b class="fc">&nbsp;		Page&lt;SessaoResponse&gt; response = sessaoService.pesquisar(pageable);</b>
+<b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Informações sobre uma sessão específica.&quot;)
+&nbsp;	@GetMapping(path = &quot;/{id}&quot;)
+&nbsp;	public ResponseEntity&lt;SessaoResponse&gt; buscaoPorId(@PathVariable Long id) {
+<b class="fc">&nbsp;		SessaoResponse response = sessaoService.buscarPorId(id);</b>
+<b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Prorrogar prazo da sessão.&quot;)
+&nbsp;	@PutMapping(path = &quot;/prorrogar/{id}&quot;)
+&nbsp;	public ResponseEntity&lt;SessaoResponse&gt; prorrogar(@PathVariable Long id, @Valid @RequestBody SessaoRequest request) {
+<b class="fc">&nbsp;		SessaoResponse response = this.sessaoService.prorrogar(id, request);</b>
+<b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Encerramento de sessão.&quot;)
+&nbsp;	@PutMapping(path = &quot;/encerrar/{sessaoId}&quot;)
+&nbsp;	public ResponseEntity&lt;SessaoResponse&gt; encerrar(@Valid @PathVariable Long sessaoId, HttpServletResponse servletResponse) {
+<b class="fc">&nbsp;		SessaoResponse response = this.sessaoService.encerrar(sessaoId);</b>
+<b class="fc">&nbsp;		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));</b>
+<b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;	@ApiOperation(value = &quot;Apaga sessão.&quot;)
+&nbsp;	@DeleteMapping(path = &quot;/{id}&quot;)
+&nbsp;	@ResponseStatus(HttpStatus.NO_CONTENT)
+&nbsp;	public void apagar(@PathVariable Long id) {
+<b class="fc">&nbsp;		this.sessaoService.apagar(id);</b>
+&nbsp;	}
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-19 20:07</div>
+</div>
+</body>
+</html>
