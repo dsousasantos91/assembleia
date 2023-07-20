@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    name: assembleiadb
+    password: ${PASSWORD_DB:sa}
+    url: ${DATABASE_URL:jdbc:h2:mem:testdb}
+    username: ${USER_DB:sa}
+  flyway:
+    enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  h2:
+    console:
+      enabled: true

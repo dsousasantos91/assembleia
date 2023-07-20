@@ -12,12 +12,3 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-  rabbitmq:
-    host: ${RABBITMQ_HOST:localhost}
-    listener:
-      simple:
-        default-requeue-rejected: false
-    password: ${RABBITMQ_PASSWORD:admin}
-    port: ${RABBIT_PORT:5672}
-    username: ${RABBITMQ_USER:admin}
-    virtual-host: ${RABBIT_VHOST:/}
