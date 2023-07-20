@@ -32,11 +32,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -118,8 +118,8 @@ class SessaoServiceTest {
         when(assembleiaRepository.findById(anyLong())).thenReturn(Optional.of(assembleia));
         doAnswer(invocation -> invocation.getArgument(0)).when(sessaoRepository).saveAll(anyList());
         List<SessaoResponse> response = sessaoService.abrirEmLote(requestEmLote);
-        List<Long> idsPautasDaAssembleia = assembleia.getPautas().stream().map(Pauta::getId).collect(toList());
-        List<Long> idsPautasResponse = response.stream().map(SessaoResponse::getPauta).map(PautaResponse::getId).collect(toList());
+        List<Long> idsPautasDaAssembleia = assembleia.getPautas().stream().map(Pauta::getId).toList();
+        List<Long> idsPautasResponse = response.stream().map(SessaoResponse::getPauta).map(PautaResponse::getId).toList();
         assertEquals(response.size(), assembleia.getPautas().size());
         verify(sessaoRepository, times(1)).saveAll(anyList());
         assertTrue(idsPautasResponse.containsAll(idsPautasDaAssembleia));
@@ -136,7 +136,7 @@ class SessaoServiceTest {
         PageImpl<Sessao> pageResponse = new PageImpl<>(sessaoList, pageable, sessaoList.size());
         when(sessaoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<SessaoResponse> response = sessaoService.pesquisar(pageable);
-        List<Long> idsSessoes = response.stream().map(SessaoResponse::getId).collect(toList());
+        List<Long> idsSessoes = response.stream().map(SessaoResponse::getId).toList();
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsSessoes.size(), 2);
