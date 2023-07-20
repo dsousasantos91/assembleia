@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -45,13 +46,14 @@ public class AssembleiaService {
         return this.assembleiaMapper.toResponse(assembleia);
     }
 
+    @Transactional
     public AssembleiaResponse atualizar(Long id, AssembleiaUpdateRequest request) {
         log.info("Atualizando assembleia ID [{}]", id);
         Assembleia assembleiaEncontrada = this.assembleiaRepository.findById(id)
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id)));
         Assembleia assembleia = this.assembleiaMapper.toEntity(request);
-        assembleia.getLocal().setAssembleia(assembleia);
-        PropertyUtils.copyNonNullProperties(assembleia, assembleiaEncontrada);
+        PropertyUtils.copyNonNullProperties(assembleia, assembleiaEncontrada, "local");
+        PropertyUtils.copyNonNullProperties(assembleia.getLocal(), assembleiaEncontrada.getLocal());
         Assembleia assembleiaAtualizada = this.assembleiaRepository.save(assembleiaEncontrada);
         log.info("Assembleia ID [{}] atualizada com sucesso.", assembleiaEncontrada.getId());
         return this.assembleiaMapper.toResponse(assembleiaAtualizada);
