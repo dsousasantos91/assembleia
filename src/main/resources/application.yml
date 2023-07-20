@@ -1,37 +1,11 @@
-server:
-  servlet:
-    context-path: /api
-
 spring:
-  datasource:
-    driverClassName: org.postgresql.Driver
-    name: crud
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
-  flyway:
-    enabled: true
   jackson:
     date-format: yyyy-MM-dd
     deserialization:
       fail-on-unknown-properties: true
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: none
-    show-sql: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  rabbitmq:
-    virtual-host: /
-    host: localhost
-    port: 5672
-    username: admin
-    password: admin
-    listener:
-      simple:
-        default-requeue-rejected: false
 
 cliente:
   validador:
