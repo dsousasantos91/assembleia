@@ -13,11 +13,11 @@ spring:
       ddl-auto: none
     show-sql: true
   rabbitmq:
-    host: ${STACKHERO_RABBITMQ_HOST:localhost}
+    host: ${RABBITMQ_HOST:localhost}
     listener:
       simple:
         default-requeue-rejected: false
-    password: ${STACKHERO_RABBITMQ_PASSWORD:admin}
+    password: ${RABBITMQ_PASSWORD:admin}
     port: ${RABBIT_PORT:5672}
-    username: ${STACKHERO_RABBITMQ_USER:admin}
+    username: ${RABBITMQ_USER:admin}
     virtual-host: ${RABBIT_VHOST:/}
