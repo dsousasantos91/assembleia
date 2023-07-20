@@ -33,7 +33,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping(value = "/v1/sessao", produces = { "application/json;charset=UTF-8" })
+@RequestMapping(value = "/api/v1/sessao", produces = { "application/json;charset=UTF-8" })
 public class SessaoController {
 
 	private final SessaoService sessaoService;
