@@ -22,8 +22,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -78,10 +81,13 @@ public class VotacaoService {
         long votosParaNao = votacoes.stream().filter(votacao -> Voto.NAO.equals(votacao.getVoto())).count();
         long votosParaSim = votacoes.stream().filter(votacao -> Voto.SIM.equals(votacao.getVoto())).count();
         log.info("Contagem do votos da sessão [{}] realizada com sucesso.", sessao.getId());
+        Map<Voto, Long> votos = new HashMap<>();
+        votos.put(Voto.NAO, votosParaNao);
+        votos.put(Voto.SIM, votosParaSim);
         return ContagemVotosResponse.builder()
                 .sessaoId(sessao.getId())
                 .pauta(pautaMapper.toResponse(sessao.getPauta()))
-                .votos(Map.of(Voto.NAO, votosParaNao, Voto.SIM, votosParaSim))
+                .votos(votos)
                 .build();
     }
 
@@ -98,6 +104,6 @@ public class VotacaoService {
     }
 
     private static boolean sessaoContemAssociado(Sessao sessao, Associado associado) {
-        return !sessao.getAssociados().isEmpty() && !sessao.getAssociados().stream().map(Associado::getCpf).toList().contains(associado.getCpf());
+        return !sessao.getAssociados().isEmpty() && !sessao.getAssociados().stream().map(Associado::getCpf).collect(toList()).contains(associado.getCpf());
     }
 }

@@ -24,10 +24,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -95,7 +97,7 @@ class VotacaoControllerTest {
 
     @Test
     void devePesquisarERetornarStatus200() throws Exception {
-        List<VotacaoResponse> votacaoResponseList = List.of(response);
+        List<VotacaoResponse> votacaoResponseList = singletonList(response);
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<VotacaoResponse> pageResponse = new PageImpl<>(votacaoResponseList, pageable, votacaoResponseList.size());
         when(votacaoService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
@@ -110,10 +112,13 @@ class VotacaoControllerTest {
 
     @Test
     void deveContabilizarERetornarStatus200() throws Exception{
+        Map<Voto, Long> votos = new HashMap<>();
+        votos.put(Voto.SIM, 5L);
+        votos.put(Voto.NAO, 4L);
         ContagemVotosResponse responseContagem = ContagemVotosResponse.builder()
                 .sessaoId(1L)
                 .pauta(response.getSessao().getPauta())
-                .votos(Map.of(Voto.SIM, 5L, Voto.NAO, 4L))
+                .votos(votos)
                 .build();
         when(votacaoService.contabilizar(anyLong())).thenReturn(responseContagem);
         mockMvc.perform(

@@ -2,6 +2,7 @@ package br.com.dsousasantos91.assembleia.mock;
 
 import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class AssociadoRequestMock {
@@ -24,7 +25,7 @@ public class AssociadoRequestMock {
     }
 
     public static void initializeDefaultDataList(AssociadoRequestMock mock) {
-        mock.elements = List.of(
+        mock.elements = Arrays.asList(
                 AssociadoRequest.builder()
                         .cpf("45906639020")
                         .nome("Jermaine Miller")

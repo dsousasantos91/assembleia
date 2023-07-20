@@ -25,9 +25,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -111,7 +113,7 @@ class SessaoControllerTest {
                 .dataHoraInicio(LocalDateTime.now())
                 .dataHoraFim(LocalDateTime.now().plusMinutes(5))
                 .build();
-        List<SessaoResponse> responses = List.of(response, response2, response3);
+        List<SessaoResponse> responses = Arrays.asList(response, response2, response3);
 
         when(sessaoService.abrirEmLote(any(SessaoEmLoteRequest.class))).thenReturn(responses);
         mockMvc.perform(
@@ -127,7 +129,7 @@ class SessaoControllerTest {
 
     @Test
     void devePesquisarERetornarStatus200() throws Exception {
-        List<SessaoResponse> sessaoResponseList = List.of(response);
+        List<SessaoResponse> sessaoResponseList = singletonList(response);
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<SessaoResponse> pageResponse = new PageImpl<>(sessaoResponseList, pageable, sessaoResponseList.size());
         when(sessaoService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
