@@ -25,8 +25,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.toList;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -100,6 +98,6 @@ public class VotacaoService {
     }
 
     private static boolean sessaoContemAssociado(Sessao sessao, Associado associado) {
-        return !sessao.getAssociados().isEmpty() && !sessao.getAssociados().stream().map(Associado::getCpf).collect(toList()).contains(associado.getCpf());
+        return !sessao.getAssociados().isEmpty() && !sessao.getAssociados().stream().map(Associado::getCpf).toList().contains(associado.getCpf());
     }
 }

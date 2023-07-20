@@ -34,7 +34,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -131,7 +130,7 @@ class VotacaoServiceTest {
         PageImpl<Votacao> pageResponse = new PageImpl<>(votacaoList, pageable, votacaoList.size());
         when(votacaoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<VotacaoResponse> response = votacaoService.pesquisar(pageable);
-        List<Long> idsVotacoes = response.stream().map(VotacaoResponse::getId).collect(toList());
+        List<Long> idsVotacoes = response.stream().map(VotacaoResponse::getId).toList();
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsVotacoes.size(), 1);

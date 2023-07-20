@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Objects.isNull;
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -65,7 +64,7 @@ public class SessaoService {
         log.info("Buscando assembleia ID [{}].", request.getAssembleiaId());
         Optional<Assembleia> assembleia = this.assembleiaRepository.findById(request.getAssembleiaId());
         if (assembleia.isPresent()) {
-            List<Long> idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).collect(toList());
+            List<Long> idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).toList();
             request.setIdsPautas(idsPautas);
         }
         if (assembleia.isEmpty() && nuloOuVazio(request.getIdsPautas()))
@@ -144,7 +143,7 @@ public class SessaoService {
             pauta.ifPresent(sessao::setPauta);
             log.info("Sessão ID [{}] instanciada com sucesso para a pauta [{}]", sessao.getId(), sessao.getPauta().getTitulo());
             return sessao;
-        }).collect(toList());
+        }).toList();
     }
 
     private List<Associado> setAssociados(SessaoEmLoteRequest request) {
@@ -158,7 +157,7 @@ public class SessaoService {
                     return associadoRepository.findByCpf(associado.getCpf())
                             .orElseGet(() -> associadoMapper.toEntity(associado));
                 })
-                .collect(toList());
+                .toList();
     }
 
     private <T> Boolean nuloOuVazio(List<T> list) {
