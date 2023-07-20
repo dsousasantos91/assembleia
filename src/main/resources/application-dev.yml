@@ -2,9 +2,9 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     name: assembleiadb
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    password: ${PASSWORD_DB:postgres}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${USER_DB:postgres}
   flyway:
     enabled: true
   jpa:
@@ -13,11 +13,11 @@ spring:
       ddl-auto: none
     show-sql: true
   rabbitmq:
-    virtual-host: /
-    host: localhost
-    port: 5672
-    username: admin
-    password: admin
+    host: ${RABBITMQ_HOST:localhost}
     listener:
       simple:
         default-requeue-rejected: false
+    password: ${RABBITMQ_PASSWORD:admin}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBITMQ_USER:admin}
+    virtual-host: ${RABBIT_VHOST:/}

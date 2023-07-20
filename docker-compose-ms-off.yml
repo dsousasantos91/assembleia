@@ -42,24 +42,6 @@ services:
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
 
-  ms-assembleia:
-    image: dsousasantos91/ms-assembleia:1.0.0
-    container_name: ms-assembleia
-    restart: always
-    environment:
-      - "APP_PROFILE=dev"
-      - "DATABASE_URL=jdbc:postgresql://assembleiadb:5432/postgres"
-      - "RABBITMQ_HOST=assembleia_amqp"
-    depends_on:
-      assembleiadb:
-        condition: service_started
-      assembleia_amqp:
-        condition: service_started
-    ports:
-      - "8080:8080"
-    networks:
-      - assembleia-network
-
 networks:
   assembleia-network:
     name: assembleia-network
