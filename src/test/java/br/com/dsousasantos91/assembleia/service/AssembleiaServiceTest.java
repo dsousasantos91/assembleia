@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -87,7 +88,7 @@ class AssembleiaServiceTest {
         PageImpl<Assembleia> pageResponse = new PageImpl<>(assembleiaList, pageable, assembleiaList.size());
         when(assembleiaRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<AssembleiaResponse> response = assembleiaService.pesquisar(pageable);
-        List<Long> idsAssembleias = response.stream().map(AssembleiaResponse::getId).toList();
+        List<Long> idsAssembleias = response.stream().map(AssembleiaResponse::getId).collect(toList());
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsAssembleias.size(), 2);
