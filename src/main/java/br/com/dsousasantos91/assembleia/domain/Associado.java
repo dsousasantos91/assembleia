@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "associado")
+@Table(name = "associado", uniqueConstraints = @UniqueConstraint(name = "UniqueAssociado", columnNames = { "cpf" }))
 public class Associado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AssociadoMapperImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.dsousasantos91.assembleia.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: AssociadoMapperImpl (br.com.dsousasantos91.assembleia.mapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AssociadoMapperImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    28,6%
+  </span>
+  <span class="absValue">
+    (6/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.mapper;
+&nbsp;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Associado;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.AssociadoResponse;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import org.springframework.stereotype.Component;
+&nbsp;
+&nbsp;@Generated(
+&nbsp;    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+&nbsp;    date = &quot;2023-07-19T10:41:02-0300&quot;,
+&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)&quot;
+&nbsp;)
+&nbsp;@Component
+<b class="fc">&nbsp;public class AssociadoMapperImpl implements AssociadoMapper {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public AssociadoResponse toResponse(Associado associado) {
+<b class="nc">&nbsp;        if ( associado == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        AssociadoResponse.AssociadoResponseBuilder associadoResponse = AssociadoResponse.builder();</b>
+&nbsp;
+<b class="nc">&nbsp;        associadoResponse.id( associado.getId() );</b>
+<b class="nc">&nbsp;        associadoResponse.cpf( associado.getCpf() );</b>
+<b class="nc">&nbsp;        associadoResponse.nome( associado.getNome() );</b>
+&nbsp;
+<b class="nc">&nbsp;        return associadoResponse.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Associado toEntity(AssociadoRequest request) {
+<b class="fc">&nbsp;        if ( request == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Associado.AssociadoBuilder associado = Associado.builder();</b>
+&nbsp;
+<b class="fc">&nbsp;        associado.cpf( request.getCpf() );</b>
+<b class="fc">&nbsp;        associado.nome( request.getNome() );</b>
+&nbsp;
+<b class="fc">&nbsp;        return associado.build();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public List&lt;Associado&gt; toEntities(List&lt;AssociadoRequest&gt; request) {
+<b class="nc">&nbsp;        if ( request == null ) {</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        List&lt;Associado&gt; list = new ArrayList&lt;Associado&gt;( request.size() );</b>
+<b class="nc">&nbsp;        for ( AssociadoRequest associadoRequest : request ) {</b>
+<b class="nc">&nbsp;            list.add( toEntity( associadoRequest ) );</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+<b class="nc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-19 20:07</div>
+</div>
+</body>
+</html>

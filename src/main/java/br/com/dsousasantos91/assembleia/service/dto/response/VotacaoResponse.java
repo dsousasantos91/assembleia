@@ -25,6 +25,6 @@ public class VotacaoResponse {
     private LocalDateTime dataHoraVoto;
 
     public String getVoto() {
-        return voto.getVoto();
+        return voto.getValue();
     }
 }

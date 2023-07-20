@@ -32,14 +32,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/v1/assembleia")
+@RequestMapping(value = "/api/v1/assembleia", produces = { "application/json;charset=UTF-8" })
 public class AssembleiaController {
 
 	private final AssembleiaService assembleiaService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Cadastro de assembleia.")
-	@PostMapping(produces = "application/json")
+	@PostMapping
 	public ResponseEntity<AssembleiaResponse> criar(@Valid @RequestBody AssembleiaRequest request, HttpServletResponse servletResponse) {
 		AssembleiaResponse response = this.assembleiaService.criar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
@@ -55,24 +55,31 @@ public class AssembleiaController {
 	}
 
 	@ApiOperation(value = "Informações sobre uma assembleia.")
-	@GetMapping(path = "/{id}", produces = "application/json")
+	@GetMapping(path = "/{id}")
 	public ResponseEntity<AssembleiaResponse> buscaoPorId(@PathVariable Long id) {
 		AssembleiaResponse response = assembleiaService.buscarPorId(id);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Atualização de assembleia.")
-	@PutMapping(path = "/{id}", produces = "application/json")
+	@PutMapping(path = "/{id}")
 	public ResponseEntity<AssembleiaResponse> atualizar(@PathVariable Long id, @Valid @RequestBody AssembleiaUpdateRequest request) {
 		AssembleiaResponse response = this.assembleiaService.atualizar(id, request);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Encerramento de assembleia.")
+	@PutMapping(path = "/encerrar/{id}")
+	public ResponseEntity<AssembleiaResponse> encerrar(@PathVariable Long id) {
+		AssembleiaResponse response = this.assembleiaService.encerrar(id);
+		return ResponseEntity.ok(response);
+	}
+
+	@ApiOperation(value = "Apaga assembleia.")
 	@DeleteMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void remover(@PathVariable Long id) {
-		this.assembleiaService.encerrar(id);
+	public void apagar(@PathVariable Long id) {
+		this.assembleiaService.apagar(id);
 	}
 
 }

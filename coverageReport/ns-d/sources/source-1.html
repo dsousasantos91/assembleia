@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > NotificadorScheduler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.dsousasantos91.assembleia.scheduler</a>
+</div>
+
+<h1>Coverage Summary for Class: NotificadorScheduler (br.com.dsousasantos91.assembleia.scheduler)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificadorScheduler</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (3/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN</td>
+  </tr>
+  <tr>
+    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$1aGNThQP</td>
+  </tr>
+  <tr>
+    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$NOqn56zm</td>
+  </tr>
+  <tr>
+    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$ZQHZm7YI</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (2/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    20%
+  </span>
+  <span class="absValue">
+    (3/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.scheduler;
+&nbsp;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Sessao;
+&nbsp;import br.com.dsousasantos91.assembleia.producer.NotificarVotacaoProducer;
+&nbsp;import br.com.dsousasantos91.assembleia.scheduler.dto.Notificador;
+&nbsp;import br.com.dsousasantos91.assembleia.service.VotacaoService;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
+&nbsp;import lombok.RequiredArgsConstructor;
+&nbsp;import lombok.extern.slf4j.Slf4j;
+&nbsp;import org.springframework.scheduling.TaskScheduler;
+&nbsp;import org.springframework.scheduling.support.CronTrigger;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.TimeZone;
+&nbsp;import java.util.concurrent.ScheduledFuture;
+&nbsp;
+<b class="fc">&nbsp;@Slf4j</b>
+&nbsp;@Service
+<b class="fc">&nbsp;@RequiredArgsConstructor</b>
+&nbsp;public class NotificadorScheduler {
+&nbsp;
+&nbsp;    private final TaskScheduler taskScheduler;
+&nbsp;    private final NotificarVotacaoProducer notificarVotacaoProducer;
+&nbsp;    private final VotacaoService votacaoService;
+<b class="fc">&nbsp;    private final Map&lt;String, ScheduledFuture&lt;?&gt;&gt; schedulerMap = new HashMap&lt;&gt;();</b>
+&nbsp;
+&nbsp;    public void agendarNotificacao(Sessao sessao) {
+<b class="nc">&nbsp;        Notificador notificador = Notificador.builder().sessao(sessao).build();</b>
+<b class="nc">&nbsp;        log.info(&quot;Agendamento de Notificacao [{}]&quot;, notificador.toString());</b>
+<b class="nc">&nbsp;        cancelarNotificacao(notificador);</b>
+<b class="nc">&nbsp;        ScheduledFuture&lt;?&gt; scheduleTask = taskScheduler.schedule(</b>
+&nbsp;                () -&gt; {
+<b class="nc">&nbsp;                    ContagemVotosResponse contagemVotos = votacaoService.contabilizar(notificador.getSessao().getId());</b>
+<b class="nc">&nbsp;                    notificarVotacaoProducer.enviarResultadoVotacao(contagemVotos);</b>
+&nbsp;                },
+<b class="nc">&nbsp;                new CronTrigger(notificador.getCron(), TimeZone.getTimeZone(TimeZone.getDefault().toZoneId()))</b>
+&nbsp;        );
+<b class="nc">&nbsp;        log.info(&quot;Agendamento de Notificacao: [{}] realizado com sucesso&quot;, notificador);</b>
+<b class="nc">&nbsp;        schedulerMap.put(notificador.getNome(), scheduleTask);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void cancelarNotificacao(Notificador notificador) {
+<b class="nc">&nbsp;        log.info(&quot;Cancelamento de Notificacao:&quot;+ notificador.toString());</b>
+<b class="nc">&nbsp;        if (schedulerMap.containsKey(notificador.getNome()))</b>
+<b class="nc">&nbsp;            schedulerMap.get(notificador.getNome()).cancel(true);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-19 20:07</div>
+</div>
+</body>
+</html>

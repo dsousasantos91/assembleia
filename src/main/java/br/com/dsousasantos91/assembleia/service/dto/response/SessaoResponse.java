@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Getter
 @Setter
@@ -23,4 +24,12 @@ public class SessaoResponse {
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataHoraFim;
+
+    public LocalDateTime getDataHoraInicio() {
+        return dataHoraInicio.truncatedTo(ChronoUnit.SECONDS);
+    }
+
+    public LocalDateTime getDataHoraFim() {
+        return dataHoraFim.truncatedTo(ChronoUnit.SECONDS);
+    }
 }

@@ -33,6 +33,6 @@ public class AssembleiaResponse {
     private List<PautaResponse> pautas;
 
     public String getTipoAssembleia() {
-        return tipoAssembleia.getNome();
+        return tipoAssembleia.getValue();
     }
 }

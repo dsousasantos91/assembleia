@@ -15,6 +15,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContagemVotosResponse {
+    private Long sessaoId;
     private PautaResponse pauta;
     private Map<Voto, Long> votos;
 }

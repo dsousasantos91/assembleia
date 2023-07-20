@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,15 +30,15 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping("/v1/votacao")
+@RequestMapping(value = "/v1/votacao", produces = { "application/json;charset=UTF-8" })
 public class VotacaoController {
 
 	private final VotacaoService votacaoService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Votação de Pauta.")
-	@PostMapping(path = "/votar", produces = "application/json")
-	public ResponseEntity<VotacaoResponse> abrir(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
+	@PostMapping(path = "/api/votar")
+	public ResponseEntity<VotacaoResponse> votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
 		VotacaoResponse response = this.votacaoService.votar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -51,10 +52,17 @@ public class VotacaoController {
 		return ResponseEntity.ok(response);
 	}
 
-	@ApiOperation(value = "Contabilizar Votos.")
+	@ApiOperation(value = "Contabiliza Votos.")
 	@GetMapping(path = "/contabilizar/sessao/{sessaoId}")
 	public ResponseEntity<ContagemVotosResponse> contabilizar(@PathVariable Long sessaoId) {
 		ContagemVotosResponse response = votacaoService.contabilizar(sessaoId);
+		return ResponseEntity.ok(response);
+	}
+
+	@ApiOperation(value = "Altera voto associado.")
+	@PutMapping(path = "/alterarVoto/sessao/{sessaoId}/associado/{cpf}")
+	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable Long sessaoId, @PathVariable String cpf) {
+		VotacaoResponse response = this.votacaoService.alterarVoto(sessaoId, cpf);
 		return ResponseEntity.ok(response);
 	}
 }

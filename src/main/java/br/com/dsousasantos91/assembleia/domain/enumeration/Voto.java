@@ -7,9 +7,9 @@ public enum Voto {
     SIM("Sim"),
     NAO("Não");
 
-    private String voto;
+    private final String value;
 
-    Voto(String voto) {
-        this.voto = voto;
+    Voto(String value) {
+        this.value = value;
     }
 }
