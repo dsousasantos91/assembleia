@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.mock;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleia;
+import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleiaEnum;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaUpdateRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.EnderecoRequest;
 
@@ -18,7 +18,7 @@ public class AssembleiaUpdateRequestMock {
 
     public static void initializeDefaultData(AssembleiaUpdateRequestMock mock) {
         mock.element = AssembleiaUpdateRequest.builder()
-                .tipoAssembleia(TipoAssembleia.ORDINARIA)
+                .tipoAssembleia(TipoAssembleiaEnum.ORDINARIA)
                 .dataHoraInicioApuracao(LocalDateTime.now())
                 .dataHoraFimApuracao(LocalDateTime.now().plusMinutes(10))
                 .cooperativa("Cooperativa União")
@@ -28,7 +28,7 @@ public class AssembleiaUpdateRequestMock {
                 .build();
     }
 
-    public AssembleiaUpdateRequestMock withTipoAssembleia(TipoAssembleia param) {
+    public AssembleiaUpdateRequestMock withTipoAssembleia(TipoAssembleiaEnum param) {
         element.setTipoAssembleia(param);
         return this;
     }

@@ -68,7 +68,7 @@ class PautaControllerTest {
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<PautaResponse> pageResponse = new PageImpl<>(pautaResponseList, pageable, pautaResponseList.size());
         when(pautaService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
-        mockMvc.perform(get("/v1/pauta")
+        mockMvc.perform(get("/api/v1/pauta")
                         .contentType(APPLICATION_JSON_UTF_8)
                 )
                 .andDo(print())
@@ -80,7 +80,7 @@ class PautaControllerTest {
     @Test
     void deveBuscaoPorIdPautaERetornarStatus200() throws Exception {
         when(pautaService.buscarPorId(anyLong())).thenReturn(response);
-        mockMvc.perform(get("/v1/pauta/" + 1))
+        mockMvc.perform(get("/api/v1/pauta/" + 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
@@ -91,7 +91,7 @@ class PautaControllerTest {
     void deveAtualizarPautaERetornarStatus200() throws Exception {
         when(pautaService.atualizar(anyLong(), any(PautaRequest.class))).thenReturn(response);
         mockMvc.perform(
-                        put("/v1/pauta/" + 1)
+                        put("/api/v1/pauta/" + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )
@@ -104,7 +104,7 @@ class PautaControllerTest {
     @Test
     void deveApagarPautaERetornarStatus204() throws Exception {
         doNothing().when(pautaService).apagar(anyLong());
-        mockMvc.perform(delete("/v1/pauta/" + 1))
+        mockMvc.perform(delete("/api/v1/pauta/" + 1))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }

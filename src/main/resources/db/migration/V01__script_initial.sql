@@ -5,7 +5,7 @@ drop table if exists endereco cascade;
 drop table if exists pauta cascade;
 drop table if exists sessao cascade;
 drop table if exists sessao_associados cascade;
-drop table if exists votacao cascade;
+drop table if exists voto cascade;
 create table assembleia
 (
     id                        bigserial    not null,
@@ -63,7 +63,7 @@ create table sessao_associados
     sessao_id     int8 not null,
     associados_id int8 not null
 );
-create table votacao
+create table voto
 (
     id             bigserial    not null,
     data_hora_voto timestamp,
@@ -76,7 +76,7 @@ alter table assembleia_pautas
     add constraint assembleia_pautas_pautaUk unique (pautas_id);
 alter table associado
     add constraint UniqueAssociado unique (cpf);
-alter table votacao
+alter table voto
     add constraint UniqueVotoSessaoAssociado unique (sessao_id, associado_id);
 alter table assembleia_pautas
     add constraint assembleia_pautas_pautaFk foreign key (pautas_id) references pauta;
@@ -90,7 +90,7 @@ alter table sessao_associados
     add constraint sessao_associados_associadoFk foreign key (associados_id) references associado;
 alter table sessao_associados
     add constraint sessao_associados_sessaoFk foreign key (sessao_id) references sessao;
-alter table votacao
-    add constraint votacao_associadoFk foreign key (associado_id) references associado;
-alter table votacao
-    add constraint votacao_sessaoFk foreign key (sessao_id) references sessao;
+alter table voto
+    add constraint voto_associadoFk foreign key (associado_id) references associado;
+alter table voto
+    add constraint voto_sessaoFk foreign key (sessao_id) references sessao;

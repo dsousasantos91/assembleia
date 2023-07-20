@@ -3,13 +3,13 @@ package br.com.dsousasantos91.assembleia.domain.enumeration;
 import lombok.Getter;
 
 @Getter
-public enum TipoAssembleia {
-    ORDINARIA("Ordinária"),
-    EXTRAORDINARIA("Extraordinária");
+public enum VotoEnum {
+    SIM("Sim"),
+    NAO("Não");
 
     private final String value;
 
-    TipoAssembleia(String value) {
+    VotoEnum(String value) {
         this.value = value;
     }
 }

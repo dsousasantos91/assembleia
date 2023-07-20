@@ -3,7 +3,7 @@ package br.com.dsousasantos91.assembleia.domain.enumeration;
 import lombok.Getter;
 
 @Getter
-public enum UF {
+public enum UFEnum {
 
 	AC("AC"),
 	AL("AL"),
@@ -35,7 +35,7 @@ public enum UF {
 
 	private String sigla;
 
-	UF(String sigla) {
+	UFEnum(String sigla) {
 		this.sigla = sigla;
 	}
 }

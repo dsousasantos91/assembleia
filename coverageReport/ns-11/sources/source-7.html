@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > VotacaoResponse</title>
+  <title>Coverage Report > VotoResponse</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.service.dto.response</a>
 </div>
 
-<h1>Coverage Summary for Class: VotacaoResponse (br.com.dsousasantos91.assembleia.service.dto.response)</h1>
+<h1>Coverage Summary for Class: VotoResponse (br.com.dsousasantos91.assembleia.service.dto.response)</h1>
 
 <table class="coverageStats">
 
@@ -37,7 +37,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">VotacaoResponse</td>
+  <td class="name">VotoResponse</td>
 <td class="coverageStat">
   <span class="percent">
     77,8%
@@ -56,7 +56,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">VotacaoResponse$VotacaoResponseBuilder</td>
+    <td class="name">VotoResponse$VotoResponseBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -102,7 +102,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.service.dto.response;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 &nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
 &nbsp;import lombok.AllArgsConstructor;
 &nbsp;import lombok.Builder;
@@ -117,11 +117,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;@Builder</b>
 <b class="nc">&nbsp;@NoArgsConstructor</b>
 <b class="fc">&nbsp;@AllArgsConstructor</b>
-&nbsp;public class VotacaoResponse {
+&nbsp;public class VotoResponse {
 <b class="fc">&nbsp;    private Long id;</b>
 <b class="fc">&nbsp;    private SessaoResponse sessao;</b>
 <b class="fc">&nbsp;    private AssociadoResponse associado;</b>
-&nbsp;    private Voto voto;
+&nbsp;    private VotoEnum voto;
 &nbsp;
 &nbsp;    @JsonFormat(pattern=&quot;dd/MM/yyyy HH:mm:ss&quot;)
 <b class="fc">&nbsp;    private LocalDateTime dataHoraVoto;</b>
@@ -153,7 +153,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

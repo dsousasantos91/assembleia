@@ -137,7 +137,7 @@ public class SessaoService {
         return request.getIdsPautas().stream().map(pautaId -> {
             Optional<Pauta> pauta = pautaRepository.findById(pautaId);
             Sessao sessao = Sessao.builder()
-                    .votacaoLivre(request.getVotacaoLivre())
+                    .sessaoPrivada(request.getSessaoPrivada())
                     .dataHoraInicio(LocalDateTime.now())
                     .dataHoraFim(request.getDataHoraFim())
                     .build();
@@ -149,8 +149,8 @@ public class SessaoService {
 
     private List<Associado> setAssociados(SessaoEmLoteRequest request) {
         log.info("Relacionando associados a sessão");
-        if (Boolean.FALSE.equals(request.getVotacaoLivre()) && nuloOuVazio(request.getAssociados()))
-            throw new GenericBadRequestException("votacaoLivre é " + request.getVotacaoLivre()
+        if (Boolean.FALSE.equals(request.getSessaoPrivada()) && nuloOuVazio(request.getAssociados()))
+            throw new GenericBadRequestException("votacaoLivre é " + request.getSessaoPrivada()
                     + ". Deve-se enviar os associados participantes da Sessão.");
         return request.getAssociados().stream()
                 .map(associado -> {

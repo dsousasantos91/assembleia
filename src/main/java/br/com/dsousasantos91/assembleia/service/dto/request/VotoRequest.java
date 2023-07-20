@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.request;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class VotacaoRequest {
+public class VotoRequest {
     @NotNull(message = "{0} é obrigatório")
     private Long sessaoId;
 
@@ -24,5 +24,5 @@ public class VotacaoRequest {
     private AssociadoRequest associado;
 
     @NotNull(message = "{0} é obrigatório")
-    private Voto voto;
+    private VotoEnum voto;
 }

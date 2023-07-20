@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86%
+    86,7%
   </span>
   <span class="absValue">
-    (37/43)
+    (39/45)
   </span>
 </td>
 </tr>
@@ -85,13 +85,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 &nbsp;import java.util.ArrayList;
 &nbsp;import java.util.List;
-&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import javax.annotation.Generated;
 &nbsp;import org.springframework.stereotype.Component;
 &nbsp;
 &nbsp;@Generated(
 &nbsp;    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
-&nbsp;    date = &quot;2023-07-19T10:41:02-0300&quot;,
-&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)&quot;
+&nbsp;    date = &quot;2023-07-20T13:39:22-0300&quot;,
+&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_341 (Oracle Corporation)&quot;
 &nbsp;)
 &nbsp;@Component
 <b class="fc">&nbsp;public class SessaoMapperImpl implements SessaoMapper {</b>
@@ -106,6 +106,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 <b class="fc">&nbsp;        sessaoResponse.id( sessao.getId() );</b>
 <b class="fc">&nbsp;        sessaoResponse.pauta( pautaToPautaResponse( sessao.getPauta() ) );</b>
+<b class="fc">&nbsp;        sessaoResponse.sessaoPrivada( sessao.getSessaoPrivada() );</b>
 <b class="fc">&nbsp;        sessaoResponse.dataHoraInicio( sessao.getDataHoraInicio() );</b>
 <b class="fc">&nbsp;        sessaoResponse.dataHoraFim( sessao.getDataHoraFim() );</b>
 &nbsp;
@@ -134,9 +135,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 <b class="fc">&nbsp;        Sessao.SessaoBuilder sessao = Sessao.builder();</b>
 &nbsp;
+<b class="fc">&nbsp;        sessao.dataHoraInicio( request.getDataHoraInicio() );</b>
 <b class="fc">&nbsp;        sessao.dataHoraFim( request.getDataHoraFim() );</b>
 <b class="fc">&nbsp;        sessao.associados( associadoRequestListToAssociadoList( request.getAssociados() ) );</b>
-<b class="fc">&nbsp;        sessao.votacaoLivre( request.getVotacaoLivre() );</b>
+<b class="fc">&nbsp;        sessao.sessaoPrivada( request.getSessaoPrivada() );</b>
 &nbsp;
 <b class="fc">&nbsp;        return sessao.build();</b>
 &nbsp;    }
@@ -204,7 +206,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

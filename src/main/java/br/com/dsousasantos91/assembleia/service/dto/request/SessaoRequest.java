@@ -22,7 +22,7 @@ public class SessaoRequest {
     private Long pautaId;
 
     @NotNull(message = "{0} é obrigatório")
-    private Boolean votacaoLivre;
+    private Boolean sessaoPrivada;
 
     private List<AssociadoRequest> associados;
 

@@ -23,7 +23,7 @@ public class SessaoEmLoteRequest {
     private List<AssociadoRequest> associados;
 
     @NotNull(message = "{0} é obrigatório")
-    private Boolean votacaoLivre;
+    private Boolean sessaoPrivada;
 
     @Valid
     private TempoSessaoRequest tempoSessao = new TempoSessaoRequest();

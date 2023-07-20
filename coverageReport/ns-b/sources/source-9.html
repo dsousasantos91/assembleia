@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > VotacaoMapper</title>
+  <title>Coverage Report > SessaoMapper</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.mapper</a>
 </div>
 
-<h1>Coverage Summary for Class: VotacaoMapper (br.com.dsousasantos91.assembleia.mapper)</h1>
+<h1>Coverage Summary for Class: SessaoMapper (br.com.dsousasantos91.assembleia.mapper)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">VotacaoMapper</td>
+  <td class="name">SessaoMapper</td>
 </tr>
 
 </table>
@@ -40,16 +40,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.mapper;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.Votacao;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Sessao;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
 &nbsp;import org.mapstruct.Mapper;
 &nbsp;import org.mapstruct.ReportingPolicy;
 &nbsp;
+&nbsp;import java.util.List;
+&nbsp;
 &nbsp;@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = &quot;spring&quot;)
-&nbsp;public interface VotacaoMapper {
-&nbsp;    VotacaoResponse toResponse(Votacao votacao);
-&nbsp;    Votacao toEntity(VotacaoRequest request);
+&nbsp;public interface SessaoMapper {
+&nbsp;    SessaoResponse toResponse(Sessao sessao);
+&nbsp;    List&lt;SessaoResponse&gt; toResponses(List&lt;Sessao&gt; sessoes);
+&nbsp;    Sessao toEntity(SessaoRequest request);
 &nbsp;}
 </code>
 </pre>
@@ -74,7 +77,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

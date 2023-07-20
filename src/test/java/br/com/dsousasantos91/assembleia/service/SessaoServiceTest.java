@@ -3,7 +3,7 @@ package br.com.dsousasantos91.assembleia.service;
 import br.com.dsousasantos91.assembleia.domain.Assembleia;
 import br.com.dsousasantos91.assembleia.domain.Pauta;
 import br.com.dsousasantos91.assembleia.domain.Sessao;
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import br.com.dsousasantos91.assembleia.exception.GenericBadRequestException;
 import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
 import br.com.dsousasantos91.assembleia.mapper.AssembleiaMapper;
@@ -208,9 +208,9 @@ class SessaoServiceTest {
 
     @Test
     void deveConfirmarEnvioDeResultadoComSucesso() {
-        Map<Voto, Long> votos = new HashMap<>();
-        votos.put(Voto.SIM, 5L);
-        votos.put(Voto.NAO, 3L);
+        Map<VotoEnum, Long> votos = new HashMap<>();
+        votos.put(VotoEnum.SIM, 5L);
+        votos.put(VotoEnum.NAO, 3L);
         ContagemVotosResponse contagemResponse = ContagemVotosResponse.builder()
                 .sessaoId(entity1.getId())
                 .pauta(pautaMapper.toResponse(entity1.getPauta()))

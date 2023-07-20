@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.response;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.UF;
+import br.com.dsousasantos91.assembleia.domain.enumeration.UFEnum;
 import br.com.dsousasantos91.assembleia.util.MaskUtil;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class EnderecoResponse {
     private String logradouro;
     private String bairro;
     private String cidade;
-    private UF uf;
+    private UFEnum uf;
     private String complemento;
 
     public String getCep() {

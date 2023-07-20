@@ -2,14 +2,14 @@ package br.com.dsousasantos91.assembleia.controller;
 
 import br.com.dsousasantos91.assembleia.domain.Pauta;
 import br.com.dsousasantos91.assembleia.domain.Sessao;
-import br.com.dsousasantos91.assembleia.domain.Votacao;
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
-import br.com.dsousasantos91.assembleia.mapper.VotacaoMapper;
+import br.com.dsousasantos91.assembleia.domain.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
+import br.com.dsousasantos91.assembleia.mapper.VotoMapper;
 import br.com.dsousasantos91.assembleia.mock.VotacaoRequestMock;
-import br.com.dsousasantos91.assembleia.service.VotacaoService;
-import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
+import br.com.dsousasantos91.assembleia.service.VotoService;
+import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
-import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
+import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class VotacaoControllerTest {
+class VotoControllerTest {
 
     public static final MediaType APPLICATION_JSON_UTF_8 = new MediaType(MediaType.APPLICATION_JSON, UTF_8);
 
@@ -54,38 +54,38 @@ class VotacaoControllerTest {
     private ObjectMapper objectMapper;
 
     @Autowired
-    private VotacaoMapper votacaoMapper;
+    private VotoMapper votoMapper;
 
-    private VotacaoRequest request;
-    private VotacaoResponse response;
-    private Votacao votacao;
+    private VotoRequest request;
+    private VotoResponse response;
+    private Voto voto;
     private Sessao sessao;
 
     @BeforeEach
     public void setUp() {
         request = VotacaoRequestMock.mocked().mock();
-        votacao = votacaoMapper.toEntity(request);
+        voto = votoMapper.toEntity(request);
         sessao = Sessao.builder()
                 .id(1L)
-                .votacaoLivre(Boolean.FALSE)
+                .sessaoPrivada(Boolean.FALSE)
                 .pauta(Pauta.builder().id(1L).build())
                 .dataHoraInicio(LocalDateTime.now())
                 .dataHoraFim(LocalDateTime.now().plusHours(10))
                 .build();
-        votacao.setId(1L);
-        votacao.setSessao(sessao);
-        votacao.setDataHoraVoto(LocalDateTime.now());
-        response = votacaoMapper.toResponse(votacao);
+        voto.setId(1L);
+        voto.setSessao(sessao);
+        voto.setDataHoraVoto(LocalDateTime.now());
+        response = votoMapper.toResponse(voto);
     }
 
     @MockBean
-    private VotacaoService votacaoService;
+    private VotoService votoService;
 
     @Test
     void deveVotarERetornarStatus201() throws Exception {
-        when(votacaoService.votar(any(VotacaoRequest.class))).thenReturn(response);
+        when(votoService.votar(any(VotoRequest.class))).thenReturn(response);
         mockMvc.perform(
-                        post("/v1/votacao/votar")
+                        post("/api/v1/voto/votar")
                                 .contentType(APPLICATION_JSON_UTF_8)
                                 .content(objectMapper.writeValueAsString(request))
                 )
@@ -97,11 +97,11 @@ class VotacaoControllerTest {
 
     @Test
     void devePesquisarERetornarStatus200() throws Exception {
-        List<VotacaoResponse> votacaoResponseList = singletonList(response);
+        List<VotoResponse> votoResponseList = singletonList(response);
         PageRequest pageable = PageRequest.of(0, 1);
-        PageImpl<VotacaoResponse> pageResponse = new PageImpl<>(votacaoResponseList, pageable, votacaoResponseList.size());
-        when(votacaoService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
-        mockMvc.perform(get("/v1/votacao")
+        PageImpl<VotoResponse> pageResponse = new PageImpl<>(votoResponseList, pageable, votoResponseList.size());
+        when(votoService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
+        mockMvc.perform(get("/api/v1/voto")
                         .contentType(APPLICATION_JSON_UTF_8)
                 )
                 .andDo(print())
@@ -112,17 +112,17 @@ class VotacaoControllerTest {
 
     @Test
     void deveContabilizarERetornarStatus200() throws Exception{
-        Map<Voto, Long> votos = new HashMap<>();
-        votos.put(Voto.SIM, 5L);
-        votos.put(Voto.NAO, 4L);
+        Map<VotoEnum, Long> votos = new HashMap<>();
+        votos.put(VotoEnum.SIM, 5L);
+        votos.put(VotoEnum.NAO, 4L);
         ContagemVotosResponse responseContagem = ContagemVotosResponse.builder()
                 .sessaoId(1L)
                 .pauta(response.getSessao().getPauta())
                 .votos(votos)
                 .build();
-        when(votacaoService.contabilizar(anyLong())).thenReturn(responseContagem);
+        when(votoService.contabilizar(anyLong())).thenReturn(responseContagem);
         mockMvc.perform(
-                        get("/v1/votacao/contabilizar/sessao/" + 1)
+                        get("/api/v1/voto/contabilizar/sessao/" + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -133,9 +133,9 @@ class VotacaoControllerTest {
 
     @Test
     void deveAlterarVotoERetornarStatus200() throws Exception {
-        when(votacaoService.alterarVoto(anyLong(), anyString())).thenReturn(response);
+        when(votoService.alterar(anyLong(), anyString())).thenReturn(response);
         mockMvc.perform(
-                        put("/v1/votacao/alterarVoto/sessao/" + 1 + "/associado/" + votacao.getAssociado().getCpf())
+                        put("/api/v1/voto/alterar/sessao/" + 1 + "/associado/" + voto.getAssociado().getCpf())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )

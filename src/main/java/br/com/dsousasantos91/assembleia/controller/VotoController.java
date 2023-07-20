@@ -1,10 +1,10 @@
 package br.com.dsousasantos91.assembleia.controller;
 
 import br.com.dsousasantos91.assembleia.event.RecursoCriadoEvent;
-import br.com.dsousasantos91.assembleia.service.VotacaoService;
-import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
+import br.com.dsousasantos91.assembleia.service.VotoService;
+import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
-import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
+import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -30,39 +30,39 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping(value = "/api/v1/votacao", produces = { "application/json;charset=UTF-8" })
-public class VotacaoController {
+@RequestMapping(value = "/api/v1/voto", produces = { "application/json;charset=UTF-8" })
+public class VotoController {
 
-	private final VotacaoService votacaoService;
+	private final VotoService votoService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Votação de Pauta.")
 	@PostMapping(path = "/votar")
-	public ResponseEntity<VotacaoResponse> votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
-		VotacaoResponse response = this.votacaoService.votar(request);
+	public ResponseEntity<VotoResponse> votar(@Valid @RequestBody VotoRequest request, HttpServletResponse servletResponse) {
+		VotoResponse response = this.votoService.votar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 	@ApiOperation(value = "Listagem de pautas.")
 	@GetMapping
-	public ResponseEntity<Page<VotacaoResponse>> pesquisar(
+	public ResponseEntity<Page<VotoResponse>> pesquisar(
 			@SortDefault.SortDefaults({ @SortDefault(sort = "id") }) Pageable pageable) {
-		Page<VotacaoResponse> response = votacaoService.pesquisar(pageable);
+		Page<VotoResponse> response = votoService.pesquisar(pageable);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Contabiliza Votos.")
 	@GetMapping(path = "/contabilizar/sessao/{sessaoId}")
 	public ResponseEntity<ContagemVotosResponse> contabilizar(@PathVariable Long sessaoId) {
-		ContagemVotosResponse response = votacaoService.contabilizar(sessaoId);
+		ContagemVotosResponse response = votoService.contabilizar(sessaoId);
 		return ResponseEntity.ok(response);
 	}
 
 	@ApiOperation(value = "Altera voto associado.")
-	@PutMapping(path = "/alterarVoto/sessao/{sessaoId}/associado/{cpf}")
-	public ResponseEntity<VotacaoResponse> alterarVoto(@PathVariable Long sessaoId, @PathVariable String cpf) {
-		VotacaoResponse response = this.votacaoService.alterarVoto(sessaoId, cpf);
+	@PutMapping(path = "/alterar/sessao/{sessaoId}/associado/{cpf}")
+	public ResponseEntity<VotoResponse> alterar(@PathVariable Long sessaoId, @PathVariable String cpf) {
+		VotoResponse response = this.votoService.alterar(sessaoId, cpf);
 		return ResponseEntity.ok(response);
 	}
 }

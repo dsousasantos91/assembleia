@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PautaRepository</title>
+  <title>Coverage Report > VotacaoRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.repository</a>
 </div>
 
-<h1>Coverage Summary for Class: PautaRepository (br.com.dsousasantos91.assembleia.repository)</h1>
+<h1>Coverage Summary for Class: VotacaoRepository (br.com.dsousasantos91.assembleia.repository)</h1>
 
 <table class="coverageStats">
 
@@ -29,16 +29,16 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">PautaRepository$MockitoMock$V2LQtHQR</td>
+    <td class="name">VotacaoRepository$MockitoMock$0eiVtZHp</td>
   </tr>
   <tr>
-    <td class="name">PautaRepository$MockitoMock$V2LQtHQR$auxiliary$1OKpNmJv</td>
+    <td class="name">VotacaoRepository$MockitoMock$0eiVtZHp$auxiliary$J9pIDYaq</td>
   </tr>
   <tr>
-    <td class="name">PautaRepository$MockitoMock$V2LQtHQR$auxiliary$cAkrJtvc</td>
+    <td class="name">VotacaoRepository$MockitoMock$0eiVtZHp$auxiliary$MjbWj7z4</td>
   </tr>
   <tr>
-    <td class="name">PautaRepository$MockitoMock$V2LQtHQR$auxiliary$KoWGUfps</td>
+    <td class="name">VotacaoRepository$MockitoMock$0eiVtZHp$auxiliary$yI0jrY6W</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -52,12 +52,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.repository;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.Pauta;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Voto;
 &nbsp;import org.springframework.data.jpa.repository.JpaRepository;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
 &nbsp;@Repository
-&nbsp;public interface PautaRepository extends JpaRepository&lt;Pauta, Long&gt; {
+&nbsp;public interface VotacaoRepository extends JpaRepository&lt;Voto, Long&gt; {
+&nbsp;    Optional&lt;List&lt;Voto&gt;&gt; findBySessaoId(Long sessaoId);
+&nbsp;    Optional&lt;Voto&gt; findBySessaoIdAndAssociadoCpf(Long sessaoId, String cpf);
 &nbsp;}
 </code>
 </pre>
@@ -82,7 +87,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

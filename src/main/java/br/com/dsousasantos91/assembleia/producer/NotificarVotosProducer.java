@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class NotificarVotacaoProducer {
+public class NotificarVotosProducer {
 
     private static final String VOTACAO_EXCHANGE = "votacao.exchange";
     private static final String VOTACAO_ROUTINGKEY = "votacao.routingkey";

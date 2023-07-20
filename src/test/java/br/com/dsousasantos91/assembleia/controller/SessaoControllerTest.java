@@ -84,7 +84,7 @@ class SessaoControllerTest {
     void deveAbrirERetornarStatus201() throws Exception {
         when(sessaoService.abrir(any(SessaoRequest.class))).thenReturn(response);
         mockMvc.perform(
-                        post("/v1/sessao/abrir")
+                        post("/api/v1/sessao/abrir")
                                 .contentType(APPLICATION_JSON_UTF_8)
                                 .content(objectMapper.writeValueAsString(request))
                 )
@@ -117,7 +117,7 @@ class SessaoControllerTest {
 
         when(sessaoService.abrirEmLote(any(SessaoEmLoteRequest.class))).thenReturn(responses);
         mockMvc.perform(
-                        post("/v1/sessao/abrirEmLote")
+                        post("/api/v1/sessao/abrirEmLote")
                                 .contentType(APPLICATION_JSON_UTF_8)
                                 .content(objectMapper.writeValueAsString(loteRequest))
                 )
@@ -133,7 +133,7 @@ class SessaoControllerTest {
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<SessaoResponse> pageResponse = new PageImpl<>(sessaoResponseList, pageable, sessaoResponseList.size());
         when(sessaoService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
-        mockMvc.perform(get("/v1/sessao")
+        mockMvc.perform(get("/api/v1/sessao")
                         .contentType(APPLICATION_JSON_UTF_8)
                 )
                 .andDo(print())
@@ -145,7 +145,7 @@ class SessaoControllerTest {
     @Test
     void deveBuscaoPorIdERetornarStatus200() throws Exception {
         when(sessaoService.buscarPorId(anyLong())).thenReturn(response);
-        mockMvc.perform(get("/v1/sessao/" + 1))
+        mockMvc.perform(get("/api/v1/sessao/" + 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
@@ -155,7 +155,7 @@ class SessaoControllerTest {
     @Test
     void deveProrrogarERetornarStatus200() throws Exception {
         when(sessaoService.prorrogar(anyLong(), any(SessaoRequest.class))).thenReturn(response);
-        mockMvc.perform(put("/v1/sessao/prorrogar/" + 1)
+        mockMvc.perform(put("/api/v1/sessao/prorrogar/" + 1)
                         .contentType(APPLICATION_JSON_UTF_8)
                         .content(objectMapper.writeValueAsString(request)))
                 .andDo(print())
@@ -167,7 +167,7 @@ class SessaoControllerTest {
     @Test
     void deveEncerrarERetornarStatus200() throws Exception{
         when(sessaoService.encerrar(anyLong())).thenReturn(response);
-        mockMvc.perform(put("/v1/sessao/encerrar/" + 1))
+        mockMvc.perform(put("/api/v1/sessao/encerrar/" + 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
@@ -177,7 +177,7 @@ class SessaoControllerTest {
     @Test
     void deveApagarERetornarStatus204() throws Exception {
         doNothing().when(sessaoService).apagar(anyLong());
-        mockMvc.perform(delete("/v1/sessao/" + 1))
+        mockMvc.perform(delete("/api/v1/sessao/" + 1))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }

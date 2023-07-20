@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.domain;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.UF;
+import br.com.dsousasantos91.assembleia.domain.enumeration.UFEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,7 +54,7 @@ public class Endereco {
 
     @NotNull(message = "{0} é obrigatório")
     @Enumerated(EnumType.STRING)
-    private UF uf;
+    private UFEnum uf;
 
     private String complemento;
 

@@ -56,16 +56,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN</td>
+    <td class="name">NotificadorScheduler$MockitoMock$b6Bxtdtd</td>
   </tr>
   <tr>
-    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$1aGNThQP</td>
+    <td class="name">NotificadorScheduler$MockitoMock$b6Bxtdtd$auxiliary$3M2I3i3N</td>
   </tr>
   <tr>
-    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$NOqn56zm</td>
+    <td class="name">NotificadorScheduler$MockitoMock$b6Bxtdtd$auxiliary$aKZtHE1v</td>
   </tr>
   <tr>
-    <td class="name">NotificadorScheduler$MockitoMock$ru046gvN$auxiliary$ZQHZm7YI</td>
+    <td class="name">NotificadorScheduler$MockitoMock$b6Bxtdtd$auxiliary$F3fj5To1</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -96,9 +96,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.scheduler;
 &nbsp;
 &nbsp;import br.com.dsousasantos91.assembleia.domain.Sessao;
-&nbsp;import br.com.dsousasantos91.assembleia.producer.NotificarVotacaoProducer;
+&nbsp;import br.com.dsousasantos91.assembleia.producer.NotificarVotosProducer;
 &nbsp;import br.com.dsousasantos91.assembleia.scheduler.dto.Notificador;
-&nbsp;import br.com.dsousasantos91.assembleia.service.VotacaoService;
+&nbsp;import br.com.dsousasantos91.assembleia.service.VotoService;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 &nbsp;import lombok.RequiredArgsConstructor;
 &nbsp;import lombok.extern.slf4j.Slf4j;
@@ -117,8 +117,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;public class NotificadorScheduler {
 &nbsp;
 &nbsp;    private final TaskScheduler taskScheduler;
-&nbsp;    private final NotificarVotacaoProducer notificarVotacaoProducer;
-&nbsp;    private final VotacaoService votacaoService;
+&nbsp;    private final NotificarVotosProducer notificarVotosProducer;
+&nbsp;    private final VotoService votoService;
 <b class="fc">&nbsp;    private final Map&lt;String, ScheduledFuture&lt;?&gt;&gt; schedulerMap = new HashMap&lt;&gt;();</b>
 &nbsp;
 &nbsp;    public void agendarNotificacao(Sessao sessao) {
@@ -127,8 +127,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        cancelarNotificacao(notificador);</b>
 <b class="nc">&nbsp;        ScheduledFuture&lt;?&gt; scheduleTask = taskScheduler.schedule(</b>
 &nbsp;                () -&gt; {
-<b class="nc">&nbsp;                    ContagemVotosResponse contagemVotos = votacaoService.contabilizar(notificador.getSessao().getId());</b>
-<b class="nc">&nbsp;                    notificarVotacaoProducer.enviarResultadoVotacao(contagemVotos);</b>
+<b class="nc">&nbsp;                    ContagemVotosResponse contagemVotos = votoService.contabilizar(notificador.getSessao().getId());</b>
+<b class="nc">&nbsp;                    notificarVotosProducer.enviarResultadoVotacao(contagemVotos);</b>
 &nbsp;                },
 <b class="nc">&nbsp;                new CronTrigger(notificador.getCron(), TimeZone.getTimeZone(TimeZone.getDefault().toZoneId()))</b>
 &nbsp;        );
@@ -165,7 +165,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.response;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +17,5 @@ import java.util.Map;
 public class ContagemVotosResponse {
     private Long sessaoId;
     private PautaResponse pauta;
-    private Map<Voto, Long> votos;
+    private Map<VotoEnum, Long> votos;
 }

@@ -56,37 +56,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$Igr2zCdF</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$2XzTo8z1</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$JZIMLVDD</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$8UDOd1a9</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$Pu607Bis</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$BQD0fo35</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$UJp5GEwF</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$hMykUvqF</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$UrslBtIk</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$j5RERYhA</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$UzpROnAw</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$N7R2vLdm</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$wnOfJYWu</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$oR0wlxC0</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$wozw4GNP</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$Qh5l6ooC</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$XDhmidM0</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$XJfqadKR</td>
   </tr>
   <tr>
-    <td class="name">SessaoService$MockitoMock$yEal7oyp$auxiliary$yVkOePfh</td>
+    <td class="name">SessaoService$MockitoMock$OyGmupwd$auxiliary$ZX6aTlDY</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -144,6 +144,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.Optional;
 &nbsp;
 &nbsp;import static java.util.Objects.isNull;
+&nbsp;import static java.util.stream.Collectors.toList;
 &nbsp;
 <b class="fc">&nbsp;@Slf4j</b>
 &nbsp;@Service
@@ -180,10 +181,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        log.info(&quot;Buscando assembleia ID [{}].&quot;, request.getAssembleiaId());</b>
 <b class="fc">&nbsp;        Optional&lt;Assembleia&gt; assembleia = this.assembleiaRepository.findById(request.getAssembleiaId());</b>
 <b class="fc">&nbsp;        if (assembleia.isPresent()) {</b>
-<b class="fc">&nbsp;            List&lt;Long&gt; idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).toList();</b>
+<b class="fc">&nbsp;            List&lt;Long&gt; idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).collect(toList());</b>
 <b class="fc">&nbsp;            request.setIdsPautas(idsPautas);</b>
 &nbsp;        }
-<b class="fc">&nbsp;        if (assembleia.isEmpty() &amp;&amp; nuloOuVazio(request.getIdsPautas()))</b>
+<b class="fc">&nbsp;        if (!assembleia.isPresent() &amp;&amp; nuloOuVazio(request.getIdsPautas()))</b>
 <b class="fc">&nbsp;            throw new GenericBadRequestException(&quot;assembleiaId não enviado OU idsPautas está vazio.&quot;);</b>
 <b class="fc">&nbsp;        sessoes = montarSessoes(request);</b>
 <b class="fc">&nbsp;        List&lt;Associado&gt; associados = setAssociados(request);</b>
@@ -234,7 +235,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public void confirmarEnvioDeResultado(ContagemVotosResponse contagem) {
 <b class="fc">&nbsp;        log.info(&quot;Buscando sessão da pauta [{}].&quot;, contagem.getPauta().getTitulo());</b>
 <b class="fc">&nbsp;        Optional&lt;Sessao&gt; sessao = sessaoRepository.findById(contagem.getSessaoId());</b>
-<b class="fc">&nbsp;        if (sessao.isEmpty()) throw new RuntimeException(&quot;Sessão ID &quot; + contagem.getSessaoId() + &quot; não encontrada.&quot;);</b>
+<b class="fc">&nbsp;        if (!sessao.isPresent()) throw new RuntimeException(&quot;Sessão ID &quot; + contagem.getSessaoId() + &quot; não encontrada.&quot;);</b>
 <b class="fc">&nbsp;        log.info(&quot;Sessão [{}] encontrada.&quot;, sessao.get().getId());</b>
 <b class="fc">&nbsp;        sessao.get().setResultadoEnviado(Boolean.TRUE);</b>
 <b class="fc">&nbsp;        sessaoRepository.save(sessao.get());</b>
@@ -252,20 +253,20 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return request.getIdsPautas().stream().map(pautaId -&gt; {</b>
 <b class="fc">&nbsp;            Optional&lt;Pauta&gt; pauta = pautaRepository.findById(pautaId);</b>
 <b class="fc">&nbsp;            Sessao sessao = Sessao.builder()</b>
-<b class="fc">&nbsp;                    .votacaoLivre(request.getVotacaoLivre())</b>
+<b class="fc">&nbsp;                    .sessaoPrivada(request.getSessaoPrivada())</b>
 <b class="fc">&nbsp;                    .dataHoraInicio(LocalDateTime.now())</b>
 <b class="fc">&nbsp;                    .dataHoraFim(request.getDataHoraFim())</b>
 <b class="fc">&nbsp;                    .build();</b>
 <b class="fc">&nbsp;            pauta.ifPresent(sessao::setPauta);</b>
 <b class="fc">&nbsp;            log.info(&quot;Sessão ID [{}] instanciada com sucesso para a pauta [{}]&quot;, sessao.getId(), sessao.getPauta().getTitulo());</b>
 <b class="fc">&nbsp;            return sessao;</b>
-<b class="fc">&nbsp;        }).toList();</b>
+<b class="fc">&nbsp;        }).collect(toList());</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private List&lt;Associado&gt; setAssociados(SessaoEmLoteRequest request) {
 <b class="fc">&nbsp;        log.info(&quot;Relacionando associados a sessão&quot;);</b>
-<b class="fc">&nbsp;        if (Boolean.FALSE.equals(request.getVotacaoLivre()) &amp;&amp; nuloOuVazio(request.getAssociados()))</b>
-<b class="fc">&nbsp;            throw new GenericBadRequestException(&quot;votacaoLivre é &quot; + request.getVotacaoLivre()</b>
+<b class="fc">&nbsp;        if (Boolean.FALSE.equals(request.getSessaoPrivada()) &amp;&amp; nuloOuVazio(request.getAssociados()))</b>
+<b class="fc">&nbsp;            throw new GenericBadRequestException(&quot;votacaoLivre é &quot; + request.getSessaoPrivada()</b>
 &nbsp;                    + &quot;. Deve-se enviar os associados participantes da Sessão.&quot;);
 <b class="fc">&nbsp;        return request.getAssociados().stream()</b>
 <b class="fc">&nbsp;                .map(associado -&gt; {</b>
@@ -273,7 +274,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;                    return associadoRepository.findByCpf(associado.getCpf())</b>
 <b class="fc">&nbsp;                            .orElseGet(() -&gt; associadoMapper.toEntity(associado));</b>
 &nbsp;                })
-<b class="fc">&nbsp;                .toList();</b>
+<b class="fc">&nbsp;                .collect(toList());</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private &lt;T&gt; Boolean nuloOuVazio(List&lt;T&gt; list) {
@@ -303,7 +304,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

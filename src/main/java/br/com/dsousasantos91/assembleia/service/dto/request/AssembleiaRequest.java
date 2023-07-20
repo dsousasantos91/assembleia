@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.request;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleia;
+import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleiaEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +26,7 @@ import java.util.List;
 public class AssembleiaRequest {
     @NotNull(message = "{0} é obrigatório")
     @Enumerated(EnumType.STRING)
-    private TipoAssembleia tipoAssembleia;
+    private TipoAssembleiaEnum tipoAssembleia;
 
     @NotNull(message = "{0} é obrigatório")
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")

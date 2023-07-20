@@ -52,7 +52,7 @@ public class Sessao {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Associado> associados;
 
-    private Boolean votacaoLivre = Boolean.TRUE;
+    private Boolean sessaoPrivada = Boolean.FALSE;
 
     @JsonIgnore
     private Boolean resultadoEnviado;
