@@ -17,9 +17,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,11 +58,11 @@ class PautaServiceTest {
         Pauta entity2 = pautaMapper.toEntity(request);
         entity2.setId(2L);
         PageRequest pageable = PageRequest.of(0, 2);
-        List<Pauta> pautaList = List.of(entity1, entity2);
+        List<Pauta> pautaList = Arrays.asList(entity1, entity2);
         PageImpl<Pauta> pageResponse = new PageImpl<>(pautaList, pageable, pautaList.size());
         when(pautaRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<PautaResponse> response = pautaService.pesquisar(pageable);
-        List<Long> idsPautas = response.stream().map(PautaResponse::getId).toList();
+        List<Long> idsPautas = response.stream().map(PautaResponse::getId).collect(toList());
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsPautas.size(), 2);

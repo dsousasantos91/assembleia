@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -63,7 +64,7 @@ class PautaControllerTest {
 
     @Test
     void devePesquisarPautaERetornarStatus200() throws Exception {
-        List<PautaResponse> pautaResponseList = List.of(response);
+        List<PautaResponse> pautaResponseList = singletonList(response);
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<PautaResponse> pageResponse = new PageImpl<>(pautaResponseList, pageable, pautaResponseList.size());
         when(pautaService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);

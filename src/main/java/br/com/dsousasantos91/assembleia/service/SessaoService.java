@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toList;
 
 @Slf4j
 @Service
@@ -64,10 +65,10 @@ public class SessaoService {
         log.info("Buscando assembleia ID [{}].", request.getAssembleiaId());
         Optional<Assembleia> assembleia = this.assembleiaRepository.findById(request.getAssembleiaId());
         if (assembleia.isPresent()) {
-            List<Long> idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).toList();
+            List<Long> idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).collect(toList());
             request.setIdsPautas(idsPautas);
         }
-        if (assembleia.isEmpty() && nuloOuVazio(request.getIdsPautas()))
+        if (!assembleia.isPresent() && nuloOuVazio(request.getIdsPautas()))
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
         sessoes = montarSessoes(request);
         List<Associado> associados = setAssociados(request);
@@ -118,7 +119,7 @@ public class SessaoService {
     public void confirmarEnvioDeResultado(ContagemVotosResponse contagem) {
         log.info("Buscando sessão da pauta [{}].", contagem.getPauta().getTitulo());
         Optional<Sessao> sessao = sessaoRepository.findById(contagem.getSessaoId());
-        if (sessao.isEmpty()) throw new RuntimeException("Sessão ID " + contagem.getSessaoId() + " não encontrada.");
+        if (!sessao.isPresent()) throw new RuntimeException("Sessão ID " + contagem.getSessaoId() + " não encontrada.");
         log.info("Sessão [{}] encontrada.", sessao.get().getId());
         sessao.get().setResultadoEnviado(Boolean.TRUE);
         sessaoRepository.save(sessao.get());
@@ -143,7 +144,7 @@ public class SessaoService {
             pauta.ifPresent(sessao::setPauta);
             log.info("Sessão ID [{}] instanciada com sucesso para a pauta [{}]", sessao.getId(), sessao.getPauta().getTitulo());
             return sessao;
-        }).toList();
+        }).collect(toList());
     }
 
     private List<Associado> setAssociados(SessaoEmLoteRequest request) {
@@ -157,7 +158,7 @@ public class SessaoService {
                     return associadoRepository.findByCpf(associado.getCpf())
                             .orElseGet(() -> associadoMapper.toEntity(associado));
                 })
-                .toList();
+                .collect(toList());
     }
 
     private <T> Boolean nuloOuVazio(List<T> list) {

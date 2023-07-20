@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doNothing;
@@ -79,7 +80,7 @@ class AssembleiaControllerTest {
 
     @Test
     void devePesquisarERetornarStatusCode200() throws Exception {
-        List<AssembleiaResponse> assembleiaList = List.of(response);
+        List<AssembleiaResponse> assembleiaList = singletonList(response);
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<AssembleiaResponse> pageResponse = new PageImpl<>(assembleiaList, pageable, assembleiaList.size());
         when(assembleiaService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);

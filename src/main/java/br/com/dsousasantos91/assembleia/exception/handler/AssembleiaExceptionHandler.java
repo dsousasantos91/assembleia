@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static java.util.Collections.singletonList;
+
 @RequiredArgsConstructor
 @ControllerAdvice
 public class AssembleiaExceptionHandler extends ResponseEntityExceptionHandler {
@@ -40,7 +42,7 @@ public class AssembleiaExceptionHandler extends ResponseEntityExceptionHandler {
 
 		String mensagemUsuario = messageSource.getMessage("mensagem.invalida", null, ptBR);
 		String mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();
-		List<Erro> erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);
 	}
 	
@@ -58,7 +60,7 @@ public class AssembleiaExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 		String mensagemUsuario = messageSource.getMessage("recurso.nao-encontrado", null, ptBR);
 		String mensagemDesenvolvedor = ex.toString();
-		List<Erro> erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
 	}
 	
@@ -66,21 +68,21 @@ public class AssembleiaExceptionHandler extends ResponseEntityExceptionHandler {
 	public ResponseEntity<Object> handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
 		String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, ptBR);
 		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
-		List<Erro> erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+		List<Erro> erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 
 	@ExceptionHandler({ GenericBadRequestException.class })
 	public ResponseEntity<Object> handleGenericBadRequestException(GenericBadRequestException ex, WebRequest request) {
 		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
-		List<Erro> erros = List.of(new Erro(ex.getMessage(), mensagemDesenvolvedor));
+		List<Erro> erros = singletonList(new Erro(ex.getMessage(), mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 
 	@ExceptionHandler({ GenericNotFoundException.class })
 	public ResponseEntity<Object> handleGenericNotFoundException(GenericNotFoundException ex, WebRequest request) {
 		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
-		List<Erro> erros = List.of(new Erro(ex.getMessage(), mensagemDesenvolvedor));
+		List<Erro> erros = singletonList(new Erro(ex.getMessage(), mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	

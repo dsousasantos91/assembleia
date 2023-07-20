@@ -32,11 +32,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -118,8 +120,8 @@ class SessaoServiceTest {
         when(assembleiaRepository.findById(anyLong())).thenReturn(Optional.of(assembleia));
         doAnswer(invocation -> invocation.getArgument(0)).when(sessaoRepository).saveAll(anyList());
         List<SessaoResponse> response = sessaoService.abrirEmLote(requestEmLote);
-        List<Long> idsPautasDaAssembleia = assembleia.getPautas().stream().map(Pauta::getId).toList();
-        List<Long> idsPautasResponse = response.stream().map(SessaoResponse::getPauta).map(PautaResponse::getId).toList();
+        List<Long> idsPautasDaAssembleia = assembleia.getPautas().stream().map(Pauta::getId).collect(toList());
+        List<Long> idsPautasResponse = response.stream().map(SessaoResponse::getPauta).map(PautaResponse::getId).collect(toList());
         assertEquals(response.size(), assembleia.getPautas().size());
         verify(sessaoRepository, times(1)).saveAll(anyList());
         assertTrue(idsPautasResponse.containsAll(idsPautasDaAssembleia));
@@ -132,11 +134,11 @@ class SessaoServiceTest {
         Pauta pauta2 = Pauta.builder().id(2L).build();
         entity2.setPauta(pauta2);
         PageRequest pageable = PageRequest.of(0, 2);
-        List<Sessao> sessaoList = List.of(entity1, entity2);
+        List<Sessao> sessaoList = Arrays.asList(entity1, entity2);
         PageImpl<Sessao> pageResponse = new PageImpl<>(sessaoList, pageable, sessaoList.size());
         when(sessaoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<SessaoResponse> response = sessaoService.pesquisar(pageable);
-        List<Long> idsSessoes = response.stream().map(SessaoResponse::getId).toList();
+        List<Long> idsSessoes = response.stream().map(SessaoResponse::getId).collect(toList());
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsSessoes.size(), 2);
@@ -206,10 +208,13 @@ class SessaoServiceTest {
 
     @Test
     void deveConfirmarEnvioDeResultadoComSucesso() {
+        Map<Voto, Long> votos = new HashMap<>();
+        votos.put(Voto.SIM, 5L);
+        votos.put(Voto.NAO, 3L);
         ContagemVotosResponse contagemResponse = ContagemVotosResponse.builder()
                 .sessaoId(entity1.getId())
                 .pauta(pautaMapper.toResponse(entity1.getPauta()))
-                .votos(Map.of(Voto.SIM, 5L, Voto.NAO, 3L))
+                .votos(votos)
                 .build();
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
         doAnswer(invocation -> {

@@ -34,6 +34,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -126,11 +128,11 @@ class VotacaoServiceTest {
     @Test
     void devePesquisarComSucesso() {
         PageRequest pageable = PageRequest.of(0, 1);
-        List<Votacao> votacaoList = List.of(votacao);
+        List<Votacao> votacaoList = singletonList(votacao);
         PageImpl<Votacao> pageResponse = new PageImpl<>(votacaoList, pageable, votacaoList.size());
         when(votacaoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<VotacaoResponse> response = votacaoService.pesquisar(pageable);
-        List<Long> idsVotacoes = response.stream().map(VotacaoResponse::getId).toList();
+        List<Long> idsVotacoes = response.stream().map(VotacaoResponse::getId).collect(toList());
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
         assertEquals(response.getPageable().getPageSize(), pageable.getPageSize());
         assertEquals(idsVotacoes.size(), 1);
@@ -140,7 +142,7 @@ class VotacaoServiceTest {
     @Test
     void deveContabilizarComSucesso() {
         when(sessaoRepository.findById(sessao.getId())).thenReturn(Optional.of(sessao));
-        when(votacaoRepository.findBySessaoId(sessao.getId())).thenReturn(Optional.of(List.of(votacao)));
+        when(votacaoRepository.findBySessaoId(sessao.getId())).thenReturn(Optional.of(singletonList(votacao)));
         ContagemVotosResponse response = votacaoService.contabilizar(sessao.getId());
         assertEquals(response.getSessaoId(), sessao.getId());
         assertEquals(response.getPauta().getId(), pauta.getId());

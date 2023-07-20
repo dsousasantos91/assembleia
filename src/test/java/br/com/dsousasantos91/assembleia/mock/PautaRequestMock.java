@@ -2,6 +2,7 @@ package br.com.dsousasantos91.assembleia.mock;
 
 import br.com.dsousasantos91.assembleia.service.dto.request.PautaRequest;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PautaRequestMock {
@@ -24,7 +25,7 @@ public class PautaRequestMock {
     }
 
     public static void initializeDefaultDataList(PautaRequestMock mock) {
-        mock.elements = List.of(
+        mock.elements = Arrays.asList(
                 PautaRequest.builder()
                         .titulo("laoreet sit amet cursus sit")
                         .descricao("faucibus a pellentesque sit amet porttitor eget dolor morbi non arcu risus")
