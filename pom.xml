@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.dsousasantos91</groupId>
-    <artifactId>assembleia</artifactId>
+    <artifactId>ms-assembleia</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>assembleia</name>
-    <description>assembleia</description>
+    <name>ms-assembleia</name>
+    <description>Microservice para votação de Assembleias/pautas</description>
     <properties>
         <java.version>17</java.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
