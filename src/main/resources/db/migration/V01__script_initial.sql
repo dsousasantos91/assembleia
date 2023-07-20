@@ -12,9 +12,9 @@ create table assembleia
     cooperativa               varchar(255),
     data_hora_fim_apuracao    timestamp    not null,
     data_hora_inicio_apuracao timestamp    not null,
-    presidente                varchar(255),
-    secretario                varchar(255),
-    tipo_assembleia           varchar(255) not null,
+    presidente                varchar(50),
+    secretario                varchar(50),
+    tipo_assembleia           varchar(20) not null,
     primary key (id)
 );
 create table assembleia_pautas
@@ -26,7 +26,7 @@ create table associado
 (
     id   bigserial not null,
     cpf  varchar(11),
-    nome varchar(255),
+    nome varchar(50),
     primary key (id)
 );
 create table endereco
@@ -36,15 +36,15 @@ create table endereco
     cep           varchar(8),
     cidade        varchar(50),
     complemento   varchar(255),
-    logradouro    varchar(100),
-    uf            varchar(255) not null,
+    logradouro    varchar(255),
+    uf            varchar(2) not null,
     assembleia_id int8         not null,
     primary key (id)
 );
 create table pauta
 (
     id        bigserial not null,
-    descricao varchar(255),
+    descricao varchar(500),
     titulo    varchar(255),
     primary key (id)
 );
@@ -67,7 +67,7 @@ create table voto
 (
     id             bigserial    not null,
     data_hora_voto timestamp,
-    voto           varchar(255) not null,
+    voto           varchar(3) not null,
     associado_id   int8         not null,
     sessao_id      int8         not null,
     primary key (id)
