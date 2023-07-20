@@ -30,14 +30,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping(value = "/v1/votacao", produces = { "application/json;charset=UTF-8" })
+@RequestMapping(value = "/api/v1/votacao", produces = { "application/json;charset=UTF-8" })
 public class VotacaoController {
 
 	private final VotacaoService votacaoService;
 	private final ApplicationEventPublisher publish;
 
 	@ApiOperation(value = "Votação de Pauta.")
-	@PostMapping(path = "/api/votar")
+	@PostMapping(path = "/votar")
 	public ResponseEntity<VotacaoResponse> votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
 		VotacaoResponse response = this.votacaoService.votar(request);
 		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));
