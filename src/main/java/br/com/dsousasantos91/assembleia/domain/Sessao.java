@@ -39,7 +39,7 @@ public class Sessao {
 
     @Valid
     @NotNull(message = "{0} é obrigatório")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pauta_id")
     private Pauta pauta;
 

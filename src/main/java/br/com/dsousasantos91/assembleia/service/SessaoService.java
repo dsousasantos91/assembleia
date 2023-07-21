@@ -13,6 +13,7 @@ import br.com.dsousasantos91.assembleia.repository.AssociadoRepository;
 import br.com.dsousasantos91.assembleia.repository.PautaRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
 import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
+import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoEmLoteRequest;
 import br.com.dsousasantos91.assembleia.service.dto.request.SessaoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
@@ -57,6 +58,9 @@ public class SessaoService {
                 .dataHoraInicio(LocalDateTime.now())
                 .dataHoraFim(request.getDataHoraFim())
                 .build();
+        if (Boolean.TRUE.equals(request.getSessaoPrivada())) {
+            sessao.setAssociados(setAssociados(request.getSessaoPrivada(), request.getAssociados()));
+        }
         Sessao sessaoAberta = sessaoRepository.save(sessao);
         notificadorScheduler.agendarNotificacao(sessaoAberta);
         log.info("Sessão para pauta [{}] aberta com sucesso.", sessaoAberta.getPauta().getTitulo());
@@ -76,8 +80,10 @@ public class SessaoService {
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
         verificarExistenciaDeSessaoAberta(request.getIdsPautas());
         sessoes = montarSessoes(request);
-        List<Associado> associados = setAssociados(request);
-        sessoes.forEach(sessao -> sessao.setAssociados(associados));
+        if (Boolean.TRUE.equals(request.getSessaoPrivada())) {
+            List<Associado> associados = setAssociados(request.getSessaoPrivada(), request.getAssociados());
+            sessoes.forEach(sessao -> sessao.setAssociados(associados));
+        }
         List<Sessao> sessoesEmLote = sessaoRepository.saveAll(sessoes);
         sessoesEmLote.forEach(sessao -> {
             notificadorScheduler.agendarNotificacao(sessao);
@@ -100,7 +106,8 @@ public class SessaoService {
 
     public SessaoResponse prorrogar(SessaoRequest request) {
         log.info("Prorrogando sessão para pauta ID [{}]", request.getPautaId());
-        return this.sessaoRepository.findByPautaId(request.getPautaId())
+        return this.sessaoRepository.findByPautaIdInAndDataHoraFimIsAfter(singletonList(request.getPautaId()), LocalDateTime.now())
+                .stream().findFirst()
                 .map(sessaoEncontrada -> {
                     sessaoEncontrada.setDataHoraFim(request.getDataHoraFim());
                     notificadorScheduler.agendarNotificacao(sessaoEncontrada);
@@ -152,12 +159,12 @@ public class SessaoService {
         }).collect(toList());
     }
 
-    private List<Associado> setAssociados(SessaoEmLoteRequest request) {
+    private List<Associado> setAssociados(Boolean sessaoPrivada, List<AssociadoRequest> associados) {
         log.info("Relacionando associados a sessão");
-        if (Boolean.FALSE.equals(request.getSessaoPrivada()) && nuloOuVazio(request.getAssociados()))
-            throw new GenericBadRequestException("votacaoLivre é " + request.getSessaoPrivada()
+        if (nuloOuVazio(associados))
+            throw new GenericBadRequestException("sessaoPrivada é " + sessaoPrivada
                     + ". Deve-se enviar os associados participantes da Sessão.");
-        return request.getAssociados().stream()
+        return associados.stream()
                 .map(associado -> {
                     validarCPFService.validar(associado.getCpf());
                     return associadoRepository.findByCpf(associado.getCpf())

@@ -73,13 +73,16 @@ public class VotoService {
     }
 
     public ContagemVotosResponse contabilizar(Long sessaoId) {
+        long votosParaNao;
+        long votosParaSim;
         log.info("Realizada contagem dos votos para sessão [{}].", sessaoId);
         Sessao sessao = sessaoRepository.findById(sessaoId)
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com sessaoId %d não existe.", sessaoId)));
         List<Voto> votacoes = votacaoRepository.findBySessaoId(sessaoId);
-        if (votacoes.isEmpty()) throw new GenericNotFoundException(String.format("Votação para Sessão ID %d não encontrada.", sessaoId));
-        long votosParaNao = votacoes.stream().filter(votacao -> VotoEnum.NAO.equals(votacao.getVoto())).count();
-        long votosParaSim = votacoes.stream().filter(votacao -> VotoEnum.SIM.equals(votacao.getVoto())).count();
+        if (!votacoes.isEmpty()) ; {
+            votosParaNao = votacoes.stream().filter(votacao -> VotoEnum.NAO.equals(votacao.getVoto())).count();
+            votosParaSim = votacoes.stream().filter(votacao -> VotoEnum.SIM.equals(votacao.getVoto())).count();
+        }
         log.info("Contagem do votos da sessão [{}] realizada com sucesso.", sessao.getId());
         Map<VotoEnum, Long> votos = new HashMap<>();
         votos.put(VotoEnum.NAO, votosParaNao);

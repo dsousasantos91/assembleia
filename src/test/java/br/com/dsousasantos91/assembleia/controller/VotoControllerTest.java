@@ -85,7 +85,7 @@ class VotoControllerTest {
     void deveVotarERetornarStatus201() throws Exception {
         when(votoService.votar(any(VotoRequest.class))).thenReturn(response);
         mockMvc.perform(
-                        post("/api/v1/voto/votar")
+                        post("/api/v1/voto")
                                 .contentType(APPLICATION_JSON_UTF_8)
                                 .content(objectMapper.writeValueAsString(request))
                 )
