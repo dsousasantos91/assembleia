@@ -25,9 +25,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.joining;
@@ -54,12 +56,16 @@ public class SessaoService {
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Pauta com ID: %d não encontrada.", request.getPautaId())));
         Sessao sessao = Sessao.builder()
                 .pauta(pauta)
+                .associados(emptyList())
                 .sessaoPrivada(request.getSessaoPrivada())
                 .dataHoraInicio(LocalDateTime.now())
                 .dataHoraFim(request.getDataHoraFim())
                 .build();
-        if (Boolean.TRUE.equals(request.getSessaoPrivada())) {
-            sessao.setAssociados(setAssociados(request.getSessaoPrivada(), request.getAssociados()));
+        if (Boolean.TRUE.equals(request.getSessaoPrivada()) && nuloOuVazio(request.getAssociados())) {
+            throw new GenericBadRequestException("Associados não enviados");
+        }
+        if (Boolean.TRUE.equals(request.getSessaoPrivada()) && !nuloOuVazio(request.getAssociados())) {
+            sessao.setAssociados(parseAssociados(request.getAssociados()));
         }
         Sessao sessaoAberta = sessaoRepository.save(sessao);
         notificadorScheduler.agendarNotificacao(sessaoAberta);
@@ -69,15 +75,22 @@ public class SessaoService {
 
     public List<SessaoResponse> abrirEmLote(SessaoEmLoteRequest request) {
         log.info("Abrindo sessões em lote");
+        List<Pauta> pautas = new ArrayList<>();
         List<Sessao> sessoes;
         log.info("Buscando assembleia ID [{}].", request.getAssembleiaId());
         Optional<Assembleia> assembleia = this.assembleiaRepository.findById(request.getAssembleiaId());
-        if (!assembleia.isPresent() && nuloOuVazio(request.getIdsPautas()))
+        if (nuloOuVazio(request.getIdsPautas()) && !assembleia.isPresent()) {
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
+        }
+        if (nuloOuVazio(request.getIdsPautas()) && assembleia.isPresent()) {
+            pautas = assembleia.get().getPautas();
+            List<Long> pautasIds = pautas.stream().map(Pauta::getId).collect(toList());
+            request.setIdsPautas(pautasIds);
+        }
         verificarExistenciaDeSessaoAberta(request.getIdsPautas());
-        sessoes = montarSessoes(request);
+        sessoes = montarSessoes(request, pautas);
         if (Boolean.TRUE.equals(request.getSessaoPrivada())) {
-            List<Associado> associados = setAssociados(request.getSessaoPrivada(), request.getAssociados());
+            List<Associado> associados = parseAssociados(request.getAssociados());
             sessoes.forEach(sessao -> sessao.setAssociados(associados));
         }
         List<Sessao> sessoesEmLote = sessaoRepository.saveAll(sessoes);
@@ -102,7 +115,7 @@ public class SessaoService {
 
     public SessaoResponse prorrogar(SessaoRequest request) {
         log.info("Prorrogando sessão para pauta ID [{}]", request.getPautaId());
-        return this.sessaoRepository.findByPautaIdInAndDataHoraFimIsAfter(singletonList(request.getPautaId()), LocalDateTime.now())
+        return this.sessaoRepository.findSessoesAbertasPorPautaIdIn(singletonList(request.getPautaId()), LocalDateTime.now())
                 .stream().findFirst()
                 .map(sessaoEncontrada -> {
                     sessaoEncontrada.setDataHoraFim(request.getDataHoraFim());
@@ -113,14 +126,16 @@ public class SessaoService {
                 .orElseGet(() -> this.abrir(request));
     }
 
-    public SessaoResponse encerrar(Long id) {
-        log.info("Encerrando sessão ID [{}]", id);
-        Sessao sessao = sessaoRepository.findById(id)
-                .orElseThrow(() -> new GenericNotFoundException(String.format("Sessao com ID: %d não encontrada.", id)));
+    public SessaoResponse encerrar(Long sessaoId) {
+        log.info("Encerrando sessão ID [{}]", sessaoId);
+        Sessao sessao = sessaoRepository.findById(sessaoId)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Sessao com ID: %d não encontrada.", sessaoId)));
+        if (sessao.getDataHoraFim().isBefore(LocalDateTime.now()))
+            throw new GenericBadRequestException(String.format("Sessao com ID: %d encerrada anteriormente.", sessaoId));
         sessao.setDataHoraFim(LocalDateTime.now());
         Sessao sessaoEncerrada = sessaoRepository.save(sessao);
         notificadorScheduler.agendarNotificacao(sessaoEncerrada);
-        log.info("Sessão ID [{}] encerrada com sucesso.", id);
+        log.info("Sessão ID [{}] encerrada com sucesso.", sessaoId);
         return sessaoMapper.toResponse(sessaoEncerrada);
     }
 
@@ -140,26 +155,30 @@ public class SessaoService {
         log.info("Sessão ID [{}] apagada com sucesso", id);
     }
 
-    private List<Sessao> montarSessoes(SessaoEmLoteRequest request) {
+    private List<Sessao> montarSessoes(SessaoEmLoteRequest request, List<Pauta> pautas) {
         log.info("Instanciando sessões");
         return request.getIdsPautas().stream().map(pautaId -> {
-            Optional<Pauta> pauta = pautaRepository.findById(pautaId);
+            Optional<Pauta> pauta;
             Sessao sessao = Sessao.builder()
+                    .associados(emptyList())
                     .sessaoPrivada(request.getSessaoPrivada())
                     .dataHoraInicio(LocalDateTime.now())
                     .dataHoraFim(request.getDataHoraFim())
                     .build();
+            if (pautas.isEmpty()) {
+                pauta = pautaRepository.findById(pautaId);
+            }
+            else {
+                pauta = pautas.stream().filter(pauta_ -> pautaId.equals(pauta_.getId())).findFirst();
+            }
             pauta.ifPresent(sessao::setPauta);
             log.info("Sessão ID [{}] instanciada com sucesso para a pauta [{}]", sessao.getId(), sessao.getPauta().getTitulo());
             return sessao;
         }).collect(toList());
     }
 
-    private List<Associado> setAssociados(Boolean sessaoPrivada, List<AssociadoRequest> associados) {
+    private List<Associado> parseAssociados(List<AssociadoRequest> associados) {
         log.info("Relacionando associados a sessão");
-        if (nuloOuVazio(associados))
-            throw new GenericBadRequestException("sessaoPrivada é " + sessaoPrivada
-                    + ". Deve-se enviar os associados participantes da Sessão.");
         return associados.stream()
                 .map(associado -> {
                     validarCPFService.validar(associado.getCpf());
@@ -170,7 +189,7 @@ public class SessaoService {
     }
 
     private void verificarExistenciaDeSessaoAberta(List<Long> pautasIds) {
-        List<Sessao> sessaoExiste = sessaoRepository.findByPautaIdInAndDataHoraFimIsAfter(pautasIds, LocalDateTime.now());
+        List<Sessao> sessaoExiste = sessaoRepository.findSessoesAbertasPorPautaIdIn(pautasIds, LocalDateTime.now());
         if (sessaoExiste.isEmpty()) return;
         String titulos = sessaoExiste.stream().map(sessao -> sessao.getPauta().getTitulo()).collect(joining(", "));
         throw new GenericBadRequestException(String.format("Existe uma sessão aberta para as pautas: %s.", titulos));

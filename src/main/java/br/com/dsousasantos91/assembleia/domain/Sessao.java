@@ -59,7 +59,6 @@ public class Sessao {
 
     @PrePersist
     public void setDefaults() {
-        this.sessaoPrivada = Boolean.FALSE;
         this.resultadoEnviado = Boolean.FALSE;
     }
 }

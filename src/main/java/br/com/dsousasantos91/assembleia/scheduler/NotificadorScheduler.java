@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.concurrent.ScheduledFuture;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -33,7 +35,11 @@ public class NotificadorScheduler {
         ScheduledFuture<?> scheduleTask = taskScheduler.schedule(
                 () -> {
                     ContagemVotosResponse contagemVotos = votoService.contabilizar(notificador.getSessao().getId());
-                    notificarVotosProducer.enviarResultadoVotacao(contagemVotos);
+                    if (nonNull(contagemVotos)) {
+                        notificarVotosProducer.enviarResultadoVotacao(contagemVotos);
+                    } else {
+                        cancelarNotificacao(notificador);
+                    }
                 },
                 new CronTrigger(notificador.getCron(), TimeZone.getTimeZone(TimeZone.getDefault().toZoneId()))
         );

@@ -96,7 +96,7 @@ public class AssembleiaService {
     }
 
     public void encerrarSessao(List<Long> pautasIds) {
-        List<Sessao> sessoes = sessaoRepository.findByPautaIdInAndDataHoraFimIsAfter(pautasIds, LocalDateTime.now());
+        List<Sessao> sessoes = sessaoRepository.findSessoesAbertasPorPautaIdIn(pautasIds, LocalDateTime.now());
         if (sessoes.isEmpty()) return;
         sessoes.forEach(sessao -> {
             sessao.setDataHoraFim(LocalDateTime.now());

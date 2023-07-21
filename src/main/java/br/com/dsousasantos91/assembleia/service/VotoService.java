@@ -25,6 +25,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -76,20 +77,20 @@ public class VotoService {
         long votosParaNao;
         long votosParaSim;
         log.info("Realizada contagem dos votos para sessão [{}].", sessaoId);
-        Sessao sessao = sessaoRepository.findById(sessaoId)
-                .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com sessaoId %d não existe.", sessaoId)));
+        Optional<Sessao> sessao = sessaoRepository.findById(sessaoId);
+        if (!sessao.isPresent()) return null;
         List<Voto> votacoes = votoRepository.findBySessaoId(sessaoId);
         if (!votacoes.isEmpty()) ; {
             votosParaNao = votacoes.stream().filter(votacao -> VotoEnum.NAO.equals(votacao.getVoto())).count();
             votosParaSim = votacoes.stream().filter(votacao -> VotoEnum.SIM.equals(votacao.getVoto())).count();
         }
-        log.info("Contagem do votos da sessão [{}] realizada com sucesso.", sessao.getId());
+        log.info("Contagem do votos da sessão [{}] realizada com sucesso.", sessao.get().getId());
         Map<VotoEnum, Long> votos = new HashMap<>();
         votos.put(VotoEnum.NAO, votosParaNao);
         votos.put(VotoEnum.SIM, votosParaSim);
         return ContagemVotosResponse.builder()
-                .sessaoId(sessao.getId())
-                .pauta(pautaMapper.toResponse(sessao.getPauta()))
+                .sessaoId(sessao.get().getId())
+                .pauta(pautaMapper.toResponse(sessao.get().getPauta()))
                 .votos(votos)
                 .build();
     }
