@@ -17,6 +17,8 @@
 							"script": {
 								"exec": [
 									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarPautas = eval(pm.collectionVariables.get('gerarPautas'));\r",
+									"gerarPautas();\r",
 									"\r",
 									"let tipoAssembleia = gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\";\r",
 									"pm.collectionVariables.set('tipoAssembleia', tipoAssembleia)\r",
@@ -60,7 +62,17 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set('assembleia', JSON.stringify(responseJson));\r",
+									"pm.collectionVariables.set('assembleiaId', responseJson.id);\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -71,7 +83,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"pautas\": [\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    },\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    },\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    }\r\n  ],\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
+							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"pautas\": {{pautas}},\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -93,23 +105,94 @@
 					"response": []
 				},
 				{
-					"name": "Buscar Assembleias Paginadas",
+					"name": "Buscar Todas Assembleias",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
 									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve retornar quatidade de elementos maior que zero`, function () {\r",
+									"    const responseJson = pm.response.json();\r",
+									"    pm.collectionVariables.set('size', gerarNumeroAleatorio(0, responseJson.totalElements));\r",
+									"    pm.collectionVariables.set('page', gerarNumeroAleatorio(0, responseJson.totalPages));\r",
+									"    pm.expect(responseJson.content.length).to.be.gt(0);\r",
+									"    pm.expect(responseJson.totalElements).to.be.gt(0);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const size = pm.collectionVariables.get('size');\r",
+									"const page = pm.collectionVariables.get('page');\r",
+									"\r",
+									"if (!size) pm.collectionVariables.set('size', 0);\r",
+									"if (!page) pm.collectionVariables.set('page', 0);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Todas Assembleias Paginadas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
 									"const responseJson = pm.response.json();\r",
+									"const size = pm.collectionVariables.get('size');\r",
+									"const page = pm.collectionVariables.get('page');\r",
 									"\r",
-									"let indexContent = gerarNumeroAleatorio(0, responseJson.content.length - 1);\r",
-									"let indexPauta = gerarNumeroAleatorio(0, responseJson.content[indexContent].pautas.length - 1);\r",
+									"pm.test(`Deve retornar quatidade de elementos igual a ${size}`, function () {\r",
+									"    pm.expect(responseJson.size).to.be.eq(size);\r",
+									"    pm.expect(responseJson.pageable.pageSize).to.be.eq(size);\r",
+									"});\r",
 									"\r",
-									"console.log(responseJson.content[indexContent + 1].id)\r",
+									"pm.test(`Deve retornar a pagina igual a ${page}`, function () {\r",
+									"    pm.expect(responseJson.number).to.be.eq(page);\r",
+									"    pm.expect(responseJson.pageable.pageNumber).to.be.eq(page);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									"\r",
-									"pm.collectionVariables.set('assembleiaId', responseJson.content[indexContent].id);\r",
-									"pm.collectionVariables.set('assembleiaIdNext', responseJson.content[indexContent + 1].id);\r",
-									"pm.collectionVariables.set('pautaId', responseJson.content[indexContent].pautas[indexPauta].id);\r",
 									""
 								],
 								"type": "text/javascript"
@@ -145,6 +228,36 @@
 				},
 				{
 					"name": "Buscar Assembleia por Id",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const assembleia = JSON.parse(pm.collectionVariables.get('assembleia'));\r",
+									"pm.collectionVariables.set('assembleiaId', assembleia.id);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const assembleia = JSON.parse(pm.collectionVariables.get('assembleia'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se o objeto é igual a assembleia de id ${assembleia.id}`, function () {\r",
+									"    pm.expect(JSON.stringify(responseJson)).to.be.eq(JSON.stringify(assembleia));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -176,7 +289,219 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
+									"const options = {\r",
+									"  url:  'https://geradornv.com.br/wp-json/api/cep/random-by-states?state=SP', \r",
+									"  method: 'GET',\r",
+									"  header: {\r",
+									"    'Accept': '*/*',\r",
+									"    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\r",
+									"  },\r",
+									"  body: {\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"    let address = JSON.parse(response.text())\r",
+									"    let endereco = {\r",
+									"        \"bairro\": address.neighborhood,\r",
+									"        \"cep\": address.cep,\r",
+									"        \"cidade\": address.city,\r",
+									"        \"complemento\": address.type,\r",
+									"        \"logradouro\": address.street,\r",
+									"        \"uf\": address.state\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"endereco\", JSON.stringify(endereco));\r",
+									"});\r",
+									"\r",
+									"const assembleiaPut = JSON.parse(pm.collectionVariables.get('assembleia'));\r",
+									"assembleiaPut.tipoAssembleia = assembleiaPut.tipoAssembleia === 'Extraordinária' ? 'EXTRAORDINARIA' : 'ORDINARIA';\r",
+									"assembleiaPut.cooperativa = '{{$randomCompanyName}}';\r",
+									"assembleiaPut.presidente = '{{$randomFullName}}';\r",
+									"assembleiaPut.secretario = '{{$randomFullName}}';\r",
+									"assembleiaPut.local = JSON.parse(pm.collectionVariables.get('endereco'));\r",
+									"pm.collectionVariables.set('assembleiaPut', JSON.stringify(assembleiaPut));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"const assembleia = JSON.parse(pm.collectionVariables.get('assembleia'));\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se cooperativa foi atualizada`, function () {\r",
+									"    pm.expect(JSON.stringify(responseJson.cooperativa)).to.be.not.eq(JSON.stringify(assembleia.cooperativa));\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se o presidente foi atualizado`, function () {\r",
+									"    pm.expect(JSON.stringify(responseJson.presidente)).to.be.not.eq(JSON.stringify(assembleia.presidente));\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se secretario(a) foi atualizado(a)`, function () {\r",
+									"    pm.expect(JSON.stringify(responseJson.secretario)).to.be.not.eq(JSON.stringify(assembleia.secretario));\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se endereco foi atualizado`, function () {\r",
+									"    pm.expect(JSON.stringify(JSON.stringify(responseJson.local))).to.be.not.eq(JSON.stringify(assembleia.local));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{assembleiaPut}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encerrar Assembleia",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"const assembleia = JSON.parse(pm.collectionVariables.get('assembleia'));\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 200\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(`Deve verificar se a dataHoraFimApuracao é anterior a dataHora atual`, function () {\r",
+									"    const now = new Date().toLocaleString('pt-BR').replace(',','')\r",
+									"    pm.expect(responseJson.dataHoraFimApuracao === now).to.be.true;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/encerrar/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								"encerrar",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Assembleia",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Deve retornar status code 204\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessão",
+			"item": [
+				{
+					"name": "Massa Para Abrir Sessão em Lote",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
 									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarPautas = eval(pm.collectionVariables.get('gerarPautas'));\r",
+									"gerarPautas();\r",
 									"\r",
 									"let tipoAssembleia = gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\";\r",
 									"pm.collectionVariables.set('tipoAssembleia', tipoAssembleia)\r",
@@ -220,18 +545,27 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									""
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set('assembleiaIdSessaoEmLote', JSON.stringify(responseJson.id));\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});"
 								],
 								"type": "text/javascript"
 							}
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
+							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"pautas\": {{pautas}},\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -239,84 +573,178 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"raw": "{{url}}/api/v1/assembleia",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"assembleia",
-								":assembleiaId"
-							],
-							"variable": [
-								{
-									"key": "assembleiaId",
-									"value": "{{assembleiaId}}"
-								}
+								"assembleia"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Encerrar Assembleia",
+					"name": "Abrir Sessão Em Lote",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let sessaoPrivada = gerarNumeroAleatorio(0, 1) === 1 ? true : false;\r",
+									"\r",
+									"pm.collectionVariables.set('minutos', gerarNumeroAleatorio(1, 5));\r",
+									"pm.collectionVariables.set('sessaoPrivada', sessaoPrivada);\r",
+									"\r",
+									"let associados = [];\r",
+									"for(let i = 0; i < gerarNumeroAleatorio(1, 10); i++) {\r",
+									"    associados.push({\"cpf\": gerarCpf(),\"nome\": \"{{$randomFullName}}\"});\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('associados', JSON.stringify(associados));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"let index = gerarNumeroAleatorio(0, responseJson.length - 1);\r",
+									"pm.collectionVariables.set('pautaId', responseJson[index].pauta.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assembleiaId\": {{assembleiaIdSessaoEmLote}},\r\n  \"sessaoPrivada\": {{sessaoPrivada}},\r\n  \"tempoSessao\": {\r\n    \"dias\": 0,\r\n    \"horas\": 0,\r\n    \"minutos\": {{minutos}}\r\n  },\r\n  \"associados\": {{associados}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/assembleia/encerrar/:assembleiaId",
+							"raw": "{{url}}/api/v1/sessao/abrirEmLote",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"assembleia",
-								"encerrar",
-								":assembleiaId"
-							],
-							"variable": [
-								{
-									"key": "assembleiaId",
-									"value": "{{assembleiaId}}"
-								}
+								"sessao",
+								"abrirEmLote"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Apagar Assembleia",
+					"name": "Massa Para Abrir Sessão Por Pauta Individual",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarPautas = eval(pm.collectionVariables.get('gerarPautas'));\r",
+									"gerarPautas();\r",
+									"\r",
+									"let tipoAssembleia = gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\";\r",
+									"pm.collectionVariables.set('tipoAssembleia', tipoAssembleia)\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date(dataInicio.getTime() + gerarNumeroAleatorio(2, 5) * 60000);\r",
+									"pm.collectionVariables.set('dataInicio', dataInicio.toLocaleString('pt-BR').replace(',',''));\r",
+									"pm.collectionVariables.set('dataFim', dataFim.toLocaleString('pt-BR').replace(',',''))\r",
+									"\r",
+									"const options = {\r",
+									"  url:  'https://geradornv.com.br/wp-json/api/cep/random-by-states?state=SP', \r",
+									"  method: 'GET',\r",
+									"  header: {\r",
+									"    'Accept': '*/*',\r",
+									"    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\r",
+									"  },\r",
+									"  body: {\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"    let address = JSON.parse(response.text())\r",
+									"    let endereco = {\r",
+									"        \"bairro\": address.neighborhood,\r",
+									"        \"cep\": address.cep,\r",
+									"        \"cidade\": address.city,\r",
+									"        \"complemento\": address.type,\r",
+									"        \"logradouro\": address.street,\r",
+									"        \"uf\": address.state\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"endereco\", JSON.stringify(endereco));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set('assembleia', JSON.stringify(responseJson));\r",
+									"\r",
+									"pm.test(\"Deve retornar status code 201\", function () {\r",
+									"  pm.expect(pm.response.code).to.eql(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Deve retornar id preenchido\", function () {\r",
+									"    pm.expect(responseJson.id).to.be.not.null;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"pautas\": {{pautas}},\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"raw": "{{url}}/api/v1/assembleia",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"assembleia",
-								":assembleiaId"
-							],
-							"variable": [
-								{
-									"key": "assembleiaId",
-									"value": "{{assembleiaId}}"
-								}
+								"assembleia"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Sessão",
-			"item": [
+				},
 				{
 					"name": "Abrir Sessão",
 					"event": [
@@ -361,68 +789,6 @@
 								"v1",
 								"sessao",
 								"abrir"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Abrir Sessão Em Lote",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
-									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
-									"\r",
-									"let associados = [];\r",
-									"for(let i = 0; i < gerarNumeroAleatorio(1, 10); i++) {\r",
-									"    associados.push({ \"cpf\": gerarCpf(),\"nome\": \"{{$randomFullName}}\"});\r",
-									"}\r",
-									"\r",
-									"pm.collectionVariables.set('associados', JSON.stringify(associados));\r",
-									"\r",
-									"const assembleiaIdNext = pm.collectionVariables.get('assembleiaIdNext');"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
-									"const responseJson = pm.response.json();\r",
-									"let index = gerarNumeroAleatorio(0, responseJson.length - 1);\r",
-									"pm.collectionVariables.set('pautaId', responseJson[index].pauta.id);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"assembleiaId\": {{assembleiaIdNext}},\r\n  \"sessaoPrivada\": {{sessaoPrivada}},\r\n  \"tempoSessao\": {\r\n    \"dias\": 0,\r\n    \"horas\": 0,\r\n    \"minutos\": {{minutos}}\r\n  },\r\n  \"associados\": {{associados}}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/v1/sessao/abrirEmLote",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"sessao",
-								"abrirEmLote"
 							]
 						}
 					},
@@ -599,14 +965,7 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));",
-							"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));",
-							"",
-							"let sessaoPrivada = gerarNumeroAleatorio(0, 1) === 1 ? true : false;",
-							"",
-							"pm.collectionVariables.set('minutos', gerarNumeroAleatorio(1, 5));",
-							"pm.collectionVariables.set('sessaoPrivada', sessaoPrivada);",
-							"pm.collectionVariables.set('cpf', gerarCpf());"
+							""
 						]
 					}
 				},
@@ -747,7 +1106,7 @@
 					"response": []
 				},
 				{
-					"name": "Atualizar Pauta",
+					"name": "Apagar Votos",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -769,7 +1128,7 @@
 						}
 					],
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -781,20 +1140,22 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/v1/pauta/:pautaId",
+							"raw": "{{url}}/api/v1/voto/contabilizar/sessao/:sessaoId",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"pauta",
-								":pautaId"
+								"voto",
+								"contabilizar",
+								"sessao",
+								":sessaoId"
 							],
 							"variable": [
 								{
-									"key": "pautaId",
-									"value": "{{pautaId}}"
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
 								}
 							]
 						}
@@ -996,13 +1357,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));",
-					"",
-					"const size = gerarNumeroAleatorio(0, 8);",
-					"const page = gerarNumeroAleatorio(0, size / 2);",
-					"",
-					"pm.collectionVariables.set('size', size);",
-					"pm.collectionVariables.set('page', page);"
+					""
 				]
 			}
 		},
@@ -1072,6 +1427,27 @@
 			"value": ""
 		},
 		{
+			"key": "voto",
+			"value": ""
+		},
+		{
+			"key": "assembleiaIdNext",
+			"value": ""
+		},
+		{
+			"key": "pautas",
+			"value": ""
+		},
+		{
+			"key": "gerarPautas",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "assembleia",
+			"value": ""
+		},
+		{
 			"key": "size",
 			"value": ""
 		},
@@ -1080,11 +1456,11 @@
 			"value": ""
 		},
 		{
-			"key": "voto",
+			"key": "assembleiaPut",
 			"value": ""
 		},
 		{
-			"key": "assembleiaIdNext",
+			"key": "assembleiaIdSessaoEmLote",
 			"value": ""
 		}
 	]

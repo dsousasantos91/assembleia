@@ -6,6 +6,7 @@ import br.com.dsousasantos91.assembleia.domain.Sessao;
 import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
 import br.com.dsousasantos91.assembleia.mapper.AssembleiaMapper;
 import br.com.dsousasantos91.assembleia.repository.AssembleiaRepository;
+import br.com.dsousasantos91.assembleia.repository.PautaRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
 import br.com.dsousasantos91.assembleia.scheduler.NotificadorScheduler;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaRequest;
@@ -28,6 +29,7 @@ import static java.util.stream.Collectors.toList;
 @Service
 @RequiredArgsConstructor
 public class AssembleiaService {
+    private final PautaRepository pautaRepository;
     private final AssembleiaRepository assembleiaRepository;
     private final SessaoRepository sessaoRepository;
     private final AssembleiaMapper assembleiaMapper;
@@ -37,6 +39,7 @@ public class AssembleiaService {
         log.info("Criando assembleia {}", request.getTipoAssembleia());
         Assembleia assembleia = this.assembleiaMapper.toEntity(request);
         assembleia.getLocal().setAssembleia(assembleia);
+        assembleia.getPautas().forEach(pauta -> pauta.setAssembleia(assembleia));
         Assembleia assembleiaRegistrada = this.assembleiaRepository.save(assembleia);
         log.info("Assembleia {} registrada com sucesso. ID: [{}]", assembleiaRegistrada.getTipoAssembleia(), assembleiaRegistrada.getId());
         return this.assembleiaMapper.toResponse(assembleiaRegistrada);
@@ -68,18 +71,19 @@ public class AssembleiaService {
         return this.assembleiaMapper.toResponse(assembleiaAtualizada);
     }
 
-    public AssembleiaResponse encerrar(Long id) {
-        log.info("Encerrando assembleia ID [{}]", id);
-        Assembleia assembleia = this.assembleiaRepository.findById(id)
-                .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", id)));
-        List<Long> pautasIds = assembleia.getPautas().stream().map(Pauta::getId).collect(toList());
-        if (!pautasIds.isEmpty()) {
-            log.info("Encerrando sessões abertas para a assembleia ID [{}]", id);
+    public AssembleiaResponse encerrar(Long assembleiaId) {
+        log.info("Encerrando assembleia ID [{}]", assembleiaId);
+        Assembleia assembleia = this.assembleiaRepository.findById(assembleiaId)
+                .orElseThrow(() -> new GenericNotFoundException(String.format("Assembleia ID: [%d] não encontrada.", assembleiaId)));
+        List<Pauta> pautas = pautaRepository.findByAssembleiaId(assembleiaId);
+        if (!pautas.isEmpty()) {
+            log.info("Encerrando sessões abertas para a assembleia ID [{}]", assembleiaId);
+            List<Long> pautasIds = pautas.stream().map(Pauta::getId).collect(toList());
             this.encerrarSessao(pautasIds);
-            log.info("Sessões da assembleia ID [{}] encerrada com sucesso.", id);
+            log.info("Sessões da assembleia ID [{}] encerrada com sucesso.", assembleiaId);
         }
         assembleia.setDataHoraFimApuracao(LocalDateTime.now());
-        assembleia.setPautas(pautasIds.stream().map(pautaId -> Pauta.builder().id(pautaId).build()).collect(toList()));
+        assembleia.setPautas(pautas);
         Assembleia assembleiaEncerrada = assembleiaRepository.save(assembleia);
         log.info("Assembleia ID [{}] encerrada com sucesso.",assembleiaEncerrada.getId());
         return assembleiaMapper.toResponse(assembleiaEncerrada);
