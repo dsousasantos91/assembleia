@@ -54,7 +54,7 @@ create table sessao
     data_hora_fim     timestamp not null,
     data_hora_inicio  timestamp not null,
     resultado_enviado boolean,
-    votacao_livre     boolean,
+    sessao_privada     boolean,
     pauta_id          int8      not null,
     primary key (id)
 );

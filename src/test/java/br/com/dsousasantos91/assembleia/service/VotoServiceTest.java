@@ -142,7 +142,7 @@ class VotoServiceTest {
     @Test
     void deveContabilizarComSucesso() {
         when(sessaoRepository.findById(sessao.getId())).thenReturn(Optional.of(sessao));
-        when(votacaoRepository.findBySessaoId(sessao.getId())).thenReturn(Optional.of(singletonList(voto)));
+        when(votacaoRepository.findBySessaoId(sessao.getId())).thenReturn(singletonList(voto));
         ContagemVotosResponse response = votoService.contabilizar(sessao.getId());
         assertEquals(response.getSessaoId(), sessao.getId());
         assertEquals(response.getPauta().getId(), pauta.getId());

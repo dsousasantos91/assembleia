@@ -21,8 +21,6 @@ public class SessaoEmLoteRequest {
     private Long assembleiaId;
     private List<Long> idsPautas;
     private List<AssociadoRequest> associados;
-
-    @NotNull(message = "{0} é obrigatório")
     private Boolean sessaoPrivada;
 
     @Valid

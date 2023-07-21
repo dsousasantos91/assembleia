@@ -20,10 +20,7 @@ import java.util.List;
 public class SessaoRequest {
     @NotNull(message = "{0} é obrigatório")
     private Long pautaId;
-
-    @NotNull(message = "{0} é obrigatório")
     private Boolean sessaoPrivada;
-
     private List<AssociadoRequest> associados;
 
     @Valid

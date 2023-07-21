@@ -161,7 +161,7 @@ class SessaoServiceTest {
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
         when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
         request.getTempoSessao().setDias(1);
-        SessaoResponse response = sessaoService.prorrogar(1L, request);
+        SessaoResponse response = sessaoService.prorrogar(request);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
         assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
@@ -235,7 +235,7 @@ class SessaoServiceTest {
     @Test
     void deveLancarGenericNotFoundExceptionAoProrrogarSessao() {
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.empty());
-        assertThrows(GenericNotFoundException.class, () -> sessaoService.prorrogar(2L, request));
+        assertThrows(GenericNotFoundException.class, () -> sessaoService.prorrogar(request));
     }
 
     @Test

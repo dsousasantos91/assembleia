@@ -1,7 +1,6 @@
 package br.com.dsousasantos91.assembleia.controller;
 
 import br.com.dsousasantos91.assembleia.domain.Pauta;
-import br.com.dsousasantos91.assembleia.domain.Sessao;
 import br.com.dsousasantos91.assembleia.mapper.PautaMapper;
 import br.com.dsousasantos91.assembleia.mapper.SessaoMapper;
 import br.com.dsousasantos91.assembleia.mock.PautaRequestMock;
@@ -69,7 +68,6 @@ class SessaoControllerTest {
     @BeforeEach
     public void setUp() {
         request = SessaoRequestMock.mocked().mock();
-        Sessao sessao = sessaoMapper.toEntity(request);
         Pauta pauta = pautaMapper.toEntity(PautaRequestMock.mocked().mock());
         pauta.setId(1L);
         response = SessaoResponse.builder()
@@ -154,8 +152,8 @@ class SessaoControllerTest {
 
     @Test
     void deveProrrogarERetornarStatus200() throws Exception {
-        when(sessaoService.prorrogar(anyLong(), any(SessaoRequest.class))).thenReturn(response);
-        mockMvc.perform(put("/api/v1/sessao/prorrogar/" + 1)
+        when(sessaoService.prorrogar(any(SessaoRequest.class))).thenReturn(response);
+        mockMvc.perform(put("/api/v1/sessao/prorrogar")
                         .contentType(APPLICATION_JSON_UTF_8)
                         .content(objectMapper.writeValueAsString(request)))
                 .andDo(print())

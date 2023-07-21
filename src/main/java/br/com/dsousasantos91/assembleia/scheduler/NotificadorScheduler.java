@@ -43,7 +43,10 @@ public class NotificadorScheduler {
 
     private void cancelarNotificacao(Notificador notificador) {
         log.info("Cancelamento de Notificacao:"+ notificador.toString());
-        if (schedulerMap.containsKey(notificador.getNome()))
-            schedulerMap.get(notificador.getNome()).cancel(true);
+        if (!schedulerMap.containsKey(notificador.getNome())) return;
+        ScheduledFuture<?> scheduledFuture = schedulerMap.get(notificador.getNome());
+        if (scheduledFuture.isDone() || scheduledFuture.isCancelled()) {
+            scheduledFuture.cancel(true);
+        }
     }
 }

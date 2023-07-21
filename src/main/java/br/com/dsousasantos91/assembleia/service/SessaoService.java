@@ -27,7 +27,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Collections.singletonList;
 import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j
@@ -45,11 +47,13 @@ public class SessaoService {
     private final ValidarCPFService validarCPFService;
 
     public SessaoResponse abrir(SessaoRequest request) {
+        verificarExistenciaDeSessaoAberta(singletonList(request.getPautaId()));
         log.info("Abrindo sessão para pauta ID [{}].", request.getPautaId());
         Pauta pauta = pautaRepository.findById(request.getPautaId())
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Pauta com ID: %d não encontrada.", request.getPautaId())));
         Sessao sessao = Sessao.builder()
                 .pauta(pauta)
+                .sessaoPrivada(request.getSessaoPrivada())
                 .dataHoraInicio(LocalDateTime.now())
                 .dataHoraFim(request.getDataHoraFim())
                 .build();
@@ -70,6 +74,7 @@ public class SessaoService {
         }
         if (!assembleia.isPresent() && nuloOuVazio(request.getIdsPautas()))
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
+        verificarExistenciaDeSessaoAberta(request.getIdsPautas());
         sessoes = montarSessoes(request);
         List<Associado> associados = setAssociados(request);
         sessoes.forEach(sessao -> sessao.setAssociados(associados));
@@ -93,9 +98,9 @@ public class SessaoService {
         return this.sessaoMapper.toResponse(sessao);
     }
 
-    public SessaoResponse prorrogar(Long id, SessaoRequest request) {
-        log.info("Prorrogando sessão ID [{}]", id);
-        return this.sessaoRepository.findById(id)
+    public SessaoResponse prorrogar(SessaoRequest request) {
+        log.info("Prorrogando sessão para pauta ID [{}]", request.getPautaId());
+        return this.sessaoRepository.findByPautaId(request.getPautaId())
                 .map(sessaoEncontrada -> {
                     sessaoEncontrada.setDataHoraFim(request.getDataHoraFim());
                     notificadorScheduler.agendarNotificacao(sessaoEncontrada);
@@ -159,6 +164,13 @@ public class SessaoService {
                             .orElseGet(() -> associadoMapper.toEntity(associado));
                 })
                 .collect(toList());
+    }
+
+    private void verificarExistenciaDeSessaoAberta(List<Long> pautasIds) {
+        List<Sessao> sessaoExiste = sessaoRepository.findByPautaIdInAndDataHoraFimIsAfter(pautasIds, LocalDateTime.now());
+        if (sessaoExiste.isEmpty()) return;
+        String titulos = sessaoExiste.stream().map(sessao -> sessao.getPauta().getTitulo()).collect(joining(", "));
+        throw new GenericBadRequestException(String.format("Existe uma sessão aberta para as pautas: %s.", titulos));
     }
 
     private <T> Boolean nuloOuVazio(List<T> list) {
