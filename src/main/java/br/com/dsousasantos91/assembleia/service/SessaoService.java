@@ -72,10 +72,6 @@ public class SessaoService {
         List<Sessao> sessoes;
         log.info("Buscando assembleia ID [{}].", request.getAssembleiaId());
         Optional<Assembleia> assembleia = this.assembleiaRepository.findById(request.getAssembleiaId());
-        if (assembleia.isPresent()) {
-            List<Long> idsPautas = assembleia.get().getPautas().stream().map(Pauta::getId).collect(toList());
-            request.setIdsPautas(idsPautas);
-        }
         if (!assembleia.isPresent() && nuloOuVazio(request.getIdsPautas()))
             throw new GenericBadRequestException("assembleiaId não enviado OU idsPautas está vazio.");
         verificarExistenciaDeSessaoAberta(request.getIdsPautas());

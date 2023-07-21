@@ -79,6 +79,7 @@ public class AssembleiaService {
             log.info("Sessões da assembleia ID [{}] encerrada com sucesso.", id);
         }
         assembleia.setDataHoraFimApuracao(LocalDateTime.now());
+        assembleia.setPautas(pautasIds.stream().map(pautaId -> Pauta.builder().id(pautaId).build()).collect(toList()));
         Assembleia assembleiaEncerrada = assembleiaRepository.save(assembleia);
         log.info("Assembleia ID [{}] encerrada com sucesso.",assembleiaEncerrada.getId());
         return assembleiaMapper.toResponse(assembleiaEncerrada);
