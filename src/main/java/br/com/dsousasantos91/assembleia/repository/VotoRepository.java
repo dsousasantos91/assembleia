@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VotacaoRepository extends JpaRepository<Voto, Long> {
+public interface VotoRepository extends JpaRepository<Voto, Long> {
     List<Voto> findBySessaoId(Long sessaoId);
     Optional<Voto> findBySessaoIdAndAssociadoCpf(Long sessaoId, String cpf);
 }

@@ -36,7 +36,7 @@ public class AssembleiaRequest {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataHoraFimApuracao;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String cooperativa;
 
@@ -44,11 +44,11 @@ public class AssembleiaRequest {
     @NotNull(message = "{0} é obrigatório")
     private EnderecoRequest local;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String presidente;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String secretario;
 

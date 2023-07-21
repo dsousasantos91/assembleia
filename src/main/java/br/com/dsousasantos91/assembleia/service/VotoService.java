@@ -11,7 +11,7 @@ import br.com.dsousasantos91.assembleia.mapper.PautaMapper;
 import br.com.dsousasantos91.assembleia.mapper.VotoMapper;
 import br.com.dsousasantos91.assembleia.repository.AssociadoRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
-import br.com.dsousasantos91.assembleia.repository.VotacaoRepository;
+import br.com.dsousasantos91.assembleia.repository.VotoRepository;
 import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
@@ -33,7 +33,7 @@ import static java.util.stream.Collectors.toList;
 @RequiredArgsConstructor
 public class VotoService {
 
-    private final VotacaoRepository votacaoRepository;
+    private final VotoRepository votoRepository;
     private final SessaoRepository sessaoRepository;
     private final AssociadoRepository associadoRepository;
     private final VotoMapper votoMapper;
@@ -61,7 +61,7 @@ public class VotoService {
                 .associado(associado)
                 .voto(request.getVoto())
                 .build();
-        Voto votoRegistrado = votacaoRepository.save(voto);
+        Voto votoRegistrado = votoRepository.save(voto);
         log.info("Votação ID [{}] registrada com sucesso para o associado CPF [{}].",
                 votoRegistrado.getId(), votoRegistrado.getAssociado().getCpf());
         return votoMapper.toResponse(votoRegistrado);
@@ -69,7 +69,7 @@ public class VotoService {
 
     public Page<VotoResponse> pesquisar(Pageable pageable) {
         log.info("Pesquisando votação.");
-        return this.votacaoRepository.findAll(pageable).map(votoMapper::toResponse);
+        return this.votoRepository.findAll(pageable).map(votoMapper::toResponse);
     }
 
     public ContagemVotosResponse contabilizar(Long sessaoId) {
@@ -78,7 +78,7 @@ public class VotoService {
         log.info("Realizada contagem dos votos para sessão [{}].", sessaoId);
         Sessao sessao = sessaoRepository.findById(sessaoId)
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Sessão com sessaoId %d não existe.", sessaoId)));
-        List<Voto> votacoes = votacaoRepository.findBySessaoId(sessaoId);
+        List<Voto> votacoes = votoRepository.findBySessaoId(sessaoId);
         if (!votacoes.isEmpty()) ; {
             votosParaNao = votacoes.stream().filter(votacao -> VotoEnum.NAO.equals(votacao.getVoto())).count();
             votosParaSim = votacoes.stream().filter(votacao -> VotoEnum.SIM.equals(votacao.getVoto())).count();
@@ -97,11 +97,11 @@ public class VotoService {
     public VotoResponse alterar(Long sessaoId, String cpf) {
         validarCPFService.validar(cpf);
         log.info("Alterando voto do associado CPF [{}].", cpf);
-        Voto voto = votacaoRepository.findBySessaoIdAndAssociadoCpf(sessaoId, cpf)
+        Voto voto = votoRepository.findBySessaoIdAndAssociadoCpf(sessaoId, cpf)
                 .orElseThrow(() -> new GenericNotFoundException(String.format("Associado com CPF %s não encontrado.", cpf)));
         VotoEnum novoVoto = VotoEnum.SIM.equals(voto.getVoto()) ? VotoEnum.NAO : VotoEnum.SIM;
         voto.setVoto(novoVoto);
-        Voto votoAlterado = votacaoRepository.save(voto);
+        Voto votoAlterado = votoRepository.save(voto);
         log.info("Alteração de voto do associado CPF [{}] realizada com sucesso.", cpf);
         return votoMapper.toResponse(votoAlterado);
     }

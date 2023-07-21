@@ -115,7 +115,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import br.com.dsousasantos91.assembleia.mapper.VotoMapper;
 &nbsp;import br.com.dsousasantos91.assembleia.repository.AssociadoRepository;
 &nbsp;import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
-&nbsp;import br.com.dsousasantos91.assembleia.repository.VotacaoRepository;
+&nbsp;import br.com.dsousasantos91.assembleia.repository.VotoRepository;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
@@ -147,18 +147,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    public VotoResponse votar(VotoRequest request) {
 <b class="fc">&nbsp;        validarCPFService.validar(request.getAssociado().getCpf());</b>
-<b class="fc">&nbsp;        log.info(&quot;Encontrando sessão para votação&quot;);</b>
+<b class="fc">&nbsp;        log.info(&quot;Encontrando sessï¿½o para votaï¿½ï¿½o&quot;);</b>
 <b class="fc">&nbsp;        Sessao sessao = sessaoRepository.findById(request.getSessaoId())</b>
-<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Sessão com id %d não existe.&quot;, request.getSessaoId())));</b>
-<b class="fc">&nbsp;        log.info(&quot;Sessão ID [{}] encontrata.&quot;, sessao.getId());</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Sessï¿½o com id %d nï¿½o existe.&quot;, request.getSessaoId())));</b>
+<b class="fc">&nbsp;        log.info(&quot;Sessï¿½o ID [{}] encontrata.&quot;, sessao.getId());</b>
 <b class="fc">&nbsp;        if (LocalDateTime.now().isAfter(sessao.getDataHoraFim()))</b>
-<b class="fc">&nbsp;            throw new GenericBadRequestException(String.format(&quot;Sessão com id %d está encerrada.&quot;, request.getSessaoId()));</b>
+<b class="fc">&nbsp;            throw new GenericBadRequestException(String.format(&quot;Sessï¿½o com id %d estï¿½ encerrada.&quot;, request.getSessaoId()));</b>
 <b class="fc">&nbsp;        log.info(&quot;Buscando associado CPF [{}]&quot;, request.getAssociado().getCpf());</b>
 <b class="fc">&nbsp;        Associado associado = associadoRepository.findByCpf(request.getAssociado().getCpf())</b>
 <b class="fc">&nbsp;                .orElse(associadoMapper.toEntity(request.getAssociado()));</b>
 <b class="fc">&nbsp;        log.info(&quot;Associado CPF [{}] encontrado com sucesso.&quot;, request.getAssociado().getCpf());</b>
 <b class="fc">&nbsp;        if (sessaoContemAssociado(sessao, associado))</b>
-<b class="fc">&nbsp;            throw new GenericBadRequestException(String.format(&quot;Associado %s não tem permissão para votar na sessão de id %d.&quot;,</b>
+<b class="fc">&nbsp;            throw new GenericBadRequestException(String.format(&quot;Associado %s nï¿½o tem permissï¿½o para votar na sessï¿½o de id %d.&quot;,</b>
 <b class="fc">&nbsp;                    associado.getCpf(), request.getSessaoId()));</b>
 <b class="fc">&nbsp;        Voto voto = Voto.builder()</b>
 <b class="fc">&nbsp;                .sessao(sessao)</b>
@@ -166,25 +166,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;                .voto(request.getVoto())</b>
 <b class="fc">&nbsp;                .build();</b>
 <b class="fc">&nbsp;        Voto votoRegistrado = votacaoRepository.save(voto);</b>
-<b class="fc">&nbsp;        log.info(&quot;Votação ID [{}] registrada com sucesso para o associado CPF [{}].&quot;,</b>
+<b class="fc">&nbsp;        log.info(&quot;Votaï¿½ï¿½o ID [{}] registrada com sucesso para o associado CPF [{}].&quot;,</b>
 <b class="fc">&nbsp;                votoRegistrado.getId(), votoRegistrado.getAssociado().getCpf());</b>
 <b class="fc">&nbsp;        return votoMapper.toResponse(votoRegistrado);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public Page&lt;VotoResponse&gt; pesquisar(Pageable pageable) {
-<b class="fc">&nbsp;        log.info(&quot;Pesquisando votação.&quot;);</b>
+<b class="fc">&nbsp;        log.info(&quot;Pesquisando votaï¿½ï¿½o.&quot;);</b>
 <b class="fc">&nbsp;        return this.votacaoRepository.findAll(pageable).map(votoMapper::toResponse);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public ContagemVotosResponse contabilizar(Long sessaoId) {
-<b class="fc">&nbsp;        log.info(&quot;Realizada contagem dos votos para sessão [{}].&quot;, sessaoId);</b>
+<b class="fc">&nbsp;        log.info(&quot;Realizada contagem dos votos para sessï¿½o [{}].&quot;, sessaoId);</b>
 <b class="fc">&nbsp;        Sessao sessao = sessaoRepository.findById(sessaoId)</b>
-<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Sessão com sessaoId %d não existe.&quot;, sessaoId)));</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Sessï¿½o com sessaoId %d nï¿½o existe.&quot;, sessaoId)));</b>
 <b class="fc">&nbsp;        List&lt;Voto&gt; votacoes = votacaoRepository.findBySessaoId(sessaoId)</b>
-<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(&quot;Sessão não encontrada.&quot;));</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(&quot;Sessï¿½o nï¿½o encontrada.&quot;));</b>
 <b class="fc">&nbsp;        long votosParaNao = votacoes.stream().filter(votacao -&gt; VotoEnum.NAO.equals(votacao.getVoto())).count();</b>
 <b class="fc">&nbsp;        long votosParaSim = votacoes.stream().filter(votacao -&gt; VotoEnum.SIM.equals(votacao.getVoto())).count();</b>
-<b class="fc">&nbsp;        log.info(&quot;Contagem do votos da sessão [{}] realizada com sucesso.&quot;, sessao.getId());</b>
+<b class="fc">&nbsp;        log.info(&quot;Contagem do votos da sessï¿½o [{}] realizada com sucesso.&quot;, sessao.getId());</b>
 <b class="fc">&nbsp;        Map&lt;VotoEnum, Long&gt; votos = new HashMap&lt;&gt;();</b>
 <b class="fc">&nbsp;        votos.put(VotoEnum.NAO, votosParaNao);</b>
 <b class="fc">&nbsp;        votos.put(VotoEnum.SIM, votosParaSim);</b>
@@ -199,11 +199,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        validarCPFService.validar(cpf);</b>
 <b class="fc">&nbsp;        log.info(&quot;Alterando voto do associado CPF [{}].&quot;, cpf);</b>
 <b class="fc">&nbsp;        Voto voto = votacaoRepository.findBySessaoIdAndAssociadoCpf(sessaoId, cpf)</b>
-<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Associado com CPF %s não encontrado.&quot;, cpf)));</b>
+<b class="fc">&nbsp;                .orElseThrow(() -&gt; new GenericNotFoundException(String.format(&quot;Associado com CPF %s nï¿½o encontrado.&quot;, cpf)));</b>
 <b class="fc">&nbsp;        VotoEnum novoVoto = VotoEnum.SIM.equals(voto.getVoto()) ? VotoEnum.NAO : VotoEnum.SIM;</b>
 <b class="fc">&nbsp;        voto.setVoto(novoVoto);</b>
 <b class="fc">&nbsp;        Voto votoAlterado = votacaoRepository.save(voto);</b>
-<b class="fc">&nbsp;        log.info(&quot;Alteração de voto do associado CPF [{}] realizada com sucesso.&quot;, cpf);</b>
+<b class="fc">&nbsp;        log.info(&quot;Alteraï¿½ï¿½o de voto do associado CPF [{}] realizada com sucesso.&quot;, cpf);</b>
 <b class="fc">&nbsp;        return votoMapper.toResponse(votoAlterado);</b>
 &nbsp;    }
 &nbsp;

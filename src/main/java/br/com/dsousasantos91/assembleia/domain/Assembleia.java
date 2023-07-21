@@ -50,7 +50,7 @@ public class Assembleia {
     @NotNull(message = "{0} é obrigatório")
     private LocalDateTime dataHoraFimApuracao;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String cooperativa;
 
@@ -59,16 +59,16 @@ public class Assembleia {
     @OneToOne(mappedBy = "assembleia", cascade = CascadeType.ALL)
     private Endereco local;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String presidente;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String secretario;
 
     @Valid
     @NotEmpty(message = "{0} é obrigatório")
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assembleia" ,cascade = CascadeType.ALL)
     private List<Pauta> pautas;
 }

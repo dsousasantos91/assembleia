@@ -16,11 +16,11 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class PautaRequest {
 
-    @Size(min = 5, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 5, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String titulo;
 
-    @Size(min = 10, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 10, max = 1000, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String descricao;
 }

@@ -15,7 +15,7 @@ import br.com.dsousasantos91.assembleia.mock.SessaoRequestMock;
 import br.com.dsousasantos91.assembleia.mock.VotacaoRequestMock;
 import br.com.dsousasantos91.assembleia.repository.AssociadoRepository;
 import br.com.dsousasantos91.assembleia.repository.SessaoRepository;
-import br.com.dsousasantos91.assembleia.repository.VotacaoRepository;
+import br.com.dsousasantos91.assembleia.repository.VotoRepository;
 import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
 import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
@@ -64,7 +64,7 @@ class VotoServiceTest {
     private SessaoMapper sessaoMapper;
 
     @MockBean
-    private VotacaoRepository votacaoRepository;
+    private VotoRepository votoRepository;
 
     @MockBean
     private SessaoRepository sessaoRepository;
@@ -96,7 +96,7 @@ class VotoServiceTest {
     void deveVotarComSucesso() {
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(sessao));
         when(associadoRepository.findByCpf(associado.getCpf())).thenReturn(Optional.of(associado));
-        when(votacaoRepository.save(any(Voto.class))).thenReturn(voto);
+        when(votoRepository.save(any(Voto.class))).thenReturn(voto);
         VotoResponse response = votoService.votar(request);
         assertNotNull(response.getId());
         assertEquals(response.getSessao().getId(), request.getSessaoId());
@@ -130,7 +130,7 @@ class VotoServiceTest {
         PageRequest pageable = PageRequest.of(0, 1);
         List<Voto> votoList = singletonList(voto);
         PageImpl<Voto> pageResponse = new PageImpl<>(votoList, pageable, votoList.size());
-        when(votacaoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
+        when(votoRepository.findAll(any(Pageable.class))).thenReturn(pageResponse);
         Page<VotoResponse> response = votoService.pesquisar(pageable);
         List<Long> idsVotacoes = response.stream().map(VotoResponse::getId).collect(toList());
         assertEquals(response.getPageable().getPageNumber(), pageable.getPageNumber());
@@ -142,7 +142,7 @@ class VotoServiceTest {
     @Test
     void deveContabilizarComSucesso() {
         when(sessaoRepository.findById(sessao.getId())).thenReturn(Optional.of(sessao));
-        when(votacaoRepository.findBySessaoId(sessao.getId())).thenReturn(singletonList(voto));
+        when(votoRepository.findBySessaoId(sessao.getId())).thenReturn(singletonList(voto));
         ContagemVotosResponse response = votoService.contabilizar(sessao.getId());
         assertEquals(response.getSessaoId(), sessao.getId());
         assertEquals(response.getPauta().getId(), pauta.getId());
@@ -153,8 +153,8 @@ class VotoServiceTest {
     @Test
     void deveAlterarVotoComSucesso() {
         VotoEnum votoPre = voto.getVoto();
-        when(votacaoRepository.findBySessaoIdAndAssociadoCpf(sessao.getId(), request.getAssociado().getCpf())).thenReturn(Optional.of(voto));
-        when(votacaoRepository.save(any(Voto.class))).thenReturn(voto);
+        when(votoRepository.findBySessaoIdAndAssociadoCpf(sessao.getId(), request.getAssociado().getCpf())).thenReturn(Optional.of(voto));
+        when(votoRepository.save(any(Voto.class))).thenReturn(voto);
         VotoResponse response = votoService.alterar(sessao.getId(), request.getAssociado().getCpf());
         assertEquals(response.getId(), voto.getId());
         assertNotEquals(response.getVoto(), votoPre.getValue());
