@@ -1,0 +1,1091 @@
+{
+	"info": {
+		"_postman_id": "6da5ac02-a687-4547-94a3-b6e095596b75",
+		"name": "Assembleia Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6166663"
+	},
+	"item": [
+		{
+			"name": "Assembleia",
+			"item": [
+				{
+					"name": "Criar Assembleia",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let tipoAssembleia = gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\";\r",
+									"pm.collectionVariables.set('tipoAssembleia', tipoAssembleia)\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date(dataInicio.getTime() + gerarNumeroAleatorio(2, 5) * 60000);\r",
+									"pm.collectionVariables.set('dataInicio', dataInicio.toLocaleString('pt-BR').replace(',',''));\r",
+									"pm.collectionVariables.set('dataFim', dataFim.toLocaleString('pt-BR').replace(',',''))\r",
+									"\r",
+									"const options = {\r",
+									"  url:  'https://geradornv.com.br/wp-json/api/cep/random-by-states?state=SP', \r",
+									"  method: 'GET',\r",
+									"  header: {\r",
+									"    'Accept': '*/*',\r",
+									"    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\r",
+									"  },\r",
+									"  body: {\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"    let address = JSON.parse(response.text())\r",
+									"    let endereco = {\r",
+									"        \"bairro\": address.neighborhood,\r",
+									"        \"cep\": address.cep,\r",
+									"        \"cidade\": address.city,\r",
+									"        \"complemento\": address.type,\r",
+									"        \"logradouro\": address.street,\r",
+									"        \"uf\": address.state\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"endereco\", JSON.stringify(endereco));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"pautas\": [\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    },\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    },\r\n    {\r\n      \"titulo\": \"{{$randomLoremWords}}\",\r\n      \"descricao\": \"{{$randomLoremParagraph}}\"\r\n    }\r\n  ],\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Assembleias Paginadas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"let indexContent = gerarNumeroAleatorio(0, responseJson.content.length - 1);\r",
+									"let indexPauta = gerarNumeroAleatorio(0, responseJson.content[indexContent].pautas.length - 1);\r",
+									"\r",
+									"console.log(responseJson.content[indexContent + 1].id)\r",
+									"\r",
+									"pm.collectionVariables.set('assembleiaId', responseJson.content[indexContent].id);\r",
+									"pm.collectionVariables.set('assembleiaIdNext', responseJson.content[indexContent + 1].id);\r",
+									"pm.collectionVariables.set('pautaId', responseJson.content[indexContent].pautas[indexPauta].id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia?size={{size}}&page={{page}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "{{size}}"
+								},
+								{
+									"key": "page",
+									"value": "{{page}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Assembleia por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Assembleia",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"\r",
+									"let tipoAssembleia = gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\";\r",
+									"pm.collectionVariables.set('tipoAssembleia', tipoAssembleia)\r",
+									"\r",
+									"let dataInicio = new Date();\r",
+									"let dataFim = new Date(dataInicio.getTime() + gerarNumeroAleatorio(2, 5) * 60000);\r",
+									"pm.collectionVariables.set('dataInicio', dataInicio.toLocaleString('pt-BR').replace(',',''));\r",
+									"pm.collectionVariables.set('dataFim', dataFim.toLocaleString('pt-BR').replace(',',''))\r",
+									"\r",
+									"const options = {\r",
+									"  url:  'https://geradornv.com.br/wp-json/api/cep/random-by-states?state=SP', \r",
+									"  method: 'GET',\r",
+									"  header: {\r",
+									"    'Accept': '*/*',\r",
+									"    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',\r",
+									"  },\r",
+									"  body: {\r",
+									"  }\r",
+									"};\r",
+									"\r",
+									"pm.sendRequest(options, (error, response) => {\r",
+									"    if (error || response.code !== 200) {\r",
+									"        pm.expect.fail('Could not load external library');\r",
+									"    }\r",
+									"    let address = JSON.parse(response.text())\r",
+									"    let endereco = {\r",
+									"        \"bairro\": address.neighborhood,\r",
+									"        \"cep\": address.cep,\r",
+									"        \"cidade\": address.city,\r",
+									"        \"complemento\": address.type,\r",
+									"        \"logradouro\": address.street,\r",
+									"        \"uf\": address.state\r",
+									"    }\r",
+									"    pm.collectionVariables.set(\"endereco\", JSON.stringify(endereco));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tipoAssembleia\": \"{{tipoAssembleia}}\",\r\n  \"cooperativa\": \"{{$randomCompanyName}}\",\r\n  \"dataHoraInicioApuracao\": \"{{dataInicio}}\",\r\n  \"dataHoraFimApuracao\": \"{{dataFim}}\",\r\n  \"local\": {{endereco}},\r\n  \"presidente\": \"{{$randomFullName}}\",\r\n  \"secretario\": \"{{$randomFullName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encerrar Assembleia",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/encerrar/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								"encerrar",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Assembleia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/assembleia/:assembleiaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"assembleia",
+								":assembleiaId"
+							],
+							"variable": [
+								{
+									"key": "assembleiaId",
+									"value": "{{assembleiaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sessão",
+			"item": [
+				{
+					"name": "Abrir Sessão",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"pautaId\": {{pautaId}},\r\n  \"sessaoPrivada\": {{sessaoPrivada}},\r\n  \"tempoSessao\": {\r\n    \"dias\": 0,\r\n    \"horas\": 0,\r\n    \"minutos\": {{minutos}}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/abrir",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								"abrir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Abrir Sessão Em Lote",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let associados = [];\r",
+									"for(let i = 0; i < gerarNumeroAleatorio(1, 10); i++) {\r",
+									"    associados.push({ \"cpf\": gerarCpf(),\"nome\": \"{{$randomFullName}}\"});\r",
+									"}\r",
+									"\r",
+									"pm.collectionVariables.set('associados', JSON.stringify(associados));\r",
+									"\r",
+									"const assembleiaIdNext = pm.collectionVariables.get('assembleiaIdNext');"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"let index = gerarNumeroAleatorio(0, responseJson.length - 1);\r",
+									"pm.collectionVariables.set('pautaId', responseJson[index].pauta.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assembleiaId\": {{assembleiaIdNext}},\r\n  \"sessaoPrivada\": {{sessaoPrivada}},\r\n  \"tempoSessao\": {\r\n    \"dias\": 0,\r\n    \"horas\": 0,\r\n    \"minutos\": {{minutos}}\r\n  },\r\n  \"associados\": {{associados}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/abrirEmLote",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								"abrirEmLote"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Sessões Paginada",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"let indexContent = gerarNumeroAleatorio(0, responseJson.content.length - 1);\r",
+									"\r",
+									"pm.collectionVariables.set('sessaoId', responseJson.content[indexContent].id);\r",
+									"pm.collectionVariables.set('pautaId', responseJson.content[indexContent].pauta.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/sessao?size={{size}}&page={{page}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "{{size}}"
+								},
+								{
+									"key": "page",
+									"value": "{{page}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Sessão por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/:sessaoId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								":sessaoId"
+							],
+							"variable": [
+								{
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Prorrogar Sessão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pautaId\": {{pautaId}},\r\n    \"tempoSessao\": {\r\n        \"dias\": 0,\r\n        \"horas\": 0,\r\n        \"minutos\": {{minutos}}\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/prorrogar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								"prorrogar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Encerrar Sessão",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/encerrar/:sessaoId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								"encerrar",
+								":sessaoId"
+							],
+							"variable": [
+								{
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Apagar Sessão",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/sessao/:sessaoId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"sessao",
+								":sessaoId"
+							],
+							"variable": [
+								{
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));",
+							"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));",
+							"",
+							"let sessaoPrivada = gerarNumeroAleatorio(0, 1) === 1 ? true : false;",
+							"",
+							"pm.collectionVariables.set('minutos', gerarNumeroAleatorio(1, 5));",
+							"pm.collectionVariables.set('sessaoPrivada', sessaoPrivada);",
+							"pm.collectionVariables.set('cpf', gerarCpf());"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Pauta",
+			"item": [
+				{
+					"name": "Buscar Pautas Paginadas",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/pauta?size={{size}}&page={{page}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pauta"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "{{size}}"
+								},
+								{
+									"key": "page",
+									"value": "{{page}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Pauta por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/pauta/:pautaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pauta",
+								":pautaId"
+							],
+							"variable": [
+								{
+									"key": "pautaId",
+									"value": "{{pautaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Pauta",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"{{$randomLoremWords}}\",\r\n    \"descricao\": \"{{$randomLoremParagraph}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pauta/:pautaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pauta",
+								":pautaId"
+							],
+							"variable": [
+								{
+									"key": "pautaId",
+									"value": "{{pautaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Pauta",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/pauta/:pautaId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"pauta",
+								":pautaId"
+							],
+							"variable": [
+								{
+									"key": "pautaId",
+									"value": "{{pautaId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voto",
+			"item": [
+				{
+					"name": "Buscar Votos Paginado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/voto?size={{size}}&page={{page}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voto"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "{{size}}"
+								},
+								{
+									"key": "page",
+									"value": "{{page}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Enviar Voto",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));\r",
+									"const gerarCpf = eval(pm.collectionVariables.get('gerarCpf'));\r",
+									"\r",
+									"let voto = gerarNumeroAleatorio(0, 1) === 1 ? \"SIM\" : \"NAO\";\r",
+									"pm.collectionVariables.set('voto', voto);\r",
+									"\r",
+									"pm.collectionVariables.set('cpf', gerarCpf())"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if(pm.response.code === 400) {\r",
+									"    const sessaoId = pm.collectionVariables.get('sessaoId');\r",
+									"    pm.collectionVariables.set('sessaoId', sessaoId + 1)\r",
+									"}\r",
+									"console.log(pm.response.code === 400)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"sessaoId\": {{sessaoId}},\r\n  \"associado\": {\r\n      \"cpf\": \"{{cpf}}\",\r\n      \"nome\": \"{{$randomFullName}}\"\r\n  },\r\n  \"voto\": \"{{voto}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/voto",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Voto",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/v1/voto/alterar/sessao/:sessaoId/associado/:cpf",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voto",
+								"alterar",
+								"sessao",
+								":sessaoId",
+								"associado",
+								":cpf"
+							],
+							"variable": [
+								{
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
+								},
+								{
+									"key": "cpf",
+									"value": "{{cpf}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Contabilizar Votos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/v1/voto/contabilizar/sessao/:sessaoId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"voto",
+								"contabilizar",
+								"sessao",
+								":sessaoId"
+							],
+							"variable": [
+								{
+									"key": "sessaoId",
+									"value": "{{sessaoId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const gerarNumeroAleatorio = eval(pm.collectionVariables.get('gerarNumeroAleatorio'));",
+					"",
+					"const size = gerarNumeroAleatorio(0, 8);",
+					"const page = gerarNumeroAleatorio(0, size / 2);",
+					"",
+					"pm.collectionVariables.set('size', size);",
+					"pm.collectionVariables.set('page', page);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "cpf",
+			"value": "54147511023",
+			"type": "string"
+		},
+		{
+			"key": "endereco",
+			"value": ""
+		},
+		{
+			"key": "dataInicio",
+			"value": ""
+		},
+		{
+			"key": "dataFim",
+			"value": ""
+		},
+		{
+			"key": "tipoAssembleia",
+			"value": ""
+		},
+		{
+			"key": "pautaId",
+			"value": ""
+		},
+		{
+			"key": "minutos",
+			"value": ""
+		},
+		{
+			"key": "assembleiaId",
+			"value": ""
+		},
+		{
+			"key": "gerarNumeroAleatorio",
+			"value": ""
+		},
+		{
+			"key": "gerarCpf",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "associados",
+			"value": ""
+		},
+		{
+			"key": "sessaoPrivada",
+			"value": ""
+		},
+		{
+			"key": "sessaoId",
+			"value": ""
+		},
+		{
+			"key": "size",
+			"value": ""
+		},
+		{
+			"key": "page",
+			"value": ""
+		},
+		{
+			"key": "voto",
+			"value": ""
+		},
+		{
+			"key": "assembleiaIdNext",
+			"value": ""
+		}
+	]
+}
