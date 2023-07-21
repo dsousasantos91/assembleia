@@ -96,7 +96,7 @@ class SessaoControllerTest {
     void deveAbrirEmLoteERetornarStatus201() throws Exception {
         SessaoEmLoteRequest loteRequest = SessaoEmLoteRequestMock.mocked()
                 .withListIdsPautasList(null)
-                .withVotacaoLivre(Boolean.FALSE)
+                .withSessaoPrivada(Boolean.FALSE)
                 .mock();
 
         SessaoResponse response2 = SessaoResponse.builder()

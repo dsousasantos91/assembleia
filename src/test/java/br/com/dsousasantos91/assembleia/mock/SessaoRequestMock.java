@@ -30,7 +30,7 @@ public class SessaoRequestMock {
         return this;
     }
 
-    public SessaoRequestMock withVotacaoLivre(Boolean param) {
+    public SessaoRequestMock withSessaoPrivada(Boolean param) {
         element.setSessaoPrivada(param);
         return this;
     }

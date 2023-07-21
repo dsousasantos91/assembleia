@@ -33,12 +33,4 @@ public class SessaoRequest {
                 .plusMinutes(this.tempoSessao.getMinutos())
                 .truncatedTo(ChronoUnit.SECONDS);
     }
-
-    public LocalDateTime getDataHoraInicio() {
-        return getDataHoraFim()
-                .minusDays(this.tempoSessao.getDias())
-                .minusHours(this.tempoSessao.getHoras())
-                .minusMinutes(this.tempoSessao.getMinutos())
-                .truncatedTo(ChronoUnit.SECONDS);
-    }
 }

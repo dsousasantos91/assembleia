@@ -52,7 +52,7 @@ public class SessaoEmLoteRequestMock {
         return this;
     }
 
-    public SessaoEmLoteRequestMock withVotacaoLivre(Boolean param) {
+    public SessaoEmLoteRequestMock withSessaoPrivada(Boolean param) {
         element.setSessaoPrivada(param);
         return this;
     }

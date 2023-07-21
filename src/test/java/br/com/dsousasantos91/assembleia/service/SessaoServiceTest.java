@@ -32,6 +32,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +104,7 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.abrir(request);
         assertNotNull(response.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), calcularDataHoraInicio(request));
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
@@ -152,19 +153,21 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.buscarPorId(1L);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), calcularDataHoraInicio(request));
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
     @Test
     void deveProrrogarSessaoComSucesso() {
-        when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
-        when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
+        LocalDateTime dataHoraInicio = calcularDataHoraInicio(request);
         request.getTempoSessao().setDias(1);
+        entity1.setDataHoraFim(request.getDataHoraFim());
+        when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
+        when(pautaRepository.findById(anyLong())).thenReturn(Optional.of(entity1.getPauta()));
         SessaoResponse response = sessaoService.prorrogar(request);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), dataHoraInicio);
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
@@ -189,10 +192,10 @@ class SessaoServiceTest {
     }
 
     @Test
-    void deveLancarGenericBadRequestExceptionAoAbrirSessaoEmLoteVatacaoLivreFalseEArrayAssociadosNuloOuVazio() {
+    void deveLancarGenericBadRequestExceptionAoAbrirSessaoEmLoteSessaoPrivadaTrueEArrayAssociadosNuloOuVazio() {
         SessaoEmLoteRequest requestEmLote = SessaoEmLoteRequestMock.mocked()
                 .withAssembleiaId(1L)
-                .withVotacaoLivre(Boolean.FALSE)
+                .withSessaoPrivada(Boolean.TRUE)
                 .withListAssociadosList(null)
                 .mock();
         Assembleia assembleia = assembleiaMapper.toEntity(AssembleiaRequestMock.mocked().mock());
@@ -248,5 +251,13 @@ class SessaoServiceTest {
     void deveApagarComSucesso() {
         sessaoService.apagar(1L);
         verify(sessaoRepository, times(1)).deleteById(1L);
+    }
+
+    public LocalDateTime calcularDataHoraInicio(SessaoRequest request) {
+        return request.getDataHoraFim()
+                .minusDays(request.getTempoSessao().getDias())
+                .minusHours(request.getTempoSessao().getHoras())
+                .minusMinutes(request.getTempoSessao().getMinutos())
+                .truncatedTo(ChronoUnit.SECONDS);
     }
 }
