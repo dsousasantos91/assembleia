@@ -69,6 +69,6 @@ public class Assembleia {
 
     @Valid
     @NotEmpty(message = "{0} é obrigatório")
-    @OneToMany(mappedBy = "assembleia" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assembleia" ,cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, orphanRemoval = true)
     private List<Pauta> pautas;
 }

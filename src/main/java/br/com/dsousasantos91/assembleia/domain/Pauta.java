@@ -42,6 +42,6 @@ public class Pauta {
     @ManyToOne(cascade = CascadeType.ALL)
     private Assembleia assembleia;
 
-    @OneToOne(mappedBy = "pauta", cascade = CascadeType.DETACH, orphanRemoval = true)
+    @OneToOne(mappedBy = "pauta", cascade = {CascadeType.DETACH, CascadeType.REFRESH}, orphanRemoval = true)
     private Sessao sessao;
 }

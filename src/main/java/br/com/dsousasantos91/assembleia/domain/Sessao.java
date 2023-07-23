@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -27,7 +28,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-@Table(name = "sessao")
+@Table(name = "sessao", uniqueConstraints = @UniqueConstraint(name = "UniquePauta", columnNames = { "pauta_id" }))
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sessao {
