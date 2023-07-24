@@ -39,7 +39,7 @@ public class Pauta {
     @NotBlank(message = "{0} é obrigatório")
     private String descricao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private Assembleia assembleia;
 
     @OneToOne(mappedBy = "pauta", cascade = {CascadeType.DETACH, CascadeType.REFRESH}, orphanRemoval = true)

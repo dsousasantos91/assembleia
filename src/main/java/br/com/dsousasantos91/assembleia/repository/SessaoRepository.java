@@ -14,4 +14,5 @@ public interface SessaoRepository extends JpaRepository<Sessao, Long> {
     @Query("select s from Sessao s where s.pauta.id in :pautasIds and s.dataHoraFim > :now")
     List<Sessao> findSessoesAbertasPorPautaIdIn(List<Long> pautasIds, LocalDateTime now);
 
+    List<Sessao> findByPautaIdIn(List<Long> pautasIds);
 }
