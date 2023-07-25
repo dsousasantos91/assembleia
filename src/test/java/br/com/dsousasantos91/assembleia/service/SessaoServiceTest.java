@@ -3,7 +3,7 @@ package br.com.dsousasantos91.assembleia.service;
 import br.com.dsousasantos91.assembleia.domain.Assembleia;
 import br.com.dsousasantos91.assembleia.domain.Pauta;
 import br.com.dsousasantos91.assembleia.domain.Sessao;
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import br.com.dsousasantos91.assembleia.exception.GenericBadRequestException;
 import br.com.dsousasantos91.assembleia.exception.GenericNotFoundException;
 import br.com.dsousasantos91.assembleia.mapper.AssembleiaMapper;
@@ -32,6 +32,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +104,7 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.abrir(request);
         assertNotNull(response.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), calcularDataHoraInicio(request));
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
@@ -152,19 +153,21 @@ class SessaoServiceTest {
         SessaoResponse response = sessaoService.buscarPorId(1L);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), calcularDataHoraInicio(request));
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
     @Test
     void deveProrrogarSessaoComSucesso() {
-        when(sessaoRepository.findById(anyLong())).thenReturn(Optional.of(entity1));
-        when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
+        LocalDateTime dataHoraInicio = calcularDataHoraInicio(request);
         request.getTempoSessao().setDias(1);
-        SessaoResponse response = sessaoService.prorrogar(1L, request);
+        entity1.setDataHoraFim(request.getDataHoraFim());
+        when(sessaoRepository.save(any(Sessao.class))).thenReturn(entity1);
+        when(pautaRepository.findById(anyLong())).thenReturn(Optional.of(entity1.getPauta()));
+        SessaoResponse response = sessaoService.prorrogar(request);
         assertEquals(response.getId(), entity1.getId());
         assertEquals(response.getPauta().getId(), request.getPautaId());
-        assertEquals(response.getDataHoraInicio(), request.getDataHoraInicio());
+        assertEquals(response.getDataHoraInicio(), dataHoraInicio);
         assertEquals(response.getDataHoraFim(), request.getDataHoraFim());
     }
 
@@ -189,10 +192,10 @@ class SessaoServiceTest {
     }
 
     @Test
-    void deveLancarGenericBadRequestExceptionAoAbrirSessaoEmLoteVatacaoLivreFalseEArrayAssociadosNuloOuVazio() {
+    void deveLancarGenericBadRequestExceptionAoAbrirSessaoEmLoteSessaoPrivadaTrueEArrayAssociadosNuloOuVazio() {
         SessaoEmLoteRequest requestEmLote = SessaoEmLoteRequestMock.mocked()
                 .withAssembleiaId(1L)
-                .withVotacaoLivre(Boolean.FALSE)
+                .withSessaoPrivada(Boolean.TRUE)
                 .withListAssociadosList(null)
                 .mock();
         Assembleia assembleia = assembleiaMapper.toEntity(AssembleiaRequestMock.mocked().mock());
@@ -208,9 +211,9 @@ class SessaoServiceTest {
 
     @Test
     void deveConfirmarEnvioDeResultadoComSucesso() {
-        Map<Voto, Long> votos = new HashMap<>();
-        votos.put(Voto.SIM, 5L);
-        votos.put(Voto.NAO, 3L);
+        Map<VotoEnum, Long> votos = new HashMap<>();
+        votos.put(VotoEnum.SIM, 5L);
+        votos.put(VotoEnum.NAO, 3L);
         ContagemVotosResponse contagemResponse = ContagemVotosResponse.builder()
                 .sessaoId(entity1.getId())
                 .pauta(pautaMapper.toResponse(entity1.getPauta()))
@@ -235,7 +238,7 @@ class SessaoServiceTest {
     @Test
     void deveLancarGenericNotFoundExceptionAoProrrogarSessao() {
         when(sessaoRepository.findById(anyLong())).thenReturn(Optional.empty());
-        assertThrows(GenericNotFoundException.class, () -> sessaoService.prorrogar(2L, request));
+        assertThrows(GenericNotFoundException.class, () -> sessaoService.prorrogar(request));
     }
 
     @Test
@@ -248,5 +251,13 @@ class SessaoServiceTest {
     void deveApagarComSucesso() {
         sessaoService.apagar(1L);
         verify(sessaoRepository, times(1)).deleteById(1L);
+    }
+
+    public LocalDateTime calcularDataHoraInicio(SessaoRequest request) {
+        return request.getDataHoraFim()
+                .minusDays(request.getTempoSessao().getDias())
+                .minusHours(request.getTempoSessao().getHoras())
+                .minusMinutes(request.getTempoSessao().getMinutos())
+                .truncatedTo(ChronoUnit.SECONDS);
     }
 }

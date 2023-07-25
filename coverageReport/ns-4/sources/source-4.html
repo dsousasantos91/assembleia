@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > VotacaoController</title>
+  <title>Coverage Report > VotoController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.controller</a>
 </div>
 
-<h1>Coverage Summary for Class: VotacaoController (br.com.dsousasantos91.assembleia.controller)</h1>
+<h1>Coverage Summary for Class: VotoController (br.com.dsousasantos91.assembleia.controller)</h1>
 
 <table class="coverageStats">
 
@@ -37,7 +37,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">VotacaoController</td>
+  <td class="name">VotoController</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -56,37 +56,37 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_2</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_2</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_3</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_3</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_4</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_4</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_5</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_4$$FastClassBySpringCGLIB$$27744ac5</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_5$$FastClassBySpringCGLIB$$b1ff51b7</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_5</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_6</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_6</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_7</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_7</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_8</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_8</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$EnhancerBySpringCGLIB$$2ec81615_9</td>
+    <td class="name">VotoController$$EnhancerBySpringCGLIB$$d1237262_9</td>
   </tr>
   <tr>
-    <td class="name">VotacaoController$$FastClassBySpringCGLIB$$4f1ec809</td>
+    <td class="name">VotoController$$FastClassBySpringCGLIB$$1020e60e</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -117,10 +117,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.controller;
 &nbsp;
 &nbsp;import br.com.dsousasantos91.assembleia.event.RecursoCriadoEvent;
-&nbsp;import br.com.dsousasantos91.assembleia.service.VotacaoService;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.VotoService;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.ContagemVotosResponse;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
 &nbsp;import io.swagger.annotations.Api;
 &nbsp;import io.swagger.annotations.ApiOperation;
 &nbsp;import lombok.RequiredArgsConstructor;
@@ -146,39 +146,39 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;@RequiredArgsConstructor</b>
 &nbsp;@Validated
 &nbsp;@RestController
-&nbsp;@RequestMapping(value = &quot;/v1/votacao&quot;, produces = { &quot;application/json;charset=UTF-8&quot; })
-&nbsp;public class VotacaoController {
+&nbsp;@RequestMapping(value = &quot;/api/v1/voto&quot;, produces = { &quot;application/json;charset=UTF-8&quot; })
+&nbsp;public class VotoController {
 &nbsp;
-&nbsp;	private final VotacaoService votacaoService;
+&nbsp;	private final VotoService votoService;
 &nbsp;	private final ApplicationEventPublisher publish;
 &nbsp;
 &nbsp;	@ApiOperation(value = &quot;Votação de Pauta.&quot;)
 &nbsp;	@PostMapping(path = &quot;/votar&quot;)
-&nbsp;	public ResponseEntity&lt;VotacaoResponse&gt; votar(@Valid @RequestBody VotacaoRequest request, HttpServletResponse servletResponse) {
-<b class="fc">&nbsp;		VotacaoResponse response = this.votacaoService.votar(request);</b>
+&nbsp;	public ResponseEntity&lt;VotoResponse&gt; votar(@Valid @RequestBody VotoRequest request, HttpServletResponse servletResponse) {
+<b class="fc">&nbsp;		VotoResponse response = this.votoService.votar(request);</b>
 <b class="fc">&nbsp;		publish.publishEvent(new RecursoCriadoEvent(this, servletResponse, response.getId()));</b>
 <b class="fc">&nbsp;		return ResponseEntity.status(HttpStatus.CREATED).body(response);</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	@ApiOperation(value = &quot;Listagem de pautas.&quot;)
 &nbsp;	@GetMapping
-&nbsp;	public ResponseEntity&lt;Page&lt;VotacaoResponse&gt;&gt; pesquisar(
+&nbsp;	public ResponseEntity&lt;Page&lt;VotoResponse&gt;&gt; pesquisar(
 &nbsp;			@SortDefault.SortDefaults({ @SortDefault(sort = &quot;id&quot;) }) Pageable pageable) {
-<b class="fc">&nbsp;		Page&lt;VotacaoResponse&gt; response = votacaoService.pesquisar(pageable);</b>
+<b class="fc">&nbsp;		Page&lt;VotoResponse&gt; response = votoService.pesquisar(pageable);</b>
 <b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	@ApiOperation(value = &quot;Contabiliza Votos.&quot;)
 &nbsp;	@GetMapping(path = &quot;/contabilizar/sessao/{sessaoId}&quot;)
 &nbsp;	public ResponseEntity&lt;ContagemVotosResponse&gt; contabilizar(@PathVariable Long sessaoId) {
-<b class="fc">&nbsp;		ContagemVotosResponse response = votacaoService.contabilizar(sessaoId);</b>
+<b class="fc">&nbsp;		ContagemVotosResponse response = votoService.contabilizar(sessaoId);</b>
 <b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	@ApiOperation(value = &quot;Altera voto associado.&quot;)
-&nbsp;	@PutMapping(path = &quot;/alterarVoto/sessao/{sessaoId}/associado/{cpf}&quot;)
-&nbsp;	public ResponseEntity&lt;VotacaoResponse&gt; alterarVoto(@PathVariable Long sessaoId, @PathVariable String cpf) {
-<b class="fc">&nbsp;		VotacaoResponse response = this.votacaoService.alterarVoto(sessaoId, cpf);</b>
+&nbsp;	@PutMapping(path = &quot;/alterar/sessao/{sessaoId}/associado/{cpf}&quot;)
+&nbsp;	public ResponseEntity&lt;VotoResponse&gt; alterar(@PathVariable Long sessaoId, @PathVariable String cpf) {
+<b class="fc">&nbsp;		VotoResponse response = this.votoService.alterar(sessaoId, cpf);</b>
 <b class="fc">&nbsp;		return ResponseEntity.ok(response);</b>
 &nbsp;	}
 &nbsp;}
@@ -205,7 +205,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ public class AssociadoRequest {
     @Pattern(regexp = "(^\\d{11}$)", message = "Enviar apenas números para {0}")
     private String cpf;
 
-    @Size(min = 3, message = "É obrigatório digitar um mínimo de {1} para {0}")
+    @Size(min = 3, max = 50, message = "É obrigatório digitar um mínimo de {1} para {0}")
     @NotBlank(message = "{0} é obrigatório")
     private String nome;
 }

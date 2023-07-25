@@ -102,7 +102,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.service.dto.response;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleia;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleiaEnum;
 &nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
 &nbsp;import lombok.AllArgsConstructor;
 &nbsp;import lombok.Builder;
@@ -120,7 +120,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;@AllArgsConstructor</b>
 &nbsp;public class AssembleiaResponse {
 <b class="fc">&nbsp;    private Long id;</b>
-&nbsp;    private TipoAssembleia tipoAssembleia;
+&nbsp;    private TipoAssembleiaEnum tipoAssembleia;
 &nbsp;
 &nbsp;    @JsonFormat(pattern=&quot;dd/MM/yyyy HH:mm:ss&quot;)
 <b class="fc">&nbsp;    private LocalDateTime dataHoraInicioApuracao;</b>
@@ -161,7 +161,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

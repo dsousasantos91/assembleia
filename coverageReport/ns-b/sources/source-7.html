@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AssembleiaMapper</title>
+  <title>Coverage Report > AssociadoMapper</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.mapper</a>
 </div>
 
-<h1>Coverage Summary for Class: AssembleiaMapper (br.com.dsousasantos91.assembleia.mapper)</h1>
+<h1>Coverage Summary for Class: AssociadoMapper (br.com.dsousasantos91.assembleia.mapper)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">AssembleiaMapper</td>
+  <td class="name">AssociadoMapper</td>
 </tr>
 
 </table>
@@ -40,18 +40,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.mapper;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.Assembleia;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaRequest;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.AssembleiaUpdateRequest;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.AssembleiaResponse;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Associado;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.AssociadoResponse;
 &nbsp;import org.mapstruct.Mapper;
 &nbsp;import org.mapstruct.ReportingPolicy;
 &nbsp;
+&nbsp;import java.util.List;
+&nbsp;
 &nbsp;@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = &quot;spring&quot;)
-&nbsp;public interface AssembleiaMapper {
-&nbsp;    AssembleiaResponse toResponse(Assembleia assembleia);
-&nbsp;    Assembleia toEntity(AssembleiaRequest request);
-&nbsp;    Assembleia toEntity(AssembleiaUpdateRequest request);
+&nbsp;public interface AssociadoMapper {
+&nbsp;    AssociadoResponse toResponse(Associado associado);
+&nbsp;    Associado toEntity(AssociadoRequest request);
+&nbsp;    List&lt;Associado&gt; toEntities(List&lt;AssociadoRequest&gt; request);
 &nbsp;}
 </code>
 </pre>
@@ -76,7 +77,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

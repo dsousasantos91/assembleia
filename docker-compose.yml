@@ -1,9 +1,9 @@
 version: '2.4'
 
 services:
-  postgresql_client:
+  assembleiadb:
     image: postgres:12-alpine
-    container_name: assembleiaDB
+    container_name: assembleiadb
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -19,28 +19,46 @@ services:
     image: dpage/pgadmin4
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
+      - "PGADMIN_DEFAULT_EMAIL=admin@admin.com"
+      - "PGADMIN_DEFAULT_PASSWORD=root"
     ports:
       - "5050:80"
     networks:
       - assembleia-network
 
-  rabbitmq:
+  assembleia_amqp:
     image: rabbitmq:3.8.3-management
-    container_name: assembleia_rabbitmq
+    container_name: assembleia_amqp
     restart: always
     ports:
-      - 5672:5672
-      - 15672:15672
+      - "5672:5672"
+      - "15672:15672"
     environment:
-      - RABBITMQ_ERLANG_COOKIE=secret_pass
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
+      - "RABBITMQ_ERLANG_COOKIE=secret_pass"
+      - "RABBITMQ_DEFAULT_USER=admin"
+      - "RABBITMQ_DEFAULT_PASS=admin"
     networks:
       - assembleia-network
     volumes:
       - ./enabled_plugins:/etc/rabbitmq/enabled_plugins
+
+  ms-assembleia:
+    image: dsousasantos91/ms-assembleia:1.0.0
+    container_name: ms-assembleia
+    restart: always
+    environment:
+      - "APP_PROFILE=dev"
+      - "DATABASE_URL=jdbc:postgresql://assembleiadb:5432/postgres"
+      - "RABBITMQ_HOST=assembleia_amqp"
+    depends_on:
+      assembleiadb:
+        condition: service_started
+      assembleia_amqp:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    networks:
+      - assembleia-network
 
 networks:
   assembleia-network:

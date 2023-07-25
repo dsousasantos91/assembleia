@@ -126,6 +126,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;import java.util.Locale;
 &nbsp;
+&nbsp;import static java.util.Collections.singletonList;
+&nbsp;
 <b class="fc">&nbsp;@RequiredArgsConstructor</b>
 &nbsp;@ControllerAdvice
 &nbsp;public class AssembleiaExceptionHandler extends ResponseEntityExceptionHandler {
@@ -142,7 +144,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 <b class="nc">&nbsp;		String mensagemUsuario = messageSource.getMessage(&quot;mensagem.invalida&quot;, null, ptBR);</b>
 <b class="nc">&nbsp;		String mensagemDesenvolvedor = ex.getCause() != null ? ex.getCause().toString() : ex.toString();</b>
-<b class="nc">&nbsp;		List&lt;Erro&gt; erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
+<b class="nc">&nbsp;		List&lt;Erro&gt; erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
 <b class="nc">&nbsp;		return handleExceptionInternal(ex, erros, headers, HttpStatus.BAD_REQUEST, request);</b>
 &nbsp;	}
 &nbsp;	
@@ -160,7 +162,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;	public ResponseEntity&lt;Object&gt; handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
 <b class="nc">&nbsp;		String mensagemUsuario = messageSource.getMessage(&quot;recurso.nao-encontrado&quot;, null, ptBR);</b>
 <b class="nc">&nbsp;		String mensagemDesenvolvedor = ex.toString();</b>
-<b class="nc">&nbsp;		List&lt;Erro&gt; erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
+<b class="nc">&nbsp;		List&lt;Erro&gt; erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
 <b class="nc">&nbsp;		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);</b>
 &nbsp;	}
 &nbsp;	
@@ -168,21 +170,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;	public ResponseEntity&lt;Object&gt; handleDataIntegrityViolationException(DataIntegrityViolationException ex, WebRequest request) {
 <b class="nc">&nbsp;		String mensagemUsuario = messageSource.getMessage(&quot;recurso.operacao-nao-permitida&quot;, null, ptBR);</b>
 <b class="nc">&nbsp;		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);</b>
-<b class="nc">&nbsp;		List&lt;Erro&gt; erros = List.of(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
+<b class="nc">&nbsp;		List&lt;Erro&gt; erros = singletonList(new Erro(mensagemUsuario, mensagemDesenvolvedor));</b>
 <b class="nc">&nbsp;		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	@ExceptionHandler({ GenericBadRequestException.class })
 &nbsp;	public ResponseEntity&lt;Object&gt; handleGenericBadRequestException(GenericBadRequestException ex, WebRequest request) {
 <b class="nc">&nbsp;		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);</b>
-<b class="nc">&nbsp;		List&lt;Erro&gt; erros = List.of(new Erro(ex.getMessage(), mensagemDesenvolvedor));</b>
+<b class="nc">&nbsp;		List&lt;Erro&gt; erros = singletonList(new Erro(ex.getMessage(), mensagemDesenvolvedor));</b>
 <b class="nc">&nbsp;		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);</b>
 &nbsp;	}
 &nbsp;
 &nbsp;	@ExceptionHandler({ GenericNotFoundException.class })
 &nbsp;	public ResponseEntity&lt;Object&gt; handleGenericNotFoundException(GenericNotFoundException ex, WebRequest request) {
 <b class="nc">&nbsp;		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);</b>
-<b class="nc">&nbsp;		List&lt;Erro&gt; erros = List.of(new Erro(ex.getMessage(), mensagemDesenvolvedor));</b>
+<b class="nc">&nbsp;		List&lt;Erro&gt; erros = singletonList(new Erro(ex.getMessage(), mensagemDesenvolvedor));</b>
 <b class="nc">&nbsp;		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);</b>
 &nbsp;	}
 &nbsp;	
@@ -235,7 +237,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

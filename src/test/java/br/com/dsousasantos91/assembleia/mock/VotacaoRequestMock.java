@@ -1,11 +1,11 @@
 package br.com.dsousasantos91.assembleia.mock;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
-import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
+import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 
 public class VotacaoRequestMock {
-    private VotacaoRequest element;
+    private VotoRequest element;
     private VotacaoRequestMock(){}
 
     public static VotacaoRequestMock mocked() {
@@ -15,10 +15,10 @@ public class VotacaoRequestMock {
     }
 
     public static void initializeDefaultData(VotacaoRequestMock mock) {
-        mock.element = VotacaoRequest.builder()
+        mock.element = VotoRequest.builder()
                 .sessaoId(1L)
                 .associado(AssociadoRequestMock.mocked().mock())
-                .voto(Voto.SIM)
+                .voto(VotoEnum.SIM)
                 .build();
     }
 
@@ -32,12 +32,12 @@ public class VotacaoRequestMock {
         return this;
     }
 
-    public VotacaoRequestMock withVoto(Voto param) {
+    public VotacaoRequestMock withVoto(VotoEnum param) {
         element.setVoto(param);
         return this;
     }
 
-    public VotacaoRequest mock() {
+    public VotoRequest mock() {
         return element;
     }
 }

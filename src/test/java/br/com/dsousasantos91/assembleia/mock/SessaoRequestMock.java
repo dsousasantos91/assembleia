@@ -19,7 +19,7 @@ public class SessaoRequestMock {
     public static void initializeDefaultData(SessaoRequestMock mock) {
         mock.element = SessaoRequest.builder()
                 .pautaId(1L)
-                .votacaoLivre(true)
+                .sessaoPrivada(Boolean.FALSE)
                 .associados(AssociadoRequestMock.mocked().mockList())
                 .tempoSessao(TempoSessaoRequestMock.mocked().mock())
                 .build();
@@ -30,8 +30,8 @@ public class SessaoRequestMock {
         return this;
     }
 
-    public SessaoRequestMock withVotacaoLivre(Boolean param) {
-        element.setVotacaoLivre(param);
+    public SessaoRequestMock withSessaoPrivada(Boolean param) {
+        element.setSessaoPrivada(param);
         return this;
     }
 

@@ -22,7 +22,7 @@ public class SessaoEmLoteRequestMock {
                 .assembleiaId(1L)
                 .idsPautas(Arrays.asList(1L, 2L, 3L))
                 .associados(AssociadoRequestMock.mocked().mockList())
-                .votacaoLivre(Boolean.TRUE)
+                .sessaoPrivada(Boolean.TRUE)
                 .tempoSessao(TempoSessaoRequestMock.mocked().mock())
                 .build();
     }
@@ -52,8 +52,8 @@ public class SessaoEmLoteRequestMock {
         return this;
     }
 
-    public SessaoEmLoteRequestMock withVotacaoLivre(Boolean param) {
-        element.setVotacaoLivre(param);
+    public SessaoEmLoteRequestMock withSessaoPrivada(Boolean param) {
+        element.setSessaoPrivada(param);
         return this;
     }
 

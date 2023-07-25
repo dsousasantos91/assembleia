@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.response;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleia;
+import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleiaEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class AssembleiaResponse {
     private Long id;
-    private TipoAssembleia tipoAssembleia;
+    private TipoAssembleiaEnum tipoAssembleia;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataHoraInicioApuracao;

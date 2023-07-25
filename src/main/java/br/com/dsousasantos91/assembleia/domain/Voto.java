@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.domain;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,8 +30,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "votacao", uniqueConstraints = @UniqueConstraint(name = "UniqueVotoSessaoAssociado", columnNames = { "sessao_id", "associado_id" }))
-public class Votacao {
+@Table(name = "voto", uniqueConstraints = @UniqueConstraint(name = "UniqueVotoSessaoAssociado", columnNames = { "sessao_id", "associado_id" }))
+public class Voto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,7 +52,7 @@ public class Votacao {
 
     @NotNull(message = "{0} é obrigatório")
     @Enumerated(EnumType.STRING)
-    private Voto voto;
+    private VotoEnum voto;
 
     private LocalDateTime dataHoraVoto;
 

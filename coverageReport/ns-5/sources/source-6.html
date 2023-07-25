@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > Votacao</title>
+  <title>Coverage Report > Voto</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.domain</a>
 </div>
 
-<h1>Coverage Summary for Class: Votacao (br.com.dsousasantos91.assembleia.domain)</h1>
+<h1>Coverage Summary for Class: Voto (br.com.dsousasantos91.assembleia.domain)</h1>
 
 <table class="coverageStats">
 
@@ -37,7 +37,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">Votacao</td>
+  <td class="name">Voto</td>
 <td class="coverageStat">
   <span class="percent">
     90%
@@ -56,34 +56,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$6LFgCpAT</td>
+    <td class="name">Voto$HibernateProxy$5525Mfzp</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$8nfnflvE</td>
+    <td class="name">Voto$HibernateProxy$ftGawsYn</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$EdERPpuO</td>
+    <td class="name">Voto$HibernateProxy$heNxBAIS</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$hQ5glslT</td>
+    <td class="name">Voto$HibernateProxy$HevglrJe</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$RvciJh1j</td>
+    <td class="name">Voto$HibernateProxy$IkEXL9Ob</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$siwbJppN</td>
+    <td class="name">Voto$HibernateProxy$JwBdT1fX</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$TkJNw9Ua</td>
+    <td class="name">Voto$HibernateProxy$p4iOWrTa</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$Z7Gcm5Iu</td>
+    <td class="name">Voto$HibernateProxy$ULTgOwmm</td>
   </tr>
   <tr>
-    <td class="name">Votacao$HibernateProxy$zVishdiT</td>
+    <td class="name">Voto$HibernateProxy$WCFJ5i1e</td>
   </tr>
   <tr>
-    <td class="name">Votacao$VotacaoBuilder</td>
+    <td class="name">Voto$VotoBuilder</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -129,7 +129,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.domain;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.Voto;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.VotoEnum;
 &nbsp;import lombok.AllArgsConstructor;
 &nbsp;import lombok.Builder;
 &nbsp;import lombok.Getter;
@@ -159,8 +159,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;@NoArgsConstructor</b>
 <b class="fc">&nbsp;@AllArgsConstructor</b>
 &nbsp;@Entity
-&nbsp;@Table(name = &quot;votacao&quot;, uniqueConstraints = @UniqueConstraint(name = &quot;UniqueVotoSessaoAssociado&quot;, columnNames = { &quot;sessao_id&quot;, &quot;associado_id&quot; }))
-&nbsp;public class Votacao {
+&nbsp;@Table(name = &quot;voto&quot;, uniqueConstraints = @UniqueConstraint(name = &quot;UniqueVotoSessaoAssociado&quot;, columnNames = { &quot;sessao_id&quot;, &quot;associado_id&quot; }))
+&nbsp;public class Voto {
 &nbsp;
 &nbsp;    @Id
 &nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -181,7 +181,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @NotNull(message = &quot;{0} é obrigatório&quot;)
 &nbsp;    @Enumerated(EnumType.STRING)
-<b class="fc">&nbsp;    private Voto voto;</b>
+<b class="fc">&nbsp;    private VotoEnum voto;</b>
 &nbsp;
 <b class="fc">&nbsp;    private LocalDateTime dataHoraVoto;</b>
 &nbsp;
@@ -213,7 +213,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

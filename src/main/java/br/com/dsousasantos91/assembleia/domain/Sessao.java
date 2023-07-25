@@ -15,9 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -27,7 +29,7 @@ import java.util.List;
 @Setter
 @Builder
 @Entity
-@Table(name = "sessao")
+@Table(name = "sessao", uniqueConstraints = @UniqueConstraint(name = "UniquePauta", columnNames = { "pauta_id" }))
 @NoArgsConstructor
 @AllArgsConstructor
 public class Sessao {
@@ -39,7 +41,7 @@ public class Sessao {
 
     @Valid
     @NotNull(message = "{0} é obrigatório")
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "pauta_id")
     private Pauta pauta;
 
@@ -52,13 +54,17 @@ public class Sessao {
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Associado> associados;
 
-    private Boolean votacaoLivre = Boolean.TRUE;
+    private Boolean sessaoPrivada;
+
+    @Valid
+    @OneToMany(mappedBy = "sessao" ,cascade = CascadeType.ALL)
+    private List<Voto> votos;
 
     @JsonIgnore
     private Boolean resultadoEnviado;
 
     @PrePersist
-    public void setResultadoEnviado() {
+    public void setDefaults() {
         this.resultadoEnviado = Boolean.FALSE;
     }
 }

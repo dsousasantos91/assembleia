@@ -20,10 +20,7 @@ import java.util.List;
 public class SessaoRequest {
     @NotNull(message = "{0} é obrigatório")
     private Long pautaId;
-
-    @NotNull(message = "{0} é obrigatório")
-    private Boolean votacaoLivre;
-
+    private Boolean sessaoPrivada;
     private List<AssociadoRequest> associados;
 
     @Valid
@@ -34,14 +31,6 @@ public class SessaoRequest {
                 .plusDays(this.tempoSessao.getDias())
                 .plusHours(this.tempoSessao.getHoras())
                 .plusMinutes(this.tempoSessao.getMinutos())
-                .truncatedTo(ChronoUnit.SECONDS);
-    }
-
-    public LocalDateTime getDataHoraInicio() {
-        return getDataHoraFim()
-                .minusDays(this.tempoSessao.getDias())
-                .minusHours(this.tempoSessao.getHoras())
-                .minusMinutes(this.tempoSessao.getMinutos())
                 .truncatedTo(ChronoUnit.SECONDS);
     }
 }

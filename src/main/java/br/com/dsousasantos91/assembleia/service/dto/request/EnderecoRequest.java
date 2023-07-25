@@ -1,6 +1,6 @@
 package br.com.dsousasantos91.assembleia.service.dto.request;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.UF;
+import br.com.dsousasantos91.assembleia.domain.enumeration.UFEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +35,7 @@ public class EnderecoRequest {
     private String cidade;
 
     @NotNull(message = "{0} é obrigatório")
-    private UF uf;
+    private UFEnum uf;
 
     private String complemento;
 }

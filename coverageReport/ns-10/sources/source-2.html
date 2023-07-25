@@ -102,7 +102,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package br.com.dsousasantos91.assembleia.service.dto.request;
 &nbsp;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleia;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.enumeration.TipoAssembleiaEnum;
 &nbsp;import com.fasterxml.jackson.annotation.JsonFormat;
 &nbsp;import lombok.AllArgsConstructor;
 &nbsp;import lombok.Builder;
@@ -126,7 +126,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;public class AssembleiaUpdateRequest {
 &nbsp;    @NotNull(message = &quot;{0} é obrigatório&quot;)
 &nbsp;    @Enumerated(EnumType.STRING)
-<b class="fc">&nbsp;    private TipoAssembleia tipoAssembleia;</b>
+<b class="fc">&nbsp;    private TipoAssembleiaEnum tipoAssembleia;</b>
 &nbsp;
 &nbsp;    @NotNull(message = &quot;{0} é obrigatório&quot;)
 &nbsp;    @JsonFormat(pattern=&quot;dd/MM/yyyy HH:mm:ss&quot;)
@@ -175,7 +175,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,6 +19,8 @@ import java.time.temporal.ChronoUnit;
 public class SessaoResponse {
     private Long id;
     private PautaResponse pauta;
+    private Boolean sessaoPrivada;
+    private List<AssociadoResponse> associados;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataHoraInicio;

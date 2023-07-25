@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > VotacaoMapperImpl</title>
+  <title>Coverage Report > VotoMapperImpl</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">br.com.dsousasantos91.assembleia.mapper</a>
 </div>
 
-<h1>Coverage Summary for Class: VotacaoMapperImpl (br.com.dsousasantos91.assembleia.mapper)</h1>
+<h1>Coverage Summary for Class: VotoMapperImpl (br.com.dsousasantos91.assembleia.mapper)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -40,7 +40,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">VotacaoMapperImpl</td>
+  <td class="name">VotoMapperImpl</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    86,4%
+    86,7%
   </span>
   <span class="absValue">
-    (38/44)
+    (39/45)
   </span>
 </td>
 </tr>
@@ -79,53 +79,53 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import br.com.dsousasantos91.assembleia.domain.Associado;
 &nbsp;import br.com.dsousasantos91.assembleia.domain.Pauta;
 &nbsp;import br.com.dsousasantos91.assembleia.domain.Sessao;
-&nbsp;import br.com.dsousasantos91.assembleia.domain.Votacao;
+&nbsp;import br.com.dsousasantos91.assembleia.domain.Voto;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.AssociadoRequest;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotacaoRequest;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.request.VotoRequest;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.AssociadoResponse;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.PautaResponse;
 &nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.SessaoResponse;
-&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotacaoResponse;
-&nbsp;import javax.annotation.processing.Generated;
+&nbsp;import br.com.dsousasantos91.assembleia.service.dto.response.VotoResponse;
+&nbsp;import javax.annotation.Generated;
 &nbsp;import org.springframework.stereotype.Component;
 &nbsp;
 &nbsp;@Generated(
 &nbsp;    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
-&nbsp;    date = &quot;2023-07-19T10:41:03-0300&quot;,
-&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 17.0.1 (Oracle Corporation)&quot;
+&nbsp;    date = &quot;2023-07-20T13:39:22-0300&quot;,
+&nbsp;    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 1.8.0_341 (Oracle Corporation)&quot;
 &nbsp;)
 &nbsp;@Component
-<b class="fc">&nbsp;public class VotacaoMapperImpl implements VotacaoMapper {</b>
+<b class="fc">&nbsp;public class VotoMapperImpl implements VotoMapper {</b>
 &nbsp;
 &nbsp;    @Override
-&nbsp;    public VotacaoResponse toResponse(Votacao votacao) {
-<b class="fc">&nbsp;        if ( votacao == null ) {</b>
+&nbsp;    public VotoResponse toResponse(Voto voto) {
+<b class="fc">&nbsp;        if ( voto == null ) {</b>
 <b class="nc">&nbsp;            return null;</b>
 &nbsp;        }
 &nbsp;
-<b class="fc">&nbsp;        VotacaoResponse.VotacaoResponseBuilder votacaoResponse = VotacaoResponse.builder();</b>
+<b class="fc">&nbsp;        VotoResponse.VotoResponseBuilder votoResponse = VotoResponse.builder();</b>
 &nbsp;
-<b class="fc">&nbsp;        votacaoResponse.id( votacao.getId() );</b>
-<b class="fc">&nbsp;        votacaoResponse.sessao( sessaoToSessaoResponse( votacao.getSessao() ) );</b>
-<b class="fc">&nbsp;        votacaoResponse.associado( associadoToAssociadoResponse( votacao.getAssociado() ) );</b>
-<b class="fc">&nbsp;        votacaoResponse.voto( votacao.getVoto() );</b>
-<b class="fc">&nbsp;        votacaoResponse.dataHoraVoto( votacao.getDataHoraVoto() );</b>
+<b class="fc">&nbsp;        votoResponse.id( voto.getId() );</b>
+<b class="fc">&nbsp;        votoResponse.sessao( sessaoToSessaoResponse( voto.getSessao() ) );</b>
+<b class="fc">&nbsp;        votoResponse.associado( associadoToAssociadoResponse( voto.getAssociado() ) );</b>
+<b class="fc">&nbsp;        votoResponse.voto( voto.getVoto() );</b>
+<b class="fc">&nbsp;        votoResponse.dataHoraVoto( voto.getDataHoraVoto() );</b>
 &nbsp;
-<b class="fc">&nbsp;        return votacaoResponse.build();</b>
+<b class="fc">&nbsp;        return votoResponse.build();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
-&nbsp;    public Votacao toEntity(VotacaoRequest request) {
+&nbsp;    public Voto toEntity(VotoRequest request) {
 <b class="fc">&nbsp;        if ( request == null ) {</b>
 <b class="nc">&nbsp;            return null;</b>
 &nbsp;        }
 &nbsp;
-<b class="fc">&nbsp;        Votacao.VotacaoBuilder votacao = Votacao.builder();</b>
+<b class="fc">&nbsp;        Voto.VotoBuilder voto = Voto.builder();</b>
 &nbsp;
-<b class="fc">&nbsp;        votacao.associado( associadoRequestToAssociado( request.getAssociado() ) );</b>
-<b class="fc">&nbsp;        votacao.voto( request.getVoto() );</b>
+<b class="fc">&nbsp;        voto.associado( associadoRequestToAssociado( request.getAssociado() ) );</b>
+<b class="fc">&nbsp;        voto.voto( request.getVoto() );</b>
 &nbsp;
-<b class="fc">&nbsp;        return votacao.build();</b>
+<b class="fc">&nbsp;        return voto.build();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    protected PautaResponse pautaToPautaResponse(Pauta pauta) {
@@ -151,6 +151,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 <b class="fc">&nbsp;        sessaoResponse.id( sessao.getId() );</b>
 <b class="fc">&nbsp;        sessaoResponse.pauta( pautaToPautaResponse( sessao.getPauta() ) );</b>
+<b class="fc">&nbsp;        sessaoResponse.sessaoPrivada( sessao.getSessaoPrivada() );</b>
 <b class="fc">&nbsp;        sessaoResponse.dataHoraInicio( sessao.getDataHoraInicio() );</b>
 <b class="fc">&nbsp;        sessaoResponse.dataHoraFim( sessao.getDataHoraFim() );</b>
 &nbsp;
@@ -207,7 +208,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-19 20:07</div>
+    <div style="float:right;">generated on 2023-07-20 13:48</div>
 </div>
 </body>
 </html>

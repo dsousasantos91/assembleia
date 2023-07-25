@@ -71,9 +71,9 @@ public class SessaoController {
 	}
 
 	@ApiOperation(value = "Prorrogar prazo da sessão.")
-	@PutMapping(path = "/prorrogar/{id}")
-	public ResponseEntity<SessaoResponse> prorrogar(@PathVariable Long id, @Valid @RequestBody SessaoRequest request) {
-		SessaoResponse response = this.sessaoService.prorrogar(id, request);
+	@PutMapping(path = "/prorrogar")
+	public ResponseEntity<SessaoResponse> prorrogar(@Valid @RequestBody SessaoRequest request) {
+		SessaoResponse response = this.sessaoService.prorrogar(request);
 		return ResponseEntity.ok(response);
 	}
 

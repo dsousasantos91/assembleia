@@ -9,8 +9,9 @@ import java.util.Objects;
 
 public class PropertyUtils {
 
-    public static void copyNonNullProperties(Object src, Object target) {
-        BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
+    public static void copyNonNullProperties(Object src, Object target, String... ignoreProperties) {
+        String[] nullPropertyNames = getNullPropertyNames(src);
+        BeanUtils.copyProperties(src, target, concatenateArrays(ignoreProperties, nullPropertyNames));
     }
 
     private static String[] getNullPropertyNames(Object source) {
@@ -19,5 +20,12 @@ public class PropertyUtils {
                      .map(pd -> srcWrapper.getPropertyValue(pd.getName()) == null ? pd.getName() : null)
                      .filter(Objects::nonNull)
                      .toArray(String[]::new);
+    }
+
+    private static String[] concatenateArrays(String[] arr1, String[] arr2) {
+        String[] result = new String[arr1.length + arr2.length];
+        System.arraycopy(arr1, 0, result, 0, arr1.length);
+        System.arraycopy(arr2, 0, result, arr1.length, arr2.length);
+        return result;
     }
 }

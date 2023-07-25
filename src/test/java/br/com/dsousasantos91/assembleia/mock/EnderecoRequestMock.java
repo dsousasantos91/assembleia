@@ -1,9 +1,9 @@
 package br.com.dsousasantos91.assembleia.mock;
 
-import br.com.dsousasantos91.assembleia.domain.enumeration.UF;
+import br.com.dsousasantos91.assembleia.domain.enumeration.UFEnum;
 import br.com.dsousasantos91.assembleia.service.dto.request.EnderecoRequest;
 
-import static br.com.dsousasantos91.assembleia.domain.enumeration.UF.GO;
+import static br.com.dsousasantos91.assembleia.domain.enumeration.UFEnum.GO;
 
 public class EnderecoRequestMock {
     private EnderecoRequest element;
@@ -46,7 +46,7 @@ public class EnderecoRequestMock {
         return this;
     }
 
-    public EnderecoRequestMock withUf(UF param) {
+    public EnderecoRequestMock withUf(UFEnum param) {
         element.setUf(param);
         return this;
     }

@@ -68,7 +68,7 @@ class AssembleiaControllerTest {
     void deveCriarERetornarStatusCode201() throws Exception {
         when(assembleiaService.criar(any(AssembleiaRequest.class))).thenReturn(response);
         mockMvc.perform(
-                post("/v1/assembleia")
+                post("/api/v1/assembleia")
                         .contentType(APPLICATION_JSON_UTF_8)
                         .content(objectMapper.writeValueAsString(request))
                 )
@@ -84,7 +84,7 @@ class AssembleiaControllerTest {
         PageRequest pageable = PageRequest.of(0, 1);
         PageImpl<AssembleiaResponse> pageResponse = new PageImpl<>(assembleiaList, pageable, assembleiaList.size());
         when(assembleiaService.pesquisar(any(Pageable.class))).thenReturn(pageResponse);
-        mockMvc.perform(get("/v1/assembleia")
+        mockMvc.perform(get("/api/v1/assembleia")
                         .contentType(APPLICATION_JSON_UTF_8)
                 )
                 .andDo(print())
@@ -96,7 +96,7 @@ class AssembleiaControllerTest {
     @Test
     void deveBuscaoPorIdERetornarStatusCode200() throws Exception {
         when(assembleiaService.buscarPorId(anyLong())).thenReturn(response);
-        mockMvc.perform(get("/v1/assembleia/" + 1))
+        mockMvc.perform(get("/api/v1/assembleia/" + 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
@@ -107,7 +107,7 @@ class AssembleiaControllerTest {
     void deveAtualizarERetornarStatusCode200() throws Exception {
         when(assembleiaService.atualizar(anyLong(), any(AssembleiaUpdateRequest.class))).thenReturn(response);
         mockMvc.perform(
-                        put("/v1/assembleia/" + 1)
+                        put("/api/v1/assembleia/" + 1)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(request))
                 )
@@ -120,7 +120,7 @@ class AssembleiaControllerTest {
     @Test
     void deveEncerrarERetornarStatusCode200() throws Exception {
         when(assembleiaService.encerrar(anyLong())).thenReturn(response);
-        mockMvc.perform(put("/v1/assembleia/encerrar/" + 1))
+        mockMvc.perform(put("/api/v1/assembleia/encerrar/" + 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_JSON_UTF_8))
@@ -130,7 +130,7 @@ class AssembleiaControllerTest {
     @Test
     void deveApagarERetornarStatusCode204() throws Exception {
         doNothing().when(assembleiaService).apagar(anyLong());
-        mockMvc.perform(delete("/v1/assembleia/" + 1))
+        mockMvc.perform(delete("/api/v1/assembleia/" + 1))
                 .andDo(print())
                 .andExpect(status().isNoContent());
     }
