@@ -557,13 +557,13 @@
 									"            raw: JSON.stringify(\r",
 									"                {\r",
 									"                    \"tipoAssembleia\": gerarNumeroAleatorio(0, 1) === 1 ? \"EXTRAORDINARIA\" : \"ORDINARIA\",\r",
-									"                    \"cooperativa\": pm.variables.replaceIn(\"{{$randomCompanyName}})\"),\r",
+									"                    \"cooperativa\": pm.variables.replaceIn(\"{{$randomCompanyName}}\"),\r",
 									"                    \"dataHoraInicioApuracao\": new Date().toLocaleString('pt-BR').replace(',',''),\r",
 									"                    \"dataHoraFimApuracao\": new Date(new Date().getTime() + gerarNumeroAleatorio(2, 5) * 60000).toLocaleString('pt-BR').replace(',',''),\r",
 									"                    \"local\": local,\r",
 									"                    \"pautas\": gerarPautas(),\r",
-									"                    \"presidente\": pm.variables.replaceIn(\"{{$randomFullName}})\"),\r",
-									"                    \"secretario\": pm.variables.replaceIn(\"{{$randomFullName}})\")\r",
+									"                    \"presidente\": pm.variables.replaceIn(\"{{$randomFullName}}\"),\r",
+									"                    \"secretario\": pm.variables.replaceIn(\"{{$randomFullName}}\")\r",
 									"                }\r",
 									"            )\r",
 									"        }\r",
@@ -1893,10 +1893,6 @@
 			"value": ""
 		},
 		{
-			"key": "cpf",
-			"value": ""
-		},
-		{
 			"key": "voto",
 			"value": ""
 		},
@@ -1910,6 +1906,14 @@
 		},
 		{
 			"key": "associadosEmLote",
+			"value": ""
+		},
+		{
+			"key": "cpf",
+			"value": ""
+		},
+		{
+			"key": "associados",
 			"value": ""
 		}
 	]
