@@ -1,6 +1,5 @@
 package br.com.dsousasantos91.assembleia.service.dto.response;
 
-import br.com.dsousasantos91.assembleia.domain.Associado;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,7 +20,7 @@ public class SessaoResponse {
     private Long id;
     private PautaResponse pauta;
     private Boolean sessaoPrivada;
-    private List<Associado> associados;
+    private List<AssociadoResponse> associados;
 
     @JsonFormat(pattern="dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataHoraInicio;

@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -54,6 +55,10 @@ public class Sessao {
     private List<Associado> associados;
 
     private Boolean sessaoPrivada;
+
+    @Valid
+    @OneToMany(mappedBy = "sessao" ,cascade = CascadeType.ALL)
+    private List<Voto> votos;
 
     @JsonIgnore
     private Boolean resultadoEnviado;
