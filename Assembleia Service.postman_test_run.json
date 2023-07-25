@@ -1,0 +1,5229 @@
+{
+	"id": "0aff78aa-4706-4156-b8c2-a3b022b28c27",
+	"name": "Assembleia Service",
+	"timestamp": "2023-07-25T02:19:02.554Z",
+	"collection_id": "28731792-c60910d8-81be-4b28-8ca8-0b10e5f1cd5d",
+	"folder_id": 0,
+	"environment_id": "28731792-fed63216-e976-4a81-9c9a-bd851f06515d",
+	"totalPass": 1710,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-07-25T02:16:13.983Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "8180f921-cd96-436a-bf75-f49e3ffe64b7",
+			"name": "Criar Assembleia",
+			"url": "http://localhost:8080/api/v1/assembleia",
+			"time": 6,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				5,
+				4,
+				5,
+				9,
+				5,
+				5,
+				4,
+				12,
+				5,
+				5,
+				6,
+				11,
+				7,
+				5,
+				7,
+				7,
+				6,
+				5,
+				5,
+				8,
+				5,
+				5,
+				6,
+				8,
+				5,
+				5,
+				6,
+				9,
+				6
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "4b98de23-c1cd-4f70-9b1c-3895d49fa608",
+			"name": "Buscar Todas Assembleias",
+			"url": "http://localhost:8080/api/v1/assembleia",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos maior que zero": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos maior que zero": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				12,
+				10,
+				10,
+				9,
+				11,
+				12,
+				10,
+				11,
+				14,
+				12,
+				15,
+				12,
+				13,
+				12,
+				12,
+				14,
+				11,
+				12,
+				11,
+				12,
+				12,
+				13,
+				12,
+				11,
+				14,
+				12,
+				17,
+				12,
+				13,
+				12
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				}
+			]
+		},
+		{
+			"id": "98d20e02-072e-41dd-b105-997bf20c5dd1",
+			"name": "Buscar Assembleias Paginadas",
+			"url": "http://localhost:8080/api/v1/assembleia?size=20&page=4",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos igual a 20": true,
+				"Deve retornar a pagina igual a 4": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos igual a 20": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 29": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 19": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 4": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 35": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 12": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 42": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 1": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 24": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 11": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 25": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 39": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 17": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 43": {
+					"pass": 3,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 16": {
+					"pass": 3,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 21": {
+					"pass": 3,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 18": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 2": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 6": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12,
+				9,
+				15,
+				11,
+				13,
+				13,
+				10,
+				12,
+				13,
+				12,
+				12,
+				13,
+				15,
+				12,
+				13,
+				15,
+				12,
+				11,
+				12,
+				13,
+				15,
+				12,
+				13,
+				13,
+				11,
+				12,
+				12,
+				13,
+				12,
+				14
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 29": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 19": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 4": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 35": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 12": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 42": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 24": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 19": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 11": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 25": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 24": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 29": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 39": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 17": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 43": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 16": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 43": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 21": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 21": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 18": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 17": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 2": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 16": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 6": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 16": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 21": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 43": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 4": true
+				}
+			]
+		},
+		{
+			"id": "a0367124-61c4-4c2b-a26b-3fd0a2677c10",
+			"name": "Buscar Assembleia por Id",
+			"url": "http://localhost:8080/api/v1/assembleia/1758",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se o objeto é igual a assembleia de id 1758": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1700": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1702": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1704": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1706": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1708": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1710": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1712": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1714": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1716": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1718": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1720": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1722": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1724": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1726": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1728": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1730": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1732": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1734": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1736": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1738": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1740": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1742": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1744": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1746": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1748": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1750": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1752": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1754": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1756": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a assembleia de id 1758": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				4,
+				4,
+				4,
+				4,
+				5,
+				4,
+				4,
+				5,
+				5,
+				6,
+				4,
+				5,
+				5,
+				4,
+				7,
+				4,
+				4,
+				4,
+				4,
+				4,
+				5,
+				5,
+				5,
+				4,
+				4,
+				4,
+				5,
+				4,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1700": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1702": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1704": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1706": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1708": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1710": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1712": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1714": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1716": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1718": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1720": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1722": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1724": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1726": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1728": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1730": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1732": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1734": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1736": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1738": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1740": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1742": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1744": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1746": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1748": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1750": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1752": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1754": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1756": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a assembleia de id 1758": true
+				}
+			]
+		},
+		{
+			"id": "dac63fe9-8788-4502-954f-902c5bca5975",
+			"name": "Atualizar Assembleia",
+			"url": "http://localhost:8080/api/v1/assembleia/1758",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se o id é igual": true,
+				"Deve verificar se cooperativa foi atualizada": true,
+				"Deve verificar se o presidente foi atualizado": true,
+				"Deve verificar se secretario(a) foi atualizado(a)": true,
+				"Deve verificar se endereco foi atualizado": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o id é igual": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se cooperativa foi atualizada": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o presidente foi atualizado": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se secretario(a) foi atualizado(a)": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se endereco foi atualizado": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				5,
+				5,
+				4,
+				8,
+				5,
+				5,
+				6,
+				5,
+				6,
+				5,
+				7,
+				6,
+				6,
+				6,
+				7,
+				6,
+				6,
+				5,
+				6,
+				6,
+				6,
+				6,
+				7,
+				5,
+				6,
+				5,
+				6,
+				6,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o id é igual": true,
+					"Deve verificar se cooperativa foi atualizada": true,
+					"Deve verificar se o presidente foi atualizado": true,
+					"Deve verificar se secretario(a) foi atualizado(a)": true,
+					"Deve verificar se endereco foi atualizado": true
+				}
+			]
+		},
+		{
+			"id": "43ca412d-14c5-44ce-b9ed-b6f923c23841",
+			"name": "Abrir Sessão",
+			"url": "http://localhost:8080/api/v1/sessao/abrir",
+			"time": 6,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				5,
+				5,
+				463,
+				595,
+				8,
+				745,
+				7,
+				5,
+				615,
+				5,
+				472,
+				311,
+				5,
+				6,
+				6,
+				5,
+				6,
+				328,
+				313,
+				8,
+				874,
+				468,
+				753,
+				746,
+				5,
+				5,
+				5,
+				610,
+				6
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		},
+		{
+			"id": "bac4e7f3-8591-47a9-bc25-eaf07bfccd9b",
+			"name": "Buscar Todas Sessões",
+			"url": "http://localhost:8080/api/v1/sessao",
+			"time": 13,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos maior que zero": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos maior que zero": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				12,
+				11,
+				13,
+				14,
+				15,
+				13,
+				13,
+				13,
+				14,
+				12,
+				16,
+				36,
+				15,
+				16,
+				14,
+				13,
+				14,
+				17,
+				13,
+				14,
+				12,
+				13,
+				15,
+				12,
+				14,
+				12,
+				13,
+				15,
+				13
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				}
+			]
+		},
+		{
+			"id": "6a770180-9a63-4255-9928-e85197553cd5",
+			"name": "Buscar Sessões Paginada",
+			"url": "http://localhost:8080/api/v1/sessao?size=20&page=136",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos igual a 20": true,
+				"Deve retornar a pagina igual a 136": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos igual a 20": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 48": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 55": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 127": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 88": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 47": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 34": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 120": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 125": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 62": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 84": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 54": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 129": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 63": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 104": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 115": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 10": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 23": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 153": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 98": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 13": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 131": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 65": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 133": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 26": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 28": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 118": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 136": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				20,
+				12,
+				11,
+				15,
+				16,
+				14,
+				15,
+				18,
+				17,
+				14,
+				12,
+				15,
+				13,
+				14,
+				16,
+				14,
+				14,
+				14,
+				7,
+				15,
+				17,
+				14,
+				16,
+				14,
+				12,
+				13,
+				13,
+				15,
+				18,
+				15
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 48": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 55": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 127": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 88": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 47": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 34": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 120": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 125": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 62": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 84": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 54": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 129": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 63": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 34": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 104": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 115": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 10": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 23": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 153": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 98": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 13": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 131": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 115": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 65": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 133": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 127": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 26": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 28": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 118": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 136": true
+				}
+			]
+		},
+		{
+			"id": "91763cf8-10ab-4e76-9a38-7485f3afb8c5",
+			"name": "Buscar Sessão por Id",
+			"url": "http://localhost:8080/api/v1/sessao/3953",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se o objeto é igual a sessao de id undefined": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a sessao de id undefined": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				3,
+				4,
+				4,
+				6,
+				5,
+				4,
+				7,
+				4,
+				4,
+				5,
+				4,
+				4,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				6,
+				4,
+				4,
+				4,
+				5,
+				4,
+				5,
+				4,
+				5,
+				4
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a sessao de id undefined": true
+				}
+			]
+		},
+		{
+			"id": "22ff4754-89f3-4c7f-b32e-f2bb0d9fcd8d",
+			"name": "Prorrogar Sessão",
+			"url": "http://localhost:8080/api/v1/sessao/prorrogar",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se a dataHoraFim é anterior a dataHora atual": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				5,
+				5,
+				6,
+				6,
+				6,
+				5,
+				5,
+				6,
+				5,
+				6,
+				6,
+				6,
+				5,
+				5,
+				5,
+				5,
+				6,
+				4,
+				6,
+				6,
+				6,
+				5,
+				5,
+				7,
+				6,
+				5,
+				5,
+				5,
+				6
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFim é anterior a dataHora atual": true
+				}
+			]
+		},
+		{
+			"id": "fe123363-6b28-49a3-8d78-fe682944ff57",
+			"name": "Buscar Todas Pautas",
+			"url": "http://localhost:8080/api/v1/pauta",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos maior que zero": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos maior que zero": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				9,
+				7,
+				7,
+				6,
+				10,
+				15,
+				8,
+				9,
+				7,
+				8,
+				7,
+				14,
+				10,
+				8,
+				8,
+				8,
+				7,
+				7,
+				7,
+				7,
+				9,
+				8,
+				9,
+				7,
+				9,
+				8,
+				7,
+				8,
+				8,
+				7
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				}
+			]
+		},
+		{
+			"id": "6314b921-4bf8-4956-9329-faf05acb77e9",
+			"name": "Buscar Pautas Paginadas",
+			"url": "http://localhost:8080/api/v1/pauta?size=20&page=129",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos igual a 20": true,
+				"Deve retornar a pagina igual a 129": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos igual a 20": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 49": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 60": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 66": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 6": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 24": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 153": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 39": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 79": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 30": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 159": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 67": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 53": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 54": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 12": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 85": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 75": {
+					"pass": 2,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 59": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 86": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 56": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 5": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 76": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 48": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 106": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 21": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 80": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 45": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 101": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 37": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 129": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8,
+				7,
+				8,
+				22,
+				10,
+				11,
+				8,
+				8,
+				8,
+				8,
+				7,
+				7,
+				9,
+				7,
+				9,
+				9,
+				8,
+				9,
+				9,
+				7,
+				9,
+				9,
+				9,
+				8,
+				10,
+				8,
+				7,
+				9,
+				10,
+				8
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 49": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 60": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 66": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 6": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 24": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 153": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 39": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 79": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 30": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 159": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 67": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 53": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 54": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 12": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 85": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 75": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 75": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 59": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 86": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 56": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 5": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 76": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 48": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 106": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 21": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 80": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 45": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 101": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 37": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 129": true
+				}
+			]
+		},
+		{
+			"id": "468ef724-7d45-4c37-87d8-1819d2dc7c4d",
+			"name": "Buscar Pauta por Id",
+			"url": "http://localhost:8080/api/v1/pauta/6436",
+			"time": 4,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se o objeto é igual a pauta de id 6436": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6223": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6233": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6236": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6241": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6250": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6255": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6259": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6265": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6270": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6277": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6283": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6290": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6298": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6304": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6316": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6326": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6332": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6337": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6344": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6350": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6363": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6373": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6386": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6392": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6403": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6411": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6418": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6427": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6433": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve verificar se o objeto é igual a pauta de id 6436": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				4,
+				5,
+				4,
+				13,
+				5,
+				4,
+				4,
+				4,
+				4,
+				5,
+				5,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				5,
+				4,
+				5,
+				5,
+				6,
+				4,
+				4,
+				4,
+				5,
+				4,
+				4
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6223": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6233": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6236": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6241": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6250": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6255": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6259": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6265": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6270": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6277": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6283": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6290": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6298": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6304": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6316": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6326": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6332": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6337": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6344": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6350": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6363": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6373": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6386": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6392": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6403": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6411": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6418": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6427": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6433": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o objeto é igual a pauta de id 6436": true
+				}
+			]
+		},
+		{
+			"id": "a424de93-8ba2-4097-a773-e7c69f3c6c4e",
+			"name": "Atualizar Pauta",
+			"url": "http://localhost:8080/api/v1/pauta/6436",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se id é igual": true,
+				"Deve verificar se o titulo foi atualizado": true,
+				"Deve verificar se descricao foi atualizado": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se id é igual": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o titulo foi atualizado": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se descricao foi atualizado": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				4,
+				4,
+				10,
+				7,
+				7,
+				4,
+				5,
+				4,
+				6,
+				6,
+				4,
+				6,
+				5,
+				6,
+				5,
+				4,
+				6,
+				5,
+				5,
+				6,
+				6,
+				5,
+				4,
+				6,
+				4,
+				4,
+				6,
+				5,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se id é igual": true,
+					"Deve verificar se o titulo foi atualizado": true,
+					"Deve verificar se descricao foi atualizado": true
+				}
+			]
+		},
+		{
+			"id": "4f665f2a-e6e4-45ae-8342-7dae07a1cce3",
+			"name": "Enviar Voto",
+			"url": "http://localhost:8080/api/v1/voto",
+			"time": 161,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true,
+				"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": {
+					"pass": 19,
+					"fail": 0
+				},
+				"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": {
+					"pass": 11,
+					"fail": 0
+				}
+			},
+			"times": [
+				615,
+				159,
+				157,
+				154,
+				154,
+				155,
+				156,
+				157,
+				156,
+				156,
+				158,
+				156,
+				158,
+				156,
+				157,
+				165,
+				155,
+				157,
+				156,
+				156,
+				158,
+				160,
+				158,
+				145,
+				156,
+				175,
+				155,
+				157,
+				158,
+				161
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: S": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true,
+					"Deve retornar verificar se o voto persistido corresponde ao voto enviado: N": true
+				}
+			]
+		},
+		{
+			"id": "81dc111f-a42b-404f-bab2-ff58b1a40ab6",
+			"name": "Buscar Todos Votos",
+			"url": "http://localhost:8080/api/v1/voto",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos maior que zero": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos maior que zero": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				11,
+				10,
+				12,
+				11,
+				13,
+				16,
+				18,
+				17,
+				10,
+				11,
+				14,
+				12,
+				13,
+				19,
+				15,
+				14,
+				11,
+				13,
+				12,
+				13,
+				13,
+				48,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				14
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos maior que zero": true
+				}
+			]
+		},
+		{
+			"id": "eff16bfc-4ed8-408d-b4e3-6655e731c6f7",
+			"name": "Buscar Votos Paginados",
+			"url": "http://localhost:8080/api/v1/voto?size=20&page=0",
+			"time": 14,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar quatidade de elementos igual a 20": true,
+				"Deve retornar a pagina igual a 0": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar quatidade de elementos igual a 20": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 1": {
+					"pass": 16,
+					"fail": 0
+				},
+				"Deve retornar a pagina igual a 0": {
+					"pass": 14,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				4,
+				4,
+				13,
+				5,
+				6,
+				6,
+				4,
+				11,
+				4,
+				5,
+				5,
+				12,
+				12,
+				13,
+				13,
+				12,
+				4,
+				4,
+				12,
+				14,
+				15,
+				4,
+				12,
+				4,
+				4,
+				11,
+				12,
+				4,
+				14
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 1": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar quatidade de elementos igual a 20": true,
+					"Deve retornar a pagina igual a 0": true
+				}
+			]
+		},
+		{
+			"id": "a7dbf473-983a-4717-99ef-5eccb78c13e8",
+			"name": "Alterar Voto",
+			"url": "http://localhost:8080/api/v1/voto/alterar/sessao/3953/associado/69875190217",
+			"time": 161,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve retornar id preenchido": true,
+				"Deve verificar se o voto persistido foi alterado": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o voto persistido foi alterado": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				156,
+				156,
+				155,
+				156,
+				156,
+				159,
+				156,
+				160,
+				157,
+				156,
+				156,
+				156,
+				159,
+				157,
+				155,
+				157,
+				156,
+				157,
+				153,
+				157,
+				437,
+				156,
+				156,
+				157,
+				156,
+				157,
+				156,
+				160,
+				156,
+				161
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve retornar id preenchido": true,
+					"Deve verificar se o voto persistido foi alterado": true
+				}
+			]
+		},
+		{
+			"id": "8a4b6f0a-ef46-47f9-b75c-7d0c4d018e94",
+			"name": "Contabilizar Votos",
+			"url": "http://localhost:8080/api/v1/voto/contabilizar/sessao/3953",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se o voto foi contabilizado": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se o voto foi contabilizado": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				4,
+				4,
+				5,
+				7,
+				5,
+				5,
+				4,
+				4,
+				4,
+				4,
+				7,
+				4,
+				5,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				7,
+				5,
+				4,
+				4,
+				4,
+				5,
+				6,
+				4,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se o voto foi contabilizado": true
+				}
+			]
+		},
+		{
+			"id": "25185df4-3b85-4793-8458-d9ed456e3a09",
+			"name": "Encerrar Sessão",
+			"url": "http://localhost:8080/api/v1/sessao/encerrar/3953",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Deve retornar status code 200": true,
+				"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 200": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				6,
+				5,
+				4,
+				5,
+				5,
+				5,
+				6,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				6,
+				6,
+				5,
+				6,
+				6,
+				5,
+				5,
+				6,
+				6,
+				5,
+				7,
+				5,
+				5,
+				5,
+				5,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				},
+				{
+					"Deve retornar status code 200": true,
+					"Deve verificar se a dataHoraFimApuracao é menor ou igual a dataHora atual": true
+				}
+			]
+		},
+		{
+			"id": "7a271f10-5eb8-4038-bb2d-9606caf2a182",
+			"name": "Apagar Sessão",
+			"url": "http://localhost:8080/api/v1/sessao/3953",
+			"time": 5,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Deve retornar status code 204": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 204": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				5,
+				4,
+				4,
+				4,
+				5,
+				5,
+				7,
+				5,
+				4,
+				4,
+				5,
+				5,
+				5,
+				5,
+				6,
+				5,
+				5,
+				6,
+				6,
+				5,
+				6,
+				5,
+				4,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				}
+			]
+		},
+		{
+			"id": "568be244-7e4c-49c7-9587-e0f36d19d00b",
+			"name": "Apagar Pauta",
+			"url": "http://localhost:8080/api/v1/pauta/6436",
+			"time": 6,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Deve retornar status code 204": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 204": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				4,
+				4,
+				4,
+				5,
+				5,
+				5,
+				4,
+				4,
+				5,
+				4,
+				6,
+				4,
+				5,
+				4,
+				5,
+				4,
+				5,
+				4,
+				5,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				5,
+				5,
+				6
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				}
+			]
+		},
+		{
+			"id": "60a00e5e-da43-41f7-8b36-e3cd21b8cf83",
+			"name": "Apagar Assembleia",
+			"url": "http://localhost:8080/api/v1/assembleia/1758",
+			"time": 5,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {
+				"Deve retornar status code 204": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 204": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				4,
+				4,
+				4,
+				5,
+				4,
+				5,
+				6,
+				5,
+				5,
+				5,
+				6,
+				6,
+				4,
+				4,
+				5,
+				5,
+				5,
+				6,
+				5,
+				5,
+				5,
+				4,
+				5,
+				4,
+				4,
+				5,
+				7,
+				5,
+				5,
+				5
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				},
+				{
+					"Deve retornar status code 204": true
+				}
+			]
+		},
+		{
+			"id": "24cf3bf1-5269-4fe0-ab0c-760a30f279eb",
+			"name": "Abrir Sessão Em Lote",
+			"url": "http://localhost:8080/api/v1/sessao/abrirEmLote",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Deve retornar status code 201": true,
+				"Deve retornar id preenchido": true
+			},
+			"testPassFailCounts": {
+				"Deve retornar status code 201": {
+					"pass": 30,
+					"fail": 0
+				},
+				"Deve retornar id preenchido": {
+					"pass": 30,
+					"fail": 0
+				}
+			},
+			"times": [
+				296,
+				6,
+				313,
+				8,
+				488,
+				439,
+				8,
+				918,
+				6,
+				891,
+				160,
+				297,
+				6,
+				8,
+				9,
+				6,
+				7,
+				455,
+				8,
+				894,
+				9,
+				471,
+				464,
+				7,
+				159,
+				7,
+				736,
+				456,
+				594,
+				8
+			],
+			"allTests": [
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				},
+				{
+					"Deve retornar status code 201": true,
+					"Deve retornar id preenchido": true
+				}
+			]
+		}
+	],
+	"count": 30,
+	"totalTime": 30293,
+	"collection": {
+		"requests": [
+			{
+				"id": "8180f921-cd96-436a-bf75-f49e3ffe64b7",
+				"method": "POST"
+			},
+			{
+				"id": "4b98de23-c1cd-4f70-9b1c-3895d49fa608",
+				"method": "GET"
+			},
+			{
+				"id": "98d20e02-072e-41dd-b105-997bf20c5dd1",
+				"method": "GET"
+			},
+			{
+				"id": "a0367124-61c4-4c2b-a26b-3fd0a2677c10",
+				"method": "GET"
+			},
+			{
+				"id": "dac63fe9-8788-4502-954f-902c5bca5975",
+				"method": "PUT"
+			},
+			{
+				"id": "43ca412d-14c5-44ce-b9ed-b6f923c23841",
+				"method": "POST"
+			},
+			{
+				"id": "bac4e7f3-8591-47a9-bc25-eaf07bfccd9b",
+				"method": "GET"
+			},
+			{
+				"id": "6a770180-9a63-4255-9928-e85197553cd5",
+				"method": "GET"
+			},
+			{
+				"id": "91763cf8-10ab-4e76-9a38-7485f3afb8c5",
+				"method": "GET"
+			},
+			{
+				"id": "22ff4754-89f3-4c7f-b32e-f2bb0d9fcd8d",
+				"method": "PUT"
+			},
+			{
+				"id": "fe123363-6b28-49a3-8d78-fe682944ff57",
+				"method": "GET"
+			},
+			{
+				"id": "6314b921-4bf8-4956-9329-faf05acb77e9",
+				"method": "GET"
+			},
+			{
+				"id": "468ef724-7d45-4c37-87d8-1819d2dc7c4d",
+				"method": "GET"
+			},
+			{
+				"id": "a424de93-8ba2-4097-a773-e7c69f3c6c4e",
+				"method": "PUT"
+			},
+			{
+				"id": "4f665f2a-e6e4-45ae-8342-7dae07a1cce3",
+				"method": "POST"
+			},
+			{
+				"id": "81dc111f-a42b-404f-bab2-ff58b1a40ab6",
+				"method": "GET"
+			},
+			{
+				"id": "eff16bfc-4ed8-408d-b4e3-6655e731c6f7",
+				"method": "GET"
+			},
+			{
+				"id": "a7dbf473-983a-4717-99ef-5eccb78c13e8",
+				"method": "PUT"
+			},
+			{
+				"id": "8a4b6f0a-ef46-47f9-b75c-7d0c4d018e94",
+				"method": "GET"
+			},
+			{
+				"id": "25185df4-3b85-4793-8458-d9ed456e3a09",
+				"method": "PUT"
+			},
+			{
+				"id": "7a271f10-5eb8-4038-bb2d-9606caf2a182",
+				"method": "DELETE"
+			},
+			{
+				"id": "568be244-7e4c-49c7-9587-e0f36d19d00b",
+				"method": "DELETE"
+			},
+			{
+				"id": "60a00e5e-da43-41f7-8b36-e3cd21b8cf83",
+				"method": "DELETE"
+			},
+			{
+				"id": "24cf3bf1-5269-4fe0-ab0c-760a30f279eb",
+				"method": "POST"
+			}
+		]
+	}
+}
