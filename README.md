@@ -12,7 +12,7 @@
 - [Execução](#execução)
 - [Postman](#postman)
 - [RabbitMQ](#rabbitmq)
-- [PGAdmin](#pgadmin)
+- [Postgres](#postgres)
 - [Swagger-UI](#swagger-ui)
 - [Testes executados](#testes-executados)
 - [Ideias para implementação](#ideias-para-implementação)
@@ -31,21 +31,21 @@
 O projeto tem como objetivo atender votação de pautas de assembleias de uma Cooperativa.
 
 As principais funcionalidades da apicação são:
-- Cadastra uma nova assembleia/pauta.
-- Abrir uma sessão de votação em uma pauta.
-- Receber votos de associados.
-- Contabilizar os votos e mostrar o resultado da votação 
+- Cadastrar uma nova assembleia/pauta;
+- Abrir uma sessão de votação em uma pauta;
+- Receber votos de associados;
+- Contabilizar os votos e mostrar o resultado da votação;
 
-Essas e outras funcionalidades podem ser vizualizadas na documentação clicando [aqui](link swagger heroku) ou acessando [http://localhost:8080](http://localhost:8080) ao executar o projeto local.
+Essas e outras funcionalidades podem ser vizualizadas na documentação clicando [aqui](https://ms-assembleia-d93b9e66f060.herokuapp.com) ou acessando [http://localhost:8080](http://localhost:8080) ao executar o projeto local.
 
 
 **Arquitetura**
 ---
 A arquitetura é composta por:
 
-- MICROSERVICE (JAVA/SPRING)
-- MESSAGE BROKER (RABBITMQ)
-- DATABASE (POSTGRES)
+- MICROSERVICE (JAVA/SPRING);
+- MESSAGE BROKER (RABBITMQ);
+- DATABASE (POSTGRES);
 
 **Modelagem de Dados**
 ---
@@ -63,17 +63,19 @@ Por fim, podemos relacionar previamente ``sessao_associados`` na abertura de uma
 ---
 Para implementar o projeto foram utilizadas as seguintes tecnologias:
 
-- Java 8 (Foi implementado com a versão 17 e problemas no deploy no Heroku obrigaram a fazer downgrade)
-- Spring MVC, Spring Boot, Spring Cloud, Spring Data
-- SpringFox 3 (Swagger)
-- JUnit 5
-- Maven
-- H2
-- Flyway
-- PostgreSQL
-- RabbiMQ
-- Docker
-- Heroku
+- Java 8;
+- Spring MVC, Spring Boot, Spring Cloud, Spring Data;
+- SpringFox 3 (Swagger);
+- JUnit 5;
+- Maven;
+- H2;
+- Flyway;
+- PostgreSQL;
+- RabbiMQ;
+- Docker;
+- Heroku;
+
+**OBS.:** Foi implementado com a versão 17 e problemas no deploy no Heroku obrigaram a fazer downgrade devido o ambiente rodr na versão 8.
 
 **Versionamento**
 ---
@@ -121,8 +123,8 @@ docker-compose -f .\docker-compose-ms-off.yml up -d
 ## **Postman**
 
 Todas as requisições estão disponíveis para execução no arquivo ```Assembleia Service.postman_collection``` basta importar no Postman.
-Para executar as requisições local configure uma variável de ambiente ```url``` com o valor ```http://localhost:8080```.
-Para executar as requisições em produção configure a variável com o valor ```url heroku```.
+Existe também no repositório 2 arquivos de configuração de ambiente para importar contendo os valores da variável ```url``` local e Heroku.
+(```local.postman_environment.json``` e ```heroku.postman_environment.json```)
 
 **RabbitMQ**
 ---
@@ -132,27 +134,28 @@ Para executar as requisições em produção configure a variável com o valor `
 
 **Postgres**
 ---
-- [http://localhost:5050](http://localhost:5050/)
-- **User:** admin@admin.com
-- **Password:** root
+- PGAdmin
+  - [http://localhost:5050](http://localhost:5050/)
+  - **User:** admin@admin.com
+  - **Password:** root
 
-#### Dados para conexão:
-- **User:** postgres
-- **Password:** postgres
+- Dados para conectar no servidor:
+  - **User:** postgres
+  - **Password:** postgres
 
 **Swagger-UI**
 ---
 - [Local](http://localhost:8080/swagger-ui/index.html#/)
-- [Produção](heroku)
+- [Produção](https://ms-assembleia-d93b9e66f060.herokuapp.com)
 
 ## **Testes executados**
 
 Além dos teste funcionais através da ferramenta `Postman` para garantir que os requisitos foram atendidos *(Cadastrar Assembleia/Pauta, abrir sessão, votar e contabilizar votos)* também foram realizados testes como:
-- Unitário com as bibliotecas JUnit 5, Mockito e Hamcrest.
+- Unitários com as bibliotecas JUnit 5, Mockito e Hamcrest.
 - Teste de performance com Postman:
   ![Performance](test_performance_postman.png)
 
-**OBS.:** O arquivo com resultado dos testes funcionais estão no arquivo ``Assembleia Service.postman_test_run.json``
+**OBS.:** O arquivo com resultado dos testes funcionais realizando 20 interações em sequencia estão no arquivo ``Assembleia Service.postman_test_run.json``
 
 ### Coverage
 
