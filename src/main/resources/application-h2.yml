@@ -17,6 +17,3 @@ spring:
       enabled: true
       settings:
         web-allow-others: true
-logging:
-  file:
-    path: C:\Windows\Temp
