@@ -89,7 +89,10 @@ public class SessaoService {
         }
         verificarExistenciaDeSessaoAberta(request.getIdsPautas());
         sessoes = montarSessoes(request, pautas);
-        if (Boolean.TRUE.equals(request.getSessaoPrivada())) {
+        if (Boolean.TRUE.equals(request.getSessaoPrivada()) && nuloOuVazio(request.getAssociados())) {
+            throw new GenericBadRequestException("Sessão privada mas não há associado para relacioar. Envie associados na requisição.");
+        }
+        if (Boolean.TRUE.equals(request.getSessaoPrivada()) && !nuloOuVazio(request.getAssociados())) {
             List<Associado> associados = parseAssociados(request.getAssociados());
             sessoes.forEach(sessao -> sessao.setAssociados(associados));
         }
