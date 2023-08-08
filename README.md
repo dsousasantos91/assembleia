@@ -1,5 +1,5 @@
 
-# **Desafio NTConsulting/Sicred**
+# **API REST Votação de Assembleias**
 
 ## **Índice**
 - [Autor](#autor)
